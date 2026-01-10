@@ -33,6 +33,15 @@ jobs:
       - name: Build
         run: npm run build -- --base-href=/simplea2ui/
 
+      - name: Replace localhost URLs with production URL
+        run: |
+          # Replace localhost URLs with production HuggingFace Space URL
+          find dist/a2uiclient-v21/browser -type f \( -name "*.html" -o -name "*.js" \) -exec sed -i 's|http://localhost:7860|https://vishalmysore-a2ui.hf.space|g' {} +
+          
+          echo "URLs replaced in deployment files"
+          echo "Files prepared for deployment:"
+          ls -la dist/a2uiclient-v21/browser/
+
       - name: Add .nojekyll file
         run: touch dist/a2uiclient-v21/browser/.nojekyll
 
