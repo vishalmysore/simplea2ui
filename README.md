@@ -4,7 +4,7 @@ A2UI Client that communicates with A2A (Agent-to-Agent) servers using the A2A pr
 
 ## Overview
 
-SimpleA2UI is a dual-mode client that can operate in both **UI Mode** (with A2UI extensions for rich interactive components) and **Text Mode** (plain text responses without UI components). It transforms standard Angular HTTP requests into JSON-RPC 2.0 format expected by A2A servers and processes the responses accordingly.
+SimpleA2UI is a dual-mode client that can operate in both **UI Mode** (with A2UI extensions for rich interactive components) and **Text Mode** (plain text responses without UI components). It transforms standard Angular HTTP requests into JSON-RPC 2.0 format expected by A2A servers and processes the responses accordingly. 
 
 ## Architecture
 
