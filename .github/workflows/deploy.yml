@@ -31,7 +31,7 @@ jobs:
         run: npm ci
 
       - name: Build
-        run: npm run build -- --base-href=/a2uiclient-v21/
+        run: npm run build -- --base-href=/simplea2ui/
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
