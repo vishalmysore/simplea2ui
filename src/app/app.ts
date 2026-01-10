@@ -1,0 +1,864 @@
+import { Component, inject, signal, OnInit, OnDestroy } from '@angular/core';  
+import { MessageProcessor, Surface } from '@a2ui/angular';  
+import { A2aService } from './a2a.service';  
+import type { Part } from '@a2a-js/sdk';
+import { Subscription } from 'rxjs';
+import { CommonModule } from '@angular/common';
+import { ServerConfigService } from './server-config.service';
+  
+@Component({  
+  selector: 'app-root',  
+  standalone: true,  
+  imports: [Surface, CommonModule],  
+  template: `  
+    <div class="container">
+      <div class="left-panel">
+        <h1>SimpleA2UI : A2UI Client</h1>
+        
+        <form (submit)="handleSubmit($event)" class="message-form">  
+          <input type="text" name="body" placeholder="Enter message" />  
+          <button type="submit">Send</button>  
+        </form>  
+          
+        @if (loading()) {  
+          <div class="loading">Loading...</div>  
+        }  
+          
+        @if (error()) {  
+          <div class="error">Error: {{ error() }}</div>  
+        }  
+          
+        <div class="surfaces">
+          @for (surface of processor.getSurfaces(); track surface[0]) {  
+            <a2ui-surface 
+              [surfaceId]="surface[0]" 
+              [surface]="surface[1]" />  
+          }
+        </div>
+        
+        @if (!serverConfig.uiMode() && textResponse()) {
+          <div class="text-response">
+            <h3>Response:</h3>
+            <pre>{{ textResponse() }}</pre>
+          </div>
+        }
+        
+        <div class="debug-panel">
+          <button class="debug-toggle" (click)="toggleDebug()">
+            {{ showDebug() ? '▼' : '▶' }} Debug: Raw Request/Response
+          </button>
+          
+          @if (showDebug()) {
+            <div class="debug-content">
+              @if (lastRequest()) {
+                <div class="debug-section">
+                  <h4>Last Request</h4>
+                  <pre>{{ formatJson(lastRequest()) }}</pre>
+                </div>
+              }
+              
+              @if (lastResponse()) {
+                <div class="debug-section">
+                  <h4>Last Response</h4>
+                  <pre>{{ formatJson(lastResponse()) }}</pre>
+                </div>
+              }
+              
+              @if (!lastRequest() && !lastResponse()) {
+                <p class="debug-empty">No request/response data yet. Send a message to see debug info.</p>
+              }
+            </div>
+          }
+        </div>
+      </div>
+      
+      <div class="right-panel">
+        <div class="mode-toggle">
+          <div class="mode-label">Response Mode:</div>
+          <div class="toggle-buttons">
+            <button 
+              class="mode-btn" 
+              [class.active]="serverConfig.uiMode()"
+              (click)="setMode(true)">
+              UI
+            </button>
+            <button 
+              class="mode-btn" 
+              [class.active]="!serverConfig.uiMode()"
+              (click)="setMode(false)">
+              Text
+            </button>
+          </div>
+        </div>
+        
+        <div class="server-status">
+          <div class="status-info">
+            <strong>Server:</strong> {{ serverUrl() }}
+          </div>
+          <button class="connect-btn" (click)="toggleConnectForm()">
+            {{ showConnectForm() ? 'Cancel' : 'Change Server' }}
+          </button>
+        </div>
+        
+        @if (showConnectForm()) {
+          <div class="connect-form">
+            <input 
+              type="text" 
+              [value]="tempUrl()" 
+              (input)="tempUrl.set($any($event.target).value)" 
+              placeholder="http://localhost:7860" />
+            <button (click)="connectToServer()">Connect</button>
+          </div>
+        }
+        
+        <button class="toggle-btn" (click)="toggleAgentCard()">
+          {{ showAgentCard() ? 'Hide' : 'Show' }} Agent Card
+        </button>
+        
+        <button class="about-btn" (click)="toggleAbout()">
+          {{ showAbout() ? 'Hide' : 'About' }}
+        </button>
+        
+        @if (showAbout()) {
+          <div class="about-section">
+            <h3>About SimpleA2UI</h3>
+            <p>SimpleA2UI is a simple a2ui client which works with a2a and a2ui protocol, developed by Vishal Mysore</p>
+          </div>
+        }
+        
+        @if (showAgentCard() && agentCard()) {
+          <div class="agent-card">
+            <div class="agent-header">
+              <h2>{{ agentCard().name }}</h2>
+              <span class="version">v{{ agentCard().version }}</span>
+            </div>
+            
+            <p class="description">{{ agentCard().description }}</p>
+            
+            <div class="info-section">
+              <div class="info-item">
+                <strong>Provider:</strong> {{ agentCard().provider?.organization }}
+              </div>
+              <div class="info-item">
+                <strong>Protocol:</strong> {{ agentCard().protocolVersion }}
+              </div>
+              <div class="info-item">
+                <strong>Streaming:</strong> {{ agentCard().capabilities?.streaming ? 'Yes' : 'No' }}
+              </div>
+              <div class="info-item">
+                <strong>Push Notifications:</strong> {{ agentCard().capabilities?.pushNotifications ? 'Yes' : 'No' }}
+              </div>
+            </div>
+            
+            <div class="skills-section">
+              <h3>Available Skills</h3>
+              <div class="skills-grid">
+                @for (skill of agentCard().skills; track skill.id) {
+                  <div class="skill-card">
+                    <h4>{{ skill.name }}</h4>
+                    <p class="skill-description">{{ skill.description }}</p>
+                    
+                    <div class="skill-tags">
+                      @for (tag of skill.tags; track tag) {
+                        <span class="tag">{{ tag }}</span>
+                      }
+                    </div>
+                    
+                    @if (skill.examples && skill.examples.length > 0) {
+                      <div class="skill-examples">
+                        <strong>Examples:</strong>
+                        <ul>
+                          @for (example of skill.examples; track example) {
+                            <li>{{ example }}</li>
+                          }
+                        </ul>
+                      </div>
+                    }
+                  </div>
+                }
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  `,
+  styles: `
+    .container {
+      display: flex;
+      height: 100vh;
+      background: #f5f7fa;
+    }
+    
+    .left-panel {
+      flex: 1;
+      padding: 2rem;
+      overflow-y: auto;
+    }
+    
+    .right-panel {
+      width: 450px;
+      background: white;
+      border-left: 1px solid #e1e8ed;
+      overflow-y: auto;
+      padding: 1rem;
+    }
+    
+    .mode-toggle {
+      background: #f7fafc;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      border: 1px solid #e1e8ed;
+    }
+    
+    .mode-label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin-bottom: 0.5rem;
+    }
+    
+    .toggle-buttons {
+      display: flex;
+      gap: 0.5rem;
+    }
+    
+    .mode-btn {
+      flex: 1;
+      padding: 0.5rem;
+      background: white;
+      color: #64748b;
+      border: 2px solid #e1e8ed;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+    
+    .mode-btn:hover {
+      background: #f1f5f9;
+      border-color: #cbd5e1;
+    }
+    
+    .mode-btn.active {
+      background: #1da1f2;
+      color: white;
+      border-color: #1da1f2;
+    }
+    
+    .mode-btn.active:hover {
+      background: #1a91da;
+      border-color: #1a91da;
+    }
+    
+    h1 {
+      color: #1a1a1a;
+      margin: 0 0 1.5rem 0;
+      font-size: 2rem;
+    }
+    
+    .message-form {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    input[type="text"] {
+      flex: 1;
+      padding: 0.75rem;
+      border: 2px solid #e1e8ed;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+    
+    button {
+      padding: 0.75rem 1.5rem;
+      background: #1da1f2;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    
+    button:hover {
+      background: #1a91da;
+    }
+    
+    .loading {
+      padding: 1rem;
+      background: #e3f2fd;
+      border-radius: 8px;
+      color: #1976d2;
+    }
+    
+    .error {
+      padding: 1rem;
+      background: #ffebee;
+      border-radius: 8px;
+      color: #c62828;
+      margin-bottom: 1rem;
+    }
+    
+    .surfaces {
+      margin-top: 1.5rem;
+    }
+    
+    .text-response {
+      margin-top: 1.5rem;
+      background: #f7fafc;
+      border: 1px solid #e1e8ed;
+      border-radius: 8px;
+      padding: 1rem;
+    }
+    
+    .text-response h3 {
+      margin: 0 0 0.75rem 0;
+      font-size: 1rem;
+      color: #1a1a1a;
+    }
+    
+    .text-response pre {
+      margin: 0;
+      padding: 0.75rem;
+      background: white;
+      border: 1px solid #e1e8ed;
+      border-radius: 4px;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      color: #1a1a1a;
+    }
+    
+    .debug-panel {
+      margin-top: 2rem;
+      border-top: 1px solid #e1e8ed;
+      padding-top: 1rem;
+    }
+    
+    .debug-toggle {
+      width: 100%;
+      text-align: left;
+      background: #f7fafc;
+      color: #1a1a1a;
+      border: 1px solid #e1e8ed;
+      padding: 0.75rem 1rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+    
+    .debug-toggle:hover {
+      background: #e2e8f0;
+    }
+    
+    .debug-content {
+      margin-top: 1rem;
+      background: #1e293b;
+      border-radius: 8px;
+      padding: 1rem;
+      max-height: 500px;
+      overflow-y: auto;
+    }
+    
+    .debug-section {
+      margin-bottom: 1.5rem;
+    }
+    
+    .debug-section:last-child {
+      margin-bottom: 0;
+    }
+    
+    .debug-section h4 {
+      color: #60a5fa;
+      margin: 0 0 0.5rem 0;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+    
+    .debug-section pre {
+      background: #0f172a;
+      color: #e2e8f0;
+      padding: 1rem;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      line-height: 1.5;
+      overflow-x: auto;
+      margin: 0;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+    
+    .debug-empty {
+      color: #94a3b8;
+      font-style: italic;
+      margin: 0;
+      padding: 1rem;
+      text-align: center;
+    }
+    
+    .server-status {
+      background: #f7fafc;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+    }
+    
+    .status-info {
+      margin-bottom: 0.75rem;
+      font-size: 0.9rem;
+      color: #444;
+      word-break: break-all;
+    }
+    
+    .status-info strong {
+      color: #1a1a1a;
+    }
+    
+    .connect-btn {
+      width: 100%;
+      background: #10b981;
+      padding: 0.5rem;
+      font-size: 0.9rem;
+    }
+    
+    .connect-btn:hover {
+      background: #059669;
+    }
+    
+    .connect-form {
+      background: white;
+      padding: 1rem;
+      border: 1px solid #e1e8ed;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+    }
+    
+    .connect-form input {
+      width: 100%;
+      margin-bottom: 0.5rem;
+    }
+    
+    .connect-form button {
+      width: 100%;
+      background: #10b981;
+    }
+    
+    .connect-form button:hover {
+      background: #059669;
+    }
+    
+    .toggle-btn {
+      width: 100%;
+      margin-bottom: 1rem;
+      background: #667eea;
+    }
+    
+    .toggle-btn:hover {
+      background: #5568d3;
+    }
+    
+    .about-btn {
+      width: 100%;
+      margin-bottom: 1rem;
+      background: #f59e0b;
+    }
+    
+    .about-btn:hover {
+      background: #d97706;
+    }
+    
+    .about-section {
+      background: #fffbeb;
+      padding: 1.5rem;
+      border-radius: 8px;
+      border: 1px solid #fcd34d;
+      margin-bottom: 1rem;
+      animation: slideIn 0.3s ease-out;
+    }
+    
+    .about-section h3 {
+      margin: 0 0 1rem 0;
+      color: #92400e;
+      font-size: 1.1rem;
+    }
+    
+    .about-section p {
+      margin: 0;
+      color: #78350f;
+      line-height: 1.6;
+    }
+    
+    .agent-card {
+      animation: slideIn 0.3s ease-out;
+    }
+    
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateX(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+    
+    .agent-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid #e1e8ed;
+    }
+    
+    .agent-header h2 {
+      margin: 0;
+      color: #1a1a1a;
+      font-size: 1.5rem;
+    }
+    
+    .version {
+      background: #667eea;
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 12px;
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
+    
+    .description {
+      color: #657786;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+    
+    .info-section {
+      background: #f7fafc;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+    }
+    
+    .info-item {
+      padding: 0.5rem 0;
+      color: #444;
+      font-size: 0.9rem;
+    }
+    
+    .info-item strong {
+      color: #1a1a1a;
+      margin-right: 0.5rem;
+    }
+    
+    .skills-section h3 {
+      color: #1a1a1a;
+      margin: 0 0 1rem 0;
+      font-size: 1.25rem;
+    }
+    
+    .skills-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    
+    .skill-card {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      padding: 1.25rem;
+      border-radius: 12px;
+      color: white;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    .skill-card h4 {
+      margin: 0 0 0.5rem 0;
+      font-size: 1.1rem;
+    }
+    
+    .skill-description {
+      opacity: 0.95;
+      font-size: 0.9rem;
+      margin-bottom: 0.75rem;
+      line-height: 1.5;
+    }
+    
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 0.75rem;
+    }
+    
+    .tag {
+      background: rgba(255, 255, 255, 0.2);
+      padding: 0.25rem 0.75rem;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+    
+    .skill-examples {
+      margin-top: 0.75rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .skill-examples strong {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-size: 0.85rem;
+    }
+    
+    .skill-examples ul {
+      margin: 0;
+      padding-left: 1.5rem;
+    }
+    
+    .skill-examples li {
+      font-size: 0.85rem;
+      margin: 0.25rem 0;
+      opacity: 0.9;
+    }
+  `
+})  
+export class App implements OnInit, OnDestroy {  
+  private a2aService = inject(A2aService);  
+  protected processor = inject(MessageProcessor);  
+  protected serverConfig = inject(ServerConfigService);
+    
+  protected loading = signal(false);  
+  protected error = signal<string | null>(null);
+  protected showAgentCard = signal(false);
+  protected agentCard = signal<any>(null);
+  protected showAbout = signal(false);
+  protected serverUrl = this.serverConfig.serverUrl;
+  protected showConnectForm = signal(false);
+  protected tempUrl = signal('http://localhost:7860');
+  protected showDebug = signal(false);
+  protected lastRequest = signal<any>(null);
+  protected lastResponse = signal<any>(null);
+  protected textResponse = signal<string | null>(null);
+  
+  private eventSubscription?: Subscription;
+  
+  async ngOnInit() {
+    // Fetch agent card on initialization
+    try {
+      const card = await this.a2aService.getAgentCard();
+      this.agentCard.set(card);
+      console.log('Agent Card loaded:', card);
+    } catch (err) {
+      console.warn('Failed to load agent card:', err);
+    }
+    
+    // Subscribe to A2UI events (button clicks, form submissions, etc.)
+    this.eventSubscription = this.processor.events.subscribe(async (event) => {
+      console.log('A2UI Event:', event);
+      console.log('Event message:', JSON.stringify(event.message, null, 2));
+      
+      try {
+        this.loading.set(true);
+        
+        // Send the client event message to the server
+        const parts: Part[] = [
+          {
+            kind: 'data',
+            metadata: {
+              mimeType: 'application/json+a2ui'
+            },
+            data: event.message
+          } as any
+        ];
+        
+        // Capture request for debug
+        this.lastRequest.set({
+          timestamp: new Date().toISOString(),
+          parts: parts
+        });
+        
+        console.log('Sending action to server:', JSON.stringify(parts, null, 2));
+        
+        const response: any = await this.a2aService.sendMessage(parts);
+        
+        // Capture response for debug
+        this.lastResponse.set({
+          timestamp: new Date().toISOString(),
+          data: response
+        });
+        
+        console.log('Action response:', response);
+        
+        // Process the response and get server messages
+        const serverMessages = this.processResponse(response);
+        
+        // Complete the event with server messages
+        event.completion.next(serverMessages);
+        event.completion.complete();
+      } catch (err: any) {
+        console.error('Error handling A2UI event:', err);
+        this.error.set(err.message);
+        event.completion.error(err);
+      } finally {
+        this.loading.set(false);
+      }
+    });
+  }
+  
+  ngOnDestroy() {
+    this.eventSubscription?.unsubscribe();
+  }
+  
+  toggleAgentCard() {
+    this.showAgentCard.set(!this.showAgentCard());
+  }
+  
+  toggleAbout() {
+    this.showAbout.set(!this.showAbout());
+  }
+  
+  toggleDebug() {
+    this.showDebug.set(!this.showDebug());
+  }
+  
+  setMode(isUiMode: boolean) {
+    this.serverConfig.uiMode.set(isUiMode);
+    this.textResponse.set(null); // Clear text response when switching modes
+    console.log(`Mode switched to: ${isUiMode ? 'UI' : 'Text'}`);
+  }
+  
+  formatJson(obj: any): string {
+    try {
+      return JSON.stringify(obj, null, 2);
+    } catch {
+      return String(obj);
+    }
+  }
+  
+  toggleConnectForm() {
+    this.showConnectForm.set(!this.showConnectForm());
+    if (!this.showConnectForm()) {
+      this.tempUrl.set(this.serverUrl());
+    }
+  }
+  
+  async connectToServer() {
+    const url = this.tempUrl().trim();
+    if (!url) return;
+    
+    this.serverUrl.set(url);
+    this.showConnectForm.set(false);
+    
+    // Clear debug data when switching servers
+    this.lastRequest.set(null);
+    this.lastResponse.set(null);
+    
+    // Reload agent card from new server
+    try {
+      this.agentCard.set(null);
+      const card = await this.a2aService.getAgentCard();
+      this.agentCard.set(card);
+      console.log('Connected to new server, agent card loaded:', card);
+    } catch (err) {
+      console.warn('Failed to load agent card from new server:', err);
+      this.error.set('Failed to connect to server');
+    }
+  }
+  
+  private processResponse(response: any): any[] {
+    console.log('Processing response:', response);
+    
+    const serverMessages: any[] = [];
+    
+    if (response.result?.status?.message?.parts) {  
+      const responseParts = response.result.status.message.parts;  
+        
+      // Check mode to decide how to process response
+      if (this.serverConfig.uiMode()) {
+        // UI Mode: Process A2UI data parts
+        responseParts.forEach((part: any) => {  
+          if (part.data && part.metadata?.mimeType === 'application/json+a2ui') {  
+            console.log('A2UI Data:', part.data);
+            serverMessages.push(part.data);
+            this.processor.processMessages([part.data]);  
+          }  
+        });
+      } else {
+        // Text Mode: Extract and display text parts
+        responseParts.forEach((part: any) => {  
+          if (part.text) {  
+            console.log('Text part:', part.text);
+            
+            // Try to parse JSON strings - if it's A2UI data, skip it in text mode
+            try {
+              const parsed = JSON.parse(part.text);
+              if (parsed.surfaceUpdate) {
+                // Skip A2UI surfaceUpdate data in text mode
+                console.log('Skipping A2UI data in text mode');
+                return;
+              }
+              // If it's other JSON, show it formatted
+              serverMessages.push(JSON.stringify(parsed, null, 2));
+            } catch {
+              // Not JSON, just regular text
+              serverMessages.push(part.text);
+            }
+          }  
+        });
+        
+        // Display text parts in a simple format
+        if (serverMessages.length > 0) {
+          this.textResponse.set(serverMessages.join('\n\n'));
+        }
+      }
+    }
+    
+    return serverMessages;
+  }  
+  
+  async handleSubmit(event: SubmitEvent) {  
+    event.preventDefault();  
+      
+    if (!(event.target instanceof HTMLFormElement)) return;  
+      
+    const data = new FormData(event.target);  
+    const body = data.get('body') as string;  
+      
+    if (!body) return;  
+      
+    this.loading.set(true);  
+    this.error.set(null);
+    this.textResponse.set(null); // Clear previous text response
+      
+    try {  
+      const parts: Part[] = [{ kind: 'text', text: body }];  
+      
+      // Capture request for debug
+      this.lastRequest.set({
+        timestamp: new Date().toISOString(),
+        parts: parts
+      });
+      
+      const response: any = await this.a2aService.sendMessage(parts);  
+        
+      // Capture response for debug
+      this.lastResponse.set({
+        timestamp: new Date().toISOString(),
+        data: response
+      });
+      
+      console.log('Full Response:', response);
+      
+      // Process JSON-RPC 2.0 response with A2UI data
+      this.processResponse(response);
+      
+      // Clear the form after successful submission
+      event.target.reset();
+    } catch (err: any) {  
+      this.error.set(err.message);  
+    } finally {  
+      this.loading.set(false);  
+    }  
+  }  
+}
