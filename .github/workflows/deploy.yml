@@ -33,10 +33,13 @@ jobs:
       - name: Build
         run: npm run build -- --base-href=/simplea2ui/
 
+      - name: Add .nojekyll file
+        run: touch dist/a2uiclient-v21/browser/.nojekyll
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./dist/a2uiclient-v21/browser
+          path: dist/a2uiclient-v21/browser
 
   deploy:
     environment:
