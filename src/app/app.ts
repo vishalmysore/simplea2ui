@@ -17,7 +17,8 @@ import { ServerConfigService } from './server-config.service';
         
         <form (submit)="handleSubmit($event)" class="message-form">  
           <input type="text" name="body" placeholder="Enter message" />  
-          <button type="submit">Send</button>  
+          <button type="submit">Send</button>
+          <button type="button" class="clear-btn" (click)="clearChat()">Clear Chat</button>  
         </form>  
           
         @if (loading()) {  
@@ -28,13 +29,17 @@ import { ServerConfigService } from './server-config.service';
           <div class="error">Error: {{ error() }}</div>  
         }  
           
-        <div class="surfaces">
-          @for (surface of processor.getSurfaces(); track surface[0]) {  
-            <a2ui-surface 
-              [surfaceId]="surface[0]" 
-              [surface]="surface[1]" />  
-          }
-        </div>
+        @if (showSurfaces()) {
+          <div class="surfaces">
+            @for (surface of processor.getSurfaces(); track surface[0]) {
+              @if (activeSurfaceIds().has(surface[0])) {
+                <a2ui-surface 
+                  [surfaceId]="surface[0]" 
+                  [surface]="surface[1]" />  
+              }
+            }
+          </div>
+        }
         
         @if (!serverConfig.uiMode() && textResponse()) {
           <div class="text-response">
@@ -52,14 +57,20 @@ import { ServerConfigService } from './server-config.service';
             <div class="debug-content">
               @if (lastRequest()) {
                 <div class="debug-section">
-                  <h4>Last Request</h4>
+                  <div class="debug-header">
+                    <h4>Last Request</h4>
+                    <button class="copy-btn" (click)="copyToClipboard(formatJson(lastRequest()))">Copy</button>
+                  </div>
                   <pre>{{ formatJson(lastRequest()) }}</pre>
                 </div>
               }
               
               @if (lastResponse()) {
                 <div class="debug-section">
-                  <h4>Last Response</h4>
+                  <div class="debug-header">
+                    <h4>Last Response</h4>
+                    <button class="copy-btn" (click)="copyToClipboard(formatJson(lastResponse()))">Copy</button>
+                  </div>
                   <pre>{{ formatJson(lastResponse()) }}</pre>
                 </div>
               }
@@ -114,6 +125,46 @@ import { ServerConfigService } from './server-config.service';
         <button class="toggle-btn" (click)="toggleAgentCard()">
           {{ showAgentCard() ? 'Hide' : 'Show' }} Agent Card
         </button>
+        
+        <button class="test-btn" (click)="toggleTestPanel()">
+          {{ showTestPanel() ? 'Hide' : 'Test A2UI Renderer' }}
+        </button>
+        
+        @if (showTestPanel()) {
+          <div class="test-panel">
+            <h3>Test A2UI JSON</h3>
+            <p class="test-description">Paste your A2UI JSON below to see how it renders. Supports both direct A2UI JSON and full JSON-RPC responses.</p>
+            <textarea 
+              class="test-textarea"
+              [value]="testJson()"
+              (input)="testJson.set($any($event.target).value)"
+              placeholder='Paste A2UI JSON or full response here, e.g.:
+{
+  "surfaceUpdate": {
+    "surfaceId": "test",
+    "components": [...]
+  }
+}
+
+OR full response:
+{
+  "result": {
+    "status": {
+      "message": {
+        "parts": [...]
+      }
+    }
+  }
+}'></textarea>
+            <div class="test-actions">
+              <button class="render-btn" (click)="renderTestJson()">Render Test</button>
+              <button class="clear-test-btn" (click)="clearTest()">Clear Test</button>
+            </div>
+            @if (testError()) {
+              <div class="test-error">{{ testError() }}</div>
+            }
+          </div>
+        }
         
         <button class="about-btn" (click)="toggleAbout()">
           {{ showAbout() ? 'Hide' : 'About' }}
@@ -182,11 +233,15 @@ import { ServerConfigService } from './server-config.service';
         }
       </div>
     </div>
+    
+    <div class="footer">
+      <p>SimpleA2UI is an open source client implementation of the A2UI protocol developed by Vishal Mysore</p>
+    </div>
   `,
   styles: `
     .container {
       display: flex;
-      height: 100vh;
+      height: calc(100vh - 60px);
       background: #f5f7fa;
     }
     
@@ -260,6 +315,16 @@ import { ServerConfigService } from './server-config.service';
       display: flex;
       gap: 0.5rem;
       margin-bottom: 1.5rem;
+    }
+    
+    .clear-btn {
+      background: #ef4444;
+      color: white;
+      padding: 0.75rem 1rem;
+    }
+    
+    .clear-btn:hover {
+      background: #dc2626;
     }
     
     input[type="text"] {
@@ -365,6 +430,29 @@ import { ServerConfigService } from './server-config.service';
       margin-bottom: 1.5rem;
     }
     
+    .debug-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+    
+    .copy-btn {
+      background: #3b82f6;
+      color: white;
+      border: none;
+      padding: 0.25rem 0.75rem;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    
+    .copy-btn:hover {
+      background: #2563eb;
+    }
+    
     .debug-section:last-child {
       margin-bottom: 0;
     }
@@ -417,9 +505,14 @@ import { ServerConfigService } from './server-config.service';
     
     .connect-btn {
       width: 100%;
+      padding: 0.75rem;
       background: #10b981;
-      padding: 0.5rem;
-      font-size: 0.9rem;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
     }
     
     .connect-btn:hover {
@@ -450,8 +543,15 @@ import { ServerConfigService } from './server-config.service';
     
     .toggle-btn {
       width: 100%;
-      margin-bottom: 1rem;
+      padding: 0.75rem;
       background: #667eea;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+      margin-top: 0.75rem;
     }
     
     .toggle-btn:hover {
@@ -460,15 +560,123 @@ import { ServerConfigService } from './server-config.service';
     
     .about-btn {
       width: 100%;
-      margin-bottom: 1rem;
+      padding: 0.75rem;
       background: #f59e0b;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+      margin-top: 0.75rem;
+      margin-bottom: 1rem;
     }
     
     .about-btn:hover {
       background: #d97706;
     }
     
-    .about-section {
+    .test-btn {
+      width: 100%;
+      padding: 0.75rem;
+      background: #8b5cf6;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+      margin-top: 0.75rem;
+    }
+    
+    .test-btn:hover {
+      background: #7c3aed;
+    }
+    
+    .test-panel {
+      background: white;
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-top: 1rem;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+    
+    .test-panel h3 {
+      margin: 0 0 0.5rem 0;
+      color: #1a1a1a;
+      font-size: 1.125rem;
+    }
+    
+    .test-description {
+      margin: 0 0 1rem 0;
+      color: #6b7280;
+      font-size: 0.875rem;
+    }
+    
+    .test-textarea {
+      width: 100%;
+      min-height: 200px;
+      padding: 0.75rem;
+      border: 1px solid #e1e8ed;
+      border-radius: 6px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.875rem;
+      resize: vertical;
+      margin-bottom: 1rem;
+    }
+    
+    .test-textarea:focus {
+      outline: none;
+      border-color: #8b5cf6;
+      box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+    }
+    
+    .test-actions {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    
+    .render-btn {
+      flex: 1;
+      padding: 0.75rem;
+      background: #8b5cf6;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    
+    .render-btn:hover {
+      background: #7c3aed;
+    }
+    
+    .clear-test-btn {
+      padding: 0.75rem 1.5rem;
+      background: #6b7280;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    
+    .clear-test-btn:hover {
+      background: #4b5563;
+    }
+    
+    .test-error {
+      padding: 0.75rem;
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      border-radius: 6px;
+      color: #dc2626;
+      font-size: 0.875rem;
+    }
+        .about-section {
       background: #fffbeb;
       padding: 1.5rem;
       border-radius: 8px;
@@ -621,6 +829,22 @@ import { ServerConfigService } from './server-config.service';
       margin: 0.25rem 0;
       opacity: 0.9;
     }
+    
+    .footer {
+      height: 60px;
+      background: #1a1a1a;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-top: 2px solid #667eea;
+    }
+    
+    .footer p {
+      margin: 0;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
   `
 })  
 export class App implements OnInit, OnDestroy {  
@@ -640,6 +864,11 @@ export class App implements OnInit, OnDestroy {
   protected lastRequest = signal<any>(null);
   protected lastResponse = signal<any>(null);
   protected textResponse = signal<string | null>(null);
+  protected showTestPanel = signal(false);
+  protected testJson = signal('');
+  protected testError = signal<string | null>(null);
+  protected showSurfaces = signal(true);
+  protected activeSurfaceIds = signal<Set<string>>(new Set());
   
   private eventSubscription?: Subscription;
   
@@ -718,6 +947,92 @@ export class App implements OnInit, OnDestroy {
     this.showAbout.set(!this.showAbout());
   }
   
+  toggleTestPanel() {
+    this.showTestPanel.set(!this.showTestPanel());
+    if (!this.showTestPanel()) {
+      this.testError.set(null);
+    }
+  }
+  
+  renderTestJson() {
+    this.testError.set(null);
+    const jsonStr = this.testJson().trim();
+    
+    if (!jsonStr) {
+      this.testError.set('Please enter A2UI JSON to test');
+      return;
+    }
+    
+    try {
+      const parsed = JSON.parse(jsonStr);
+      let a2uiMessages: any[] = [];
+      
+      // Check if it's direct A2UI JSON or nested response
+      if (parsed.surfaceUpdate || parsed.dataModelUpdate || parsed.beginRendering) {
+        // Direct A2UI JSON
+        a2uiMessages = [parsed];
+      } else if (parsed.result?.status?.message?.parts) {
+        // JSON-RPC response format - extract A2UI data from parts
+        const parts = parsed.result.status.message.parts;
+        for (const part of parts) {
+          if (part.data && (part.data.surfaceUpdate || part.data.dataModelUpdate || part.data.beginRendering)) {
+            a2uiMessages.push(part.data);
+          }
+        }
+      } else if (parsed.data?.result?.status?.message?.parts) {
+        // Wrapped response format - extract from data.result
+        const parts = parsed.data.result.status.message.parts;
+        for (const part of parts) {
+          if (part.data && (part.data.surfaceUpdate || part.data.dataModelUpdate || part.data.beginRendering)) {
+            a2uiMessages.push(part.data);
+          }
+        }
+      }
+      
+      if (a2uiMessages.length === 0) {
+        this.testError.set('No A2UI data found. Expected surfaceUpdate, dataModelUpdate, or beginRendering in JSON');
+        return;
+      }
+      
+      // Process all A2UI messages through the MessageProcessor
+      for (const msg of a2uiMessages) {
+        this.processor.processMessages([msg]);
+        
+        // Track active surface IDs from test renders
+        if (msg.surfaceUpdate?.surfaceId) {
+          const currentIds = new Set(this.activeSurfaceIds());
+          currentIds.add(msg.surfaceUpdate.surfaceId);
+          this.activeSurfaceIds.set(currentIds);
+        }
+      }
+      console.log(`Test A2UI JSON rendered successfully (${a2uiMessages.length} message(s)):`, a2uiMessages);
+    } catch (err: any) {
+      this.testError.set(`JSON Parse Error: ${err.message}`);
+      console.error('Failed to parse test JSON:', err);
+    }
+  }
+  
+  clearTest() {
+    // Get all active surface IDs
+    const surfaceIds = Array.from(this.activeSurfaceIds());
+    
+    // Delete each surface using the proper A2UI protocol message
+    for (const surfaceId of surfaceIds) {
+      this.processor.processMessages([{
+        deleteSurface: {
+          surfaceId: surfaceId
+        }
+      }]);
+    }
+    
+    // Clear active surface IDs
+    this.activeSurfaceIds.set(new Set());
+    
+    // Clear the textarea and error
+    this.testJson.set('');
+    this.testError.set(null);
+  }
+  
   toggleDebug() {
     this.showDebug.set(!this.showDebug());
   }
@@ -726,6 +1041,44 @@ export class App implements OnInit, OnDestroy {
     this.serverConfig.uiMode.set(isUiMode);
     this.textResponse.set(null); // Clear text response when switching modes
     console.log(`Mode switched to: ${isUiMode ? 'UI' : 'Text'}`);
+  }
+  
+  clearChat() {
+    // Get all active surface IDs
+    const surfaceIds = Array.from(this.activeSurfaceIds());
+    
+    // Delete each surface using the proper A2UI protocol message
+    for (const surfaceId of surfaceIds) {
+      this.processor.processMessages([{
+        deleteSurface: {
+          surfaceId: surfaceId
+        }
+      }]);
+    }
+    
+    // Clear the list of active surface IDs
+    this.activeSurfaceIds.set(new Set());
+    
+    // Clear text response
+    this.textResponse.set(null);
+    
+    // Clear error
+    this.error.set(null);
+    
+    // Clear debug data
+    this.lastRequest.set(null);
+    this.lastResponse.set(null);
+    
+    console.log(`Chat cleared - ${surfaceIds.length} surface(s) deleted`);
+  }
+  
+  copyToClipboard(text: string) {
+    navigator.clipboard.writeText(text).then(() => {
+      console.log('Copied to clipboard');
+      // Could add a toast notification here
+    }).catch(err => {
+      console.error('Failed to copy:', err);
+    });
   }
   
   formatJson(obj: any): string {
@@ -781,7 +1134,14 @@ export class App implements OnInit, OnDestroy {
           if (part.data && part.metadata?.mimeType === 'application/json+a2ui') {  
             console.log('A2UI Data:', part.data);
             serverMessages.push(part.data);
-            this.processor.processMessages([part.data]);  
+            this.processor.processMessages([part.data]);
+            
+            // Track active surface IDs
+            if (part.data.surfaceUpdate?.surfaceId) {
+              const currentIds = new Set(this.activeSurfaceIds());
+              currentIds.add(part.data.surfaceUpdate.surfaceId);
+              this.activeSurfaceIds.set(currentIds);
+            }
           }  
         });
       } else {
