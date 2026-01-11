@@ -1,0 +1,1209 @@
+[
+  {
+    "surfaceUpdate": {
+      "surfaceId": "product_catalog",
+      "components": [
+        {
+          "id": "root",
+          "component": {
+            "Column": {
+              "children": {
+                "explicitList": [
+                  "header_bar",
+                  "search_section",
+                  "filter_row",
+                  "products_grid",
+                  "cart_summary"
+                ]
+              },
+              "alignment": "stretch"
+            }
+          }
+        },
+        {
+          "id": "header_bar",
+          "component": {
+            "Card": {
+              "child": "header_content"
+            }
+          }
+        },
+        {
+          "id": "header_content",
+          "component": {
+            "Row": {
+              "children": {
+                "explicitList": [
+                  "store_icon",
+                  "store_title",
+                  "cart_badge"
+                ]
+              },
+              "alignment": "center"
+            }
+          }
+        },
+        {
+          "id": "store_icon",
+          "component": {
+            "Icon": {
+              "name": {
+                "literalString": "storefront"
+              }
+            }
+          }
+        },
+        {
+          "id": "store_title",
+          "weight": 1,
+          "component": {
+            "Text": {
+              "usageHint": "h1",
+              "text": {
+                "literalString": "TechGear Store"
+              }
+            }
+          }
+        },
+        {
+          "id": "cart_badge",
+          "component": {
+            "Row": {
+              "children": {
+                "explicitList": [
+                  "cart_icon",
+                  "cart_count"
+                ]
+              },
+              "alignment": "center"
+            }
+          }
+        },
+        {
+          "id": "cart_icon",
+          "component": {
+            "Icon": {
+              "name": {
+                "literalString": "shopping_cart"
+              }
+            }
+          }
+        },
+        {
+          "id": "cart_count",
+          "component": {
+            "Text": {
+              "usageHint": "h3",
+              "text": {
+                "path": "/cart/itemCount"
+              }
+            }
+          }
+        },
+        {
+          "id": "search_section",
+          "component": {
+            "Card": {
+              "child": "search_content"
+            }
+          }
+        },
+        {
+          "id": "search_content",
+          "component": {
+            "Row": {
+              "children": {
+                "explicitList": [
+                  "search_icon",
+                  "search_field",
+                  "search_button"
+                ]
+              },
+              "alignment": "center"
+            }
+          }
+        },
+        {
+          "id": "search_icon",
+          "component": {
+            "Icon": {
+              "name": {
+                "literalString": "search"
+              }
+            }
+          }
+        },
+        {
+          "id": "search_field",
+          "weight": 1,
+          "component": {
+            "TextField": {
+              "label": {
+                "literalString": "Search"
+              },
+              "placeholder": {
+                "literalString": "Search products..."
+              },
+              "text": {
+                "path": "/search/query"
+              }
+            }
+          }
+        },
+        {
+          "id": "search_button",
+          "component": {
+            "Button": {
+              "action": {
+                "name": "searchProducts"
+              },
+              "child": "search_button_text",
+              "primary": true
+            }
+          }
+        },
+        {
+          "id": "search_button_text",
+          "component": {
+            "Text": {
+              "text": {
+                "literalString": "Search"
+              }
+            }
+          }
+        },
+        {
+          "id": "filter_row",
+          "component": {
+            "Card": {
+              "child": "filter_content"
+            }
+          }
+        },
+        {
+          "id": "filter_content",
+          "component": {
+            "Row": {
+              "children": {
+                "explicitList": [
+                  "filter_icon",
+                  "filter_label",
+                  "category_all",
+                  "category_laptops",
+                  "category_phones",
+                  "category_accessories"
+                ]
+              },
+              "alignment": "center"
+            }
+          }
+        },
+        {
+          "id": "filter_icon",
+          "component": {
+            "Icon": {
+              "name": {
+                "literalString": "filter_list"
+              }
+            }
+          }
+        },
+        {
+          "id": "filter_label",
+          "component": {
+            "Text": {
+              "usageHint": "body",
+              "text": {
+                "literalString": "Categories:"
+              }
+            }
+          }
+        },
+        {
+          "id": "category_all",
+          "weight": 1,
+          "component": {
+            "Button": {
+              "action": {
+                "name": "filterCategory",
+                "context": {
+                  "category": "all"
+                }
+              },
+              "child": "category_all_text",
+              "primary": true
+            }
+          }
+        },
+        {
+          "id": "category_all_text",
+          "component": {
+            "Text": {
+              "text": {
+                "literalString": "All"
+              }
+            }
+          }
+        },
+        {
+          "id": "category_laptops",
+          "weight": 1,
+          "component": {
+            "Button": {
+              "action": {
+                "name": "filterCategory",
+                "context": {
+                  "category": "laptops"
+                }
+              },
+              "child": "category_laptops_text"
+            }
+          }
+        },
+        {
+          "id": "category_laptops_text",
+          "component": {
+            "Text": {
+              "text": {
+                "literalString": "💻 Laptops"
+              }
+            }
+          }
+        },
+        {
+          "id": "category_phones",
+          "weight": 1,
+          "component": {
+            "Button": {
+              "action": {
+                "name": "filterCategory",
+                "context": {
+                  "category": "phones"
+                }
+              },
+              "child": "category_phones_text"
+            }
+          }
+        },
+        {
+          "id": "category_phones_text",
+          "component": {
+            "Text": {
+              "text": {
+                "literalString": "📱 Phones"
+              }
+            }
+          }
+        },
+        {
+          "id": "category_accessories",
+          "weight": 1,
+          "component": {
+            "Button": {
+              "action": {
+                "name": "filterCategory",
+                "context": {
+                  "category": "accessories"
+                }
+              },
+              "child": "category_accessories_text"
+            }
+          }
+        },
+        {
+          "id": "category_accessories_text",
+          "component": {
+            "Text": {
+              "text": {
+                "literalString": "🎧 Accessories"
+              }
+            }
+          }
+        },
+        {
+          "id": "products_grid",
+          "component": {
+            "Column": {
+              "children": {
+                "explicitList": [
+                  "products_row_1",
+                  "products_row_2"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "products_row_1",
+          "component": {
+            "Row": {
+              "children": {
+                "explicitList": [
+                  "product_1",
+                  "product_2",
+                  "product_3"
+                ]
+              },
+              "alignment": "stretch"
+            }
+          }
+        },
+        {
+          "id": "product_1",
+          "weight": 1,
+          "component": {
+            "Card": {
+              "child": "product_1_content"
+            }
+          }
+        },
+        {
+          "id": "product_1_content",
+          "component": {
+            "Column": {
+              "children": {
+                "explicitList": [
+                  "product_1_icon",
+                  "product_1_name",
+                  "product_1_desc",
+                  "product_1_price_row",
+                  "product_1_action"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "product_1_icon",
+          "component": {
+            "Icon": {
+              "name": {
+                "literalString": "laptop_mac"
+              }
+            }
+          }
+        },
+        {
+          "id": "product_1_name",
+          "component": {
+            "Text": {
+              "usageHint": "h3",
+              "text": {
+                "literalString": "UltraBook Pro 15"
+              }
+            }
+          }
+        },
+        {
+          "id": "product_1_desc",
+          "component": {
+            "Text": {
+              "usageHint": "body",
+              "text": {
+                "literalString": "Intel i7, 16GB RAM, 512GB SSD"
+              }
+            }
+          }
+        },
+        {
+          "id": "product_1_price_row",
+          "component": {
+            "Row": {
+              "children": {
+                "explicitList": [
+                  "product_1_price",
+                  "product_1_rating"
+                ]
+              },
+              "alignment": "center"
+            }
+          }
+        },
+        {
+          "id": "product_1_price",
+          "weight": 1,
+          "component": {
+            "Text": {
+              "usageHint": "h2",
+              "text": {
+                "literalString": "$1,299"
+              }
+            }
+          }
+        },
+        {
+          "id": "product_1_rating",
+          "component": {
+            "Text": {
+              "usageHint": "body",
+              "text": {
+                "literalString": "⭐ 4.8"
+              }
+            }
+          }
+        },
+        {
+          "id": "product_1_action",
+          "component": {
+            "Button": {
+              "action": {
+                "name": "addToCart",
+                "context": {
+                  "productId": "P-101",
+                  "price": 1299
+                }
+              },
+              "child": "product_1_button_text",
+              "primary": true
+            }
+          }
+        },
+        {
+          "id": "product_1_button_text",
+          "component": {
+            "Text": {
+              "text": {
+                "literalString": "🛒 Add to Cart"
+              }
+            }
+          }
+        },
+        {
+          "id": "product_2",
+          "weight": 1,
+          "component": {
+            "Card": {
+              "child": "product_2_content"
+            }
+          }
+        },
+        {
+          "id": "product_2_content",
+          "component": {
+            "Column": {
+              "children": {
+                "explicitList": [
+                  "product_2_icon",
+                  "product_2_name",
+                  "product_2_desc",
+                  "product_2_price_row",
+                  "product_2_action"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "product_2_icon",
+          "component": {
+            "Icon": {
+              "name": {
+                "literalString": "smartphone"
+              }
+            }
+          }
+        },
+        {
+          "id": "product_2_name",
+          "component": {
+            "Text": {
+              "usageHint": "h3",
+              "text": {
+                "literalString": "Galaxy X Ultra"
+              }
+            }
+          }
+        },
+        {
+          "id": "product_2_desc",
+          "component": {
+            "Text": {
+              "usageHint": "body",
+              "text": {
+                "literalString": "6.7\" Display, 256GB, 5G"
+              }
+            }
+          }
+        },
+        {
+          "id": "product_2_price_row",
+          "component": {
+            "Row": {
+              "children": {
+                "explicitList": [
+                  "product_2_price",
+                  "product_2_rating"
+                ]
+              },
+              "alignment": "center"
+            }
+          }
+        },
+        {
+          "id": "product_2_price",
+          "weight": 1,
+          "component": {
+            "Text": {
+              "usageHint": "h2",
+              "text": {
+                "literalString": "$899"
+              }
+            }
+          }
+        },
+        {
+          "id": "product_2_rating",
+          "component": {
+            "Text": {
+              "usageHint": "body",
+              "text": {
+                "literalString": "⭐ 4.6"
+              }
+            }
+          }
+        },
+        {
+          "id": "product_2_action",
+          "component": {
+            "Button": {
+              "action": {
+                "name": "addToCart",
+                "context": {
+                  "productId": "P-102",
+                  "price": 899
+                }
+              },
+              "child": "product_2_button_text",
+              "primary": true
+            }
+          }
+        },
+        {
+          "id": "product_2_button_text",
+          "component": {
+            "Text": {
+              "text": {
+                "literalString": "🛒 Add to Cart"
+              }
+            }
+          }
+        },
+        {
+          "id": "product_3",
+          "weight": 1,
+          "component": {
+            "Card": {
+              "child": "product_3_content"
+            }
+          }
+        },
+        {
+          "id": "product_3_content",
+          "component": {
+            "Column": {
+              "children": {
+                "explicitList": [
+                  "product_3_icon",
+                  "product_3_name",
+                  "product_3_desc",
+                  "product_3_price_row",
+                  "product_3_action"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "product_3_icon",
+          "component": {
+            "Icon": {
+              "name": {
+                "literalString": "headphones"
+              }
+            }
+          }
+        },
+        {
+          "id": "product_3_name",
+          "component": {
+            "Text": {
+              "usageHint": "h3",
+              "text": {
+                "literalString": "AirSound Pro"
+              }
+            }
+          }
+        },
+        {
+          "id": "product_3_desc",
+          "component": {
+            "Text": {
+              "usageHint": "body",
+              "text": {
+                "literalString": "Noise Canceling, 30hr Battery"
+              }
+            }
+          }
+        },
+        {
+          "id": "product_3_price_row",
+          "component": {
+            "Row": {
+              "children": {
+                "explicitList": [
+                  "product_3_price",
+                  "product_3_rating"
+                ]
+              },
+              "alignment": "center"
+            }
+          }
+        },
+        {
+          "id": "product_3_price",
+          "weight": 1,
+          "component": {
+            "Text": {
+              "usageHint": "h2",
+              "text": {
+                "literalString": "$349"
+              }
+            }
+          }
+        },
+        {
+          "id": "product_3_rating",
+          "component": {
+            "Text": {
+              "usageHint": "body",
+              "text": {
+                "literalString": "⭐ 4.9"
+              }
+            }
+          }
+        },
+        {
+          "id": "product_3_action",
+          "component": {
+            "Button": {
+              "action": {
+                "name": "addToCart",
+                "context": {
+                  "productId": "P-103",
+                  "price": 349
+                }
+              },
+              "child": "product_3_button_text",
+              "primary": true
+            }
+          }
+        },
+        {
+          "id": "product_3_button_text",
+          "component": {
+            "Text": {
+              "text": {
+                "literalString": "🛒 Add to Cart"
+              }
+            }
+          }
+        },
+        {
+          "id": "products_row_2",
+          "component": {
+            "Row": {
+              "children": {
+                "explicitList": [
+                  "product_4",
+                  "product_5",
+                  "product_6"
+                ]
+              },
+              "alignment": "stretch"
+            }
+          }
+        },
+        {
+          "id": "product_4",
+          "weight": 1,
+          "component": {
+            "Card": {
+              "child": "product_4_content"
+            }
+          }
+        },
+        {
+          "id": "product_4_content",
+          "component": {
+            "Column": {
+              "children": {
+                "explicitList": [
+                  "product_4_icon",
+                  "product_4_name",
+                  "product_4_desc",
+                  "product_4_price_row",
+                  "product_4_action"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "product_4_icon",
+          "component": {
+            "Icon": {
+              "name": {
+                "literalString": "tablet"
+              }
+            }
+          }
+        },
+        {
+          "id": "product_4_name",
+          "component": {
+            "Text": {
+              "usageHint": "h3",
+              "text": {
+                "literalString": "Tablet Max 12"
+              }
+            }
+          }
+        },
+        {
+          "id": "product_4_desc",
+          "component": {
+            "Text": {
+              "usageHint": "body",
+              "text": {
+                "literalString": "12.9\" Retina, 128GB Storage"
+              }
+            }
+          }
+        },
+        {
+          "id": "product_4_price_row",
+          "component": {
+            "Row": {
+              "children": {
+                "explicitList": [
+                  "product_4_price",
+                  "product_4_rating"
+                ]
+              },
+              "alignment": "center"
+            }
+          }
+        },
+        {
+          "id": "product_4_price",
+          "weight": 1,
+          "component": {
+            "Text": {
+              "usageHint": "h2",
+              "text": {
+                "literalString": "$799"
+              }
+            }
+          }
+        },
+        {
+          "id": "product_4_rating",
+          "component": {
+            "Text": {
+              "usageHint": "body",
+              "text": {
+                "literalString": "⭐ 4.7"
+              }
+            }
+          }
+        },
+        {
+          "id": "product_4_action",
+          "component": {
+            "Button": {
+              "action": {
+                "name": "addToCart",
+                "context": {
+                  "productId": "P-104",
+                  "price": 799
+                }
+              },
+              "child": "product_4_button_text",
+              "primary": true
+            }
+          }
+        },
+        {
+          "id": "product_4_button_text",
+          "component": {
+            "Text": {
+              "text": {
+                "literalString": "🛒 Add to Cart"
+              }
+            }
+          }
+        },
+        {
+          "id": "product_5",
+          "weight": 1,
+          "component": {
+            "Card": {
+              "child": "product_5_content"
+            }
+          }
+        },
+        {
+          "id": "product_5_content",
+          "component": {
+            "Column": {
+              "children": {
+                "explicitList": [
+                  "product_5_icon",
+                  "product_5_name",
+                  "product_5_desc",
+                  "product_5_price_row",
+                  "product_5_action"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "product_5_icon",
+          "component": {
+            "Icon": {
+              "name": {
+                "literalString": "watch"
+              }
+            }
+          }
+        },
+        {
+          "id": "product_5_name",
+          "component": {
+            "Text": {
+              "usageHint": "h3",
+              "text": {
+                "literalString": "Smart Watch 7"
+              }
+            }
+          }
+        },
+        {
+          "id": "product_5_desc",
+          "component": {
+            "Text": {
+              "usageHint": "body",
+              "text": {
+                "literalString": "Fitness Tracker, GPS, Heart Rate"
+              }
+            }
+          }
+        },
+        {
+          "id": "product_5_price_row",
+          "component": {
+            "Row": {
+              "children": {
+                "explicitList": [
+                  "product_5_price",
+                  "product_5_rating"
+                ]
+              },
+              "alignment": "center"
+            }
+          }
+        },
+        {
+          "id": "product_5_price",
+          "weight": 1,
+          "component": {
+            "Text": {
+              "usageHint": "h2",
+              "text": {
+                "literalString": "$399"
+              }
+            }
+          }
+        },
+        {
+          "id": "product_5_rating",
+          "component": {
+            "Text": {
+              "usageHint": "body",
+              "text": {
+                "literalString": "⭐ 4.5"
+              }
+            }
+          }
+        },
+        {
+          "id": "product_5_action",
+          "component": {
+            "Button": {
+              "action": {
+                "name": "addToCart",
+                "context": {
+                  "productId": "P-105",
+                  "price": 399
+                }
+              },
+              "child": "product_5_button_text",
+              "primary": true
+            }
+          }
+        },
+        {
+          "id": "product_5_button_text",
+          "component": {
+            "Text": {
+              "text": {
+                "literalString": "🛒 Add to Cart"
+              }
+            }
+          }
+        },
+        {
+          "id": "product_6",
+          "weight": 1,
+          "component": {
+            "Card": {
+              "child": "product_6_content"
+            }
+          }
+        },
+        {
+          "id": "product_6_content",
+          "component": {
+            "Column": {
+              "children": {
+                "explicitList": [
+                  "product_6_icon",
+                  "product_6_name",
+                  "product_6_desc",
+                  "product_6_price_row",
+                  "product_6_action"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "product_6_icon",
+          "component": {
+            "Icon": {
+              "name": {
+                "literalString": "camera_alt"
+              }
+            }
+          }
+        },
+        {
+          "id": "product_6_name",
+          "component": {
+            "Text": {
+              "usageHint": "h3",
+              "text": {
+                "literalString": "ProCam 4K"
+              }
+            }
+          }
+        },
+        {
+          "id": "product_6_desc",
+          "component": {
+            "Text": {
+              "usageHint": "body",
+              "text": {
+                "literalString": "4K Video, 20MP Sensor, Stabilization"
+              }
+            }
+          }
+        },
+        {
+          "id": "product_6_price_row",
+          "component": {
+            "Row": {
+              "children": {
+                "explicitList": [
+                  "product_6_price",
+                  "product_6_rating"
+                ]
+              },
+              "alignment": "center"
+            }
+          }
+        },
+        {
+          "id": "product_6_price",
+          "weight": 1,
+          "component": {
+            "Text": {
+              "usageHint": "h2",
+              "text": {
+                "literalString": "$1,599"
+              }
+            }
+          }
+        },
+        {
+          "id": "product_6_rating",
+          "component": {
+            "Text": {
+              "usageHint": "body",
+              "text": {
+                "literalString": "⭐ 4.9"
+              }
+            }
+          }
+        },
+        {
+          "id": "product_6_action",
+          "component": {
+            "Button": {
+              "action": {
+                "name": "addToCart",
+                "context": {
+                  "productId": "P-106",
+                  "price": 1599
+                }
+              },
+              "child": "product_6_button_text",
+              "primary": true
+            }
+          }
+        },
+        {
+          "id": "product_6_button_text",
+          "component": {
+            "Text": {
+              "text": {
+                "literalString": "🛒 Add to Cart"
+              }
+            }
+          }
+        },
+        {
+          "id": "cart_summary",
+          "component": {
+            "Card": {
+              "child": "cart_summary_content"
+            }
+          }
+        },
+        {
+          "id": "cart_summary_content",
+          "component": {
+            "Row": {
+              "children": {
+                "explicitList": [
+                  "cart_summary_info",
+                  "checkout_button"
+                ]
+              },
+              "alignment": "center"
+            }
+          }
+        },
+        {
+          "id": "cart_summary_info",
+          "weight": 1,
+          "component": {
+            "Row": {
+              "children": {
+                "explicitList": [
+                  "summary_icon",
+                  "summary_text"
+                ]
+              },
+              "alignment": "center"
+            }
+          }
+        },
+        {
+          "id": "summary_icon",
+          "component": {
+            "Icon": {
+              "name": {
+                "literalString": "shopping_bag"
+              }
+            }
+          }
+        },
+        {
+          "id": "summary_text",
+          "component": {
+            "Text": {
+              "usageHint": "h3",
+              "text": {
+                "path": "/cart/summary"
+              }
+            }
+          }
+        },
+        {
+          "id": "checkout_button",
+          "component": {
+            "Button": {
+              "action": {
+                "name": "checkout"
+              },
+              "child": "checkout_button_text",
+              "primary": true
+            }
+          }
+        },
+        {
+          "id": "checkout_button_text",
+          "component": {
+            "Text": {
+              "text": {
+                "literalString": "💳 Checkout"
+              }
+            }
+          }
+        }
+      ]
+    }
+  },
+  {
+    "dataModelUpdate": {
+      "surfaceId": "product_catalog",
+      "contents": [
+        {
+          "key": "/",
+          "valueMap": [
+            {
+              "key": "cart",
+              "valueMap": [
+                {
+                  "key": "itemCount",
+                  "valueString": "3"
+                },
+                {
+                  "key": "summary",
+                  "valueString": "3 items • $2,547 total"
+                }
+              ]
+            },
+            {
+              "key": "search",
+              "valueMap": [
+                {
+                  "key": "query",
+                  "valueString": ""
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "beginRendering": {
+      "surfaceId": "product_catalog",
+      "root": "root"
+    }
+  }
+]

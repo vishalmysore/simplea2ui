@@ -1,0 +1,386 @@
+[
+  {
+    "surfaceUpdate": {
+      "surfaceId": "simple_booking",
+      "components": [
+      {
+        "id": "root",
+        "component": {
+          "Column": {
+            "children": {
+              "explicitList": [
+                "header_card",
+                "search_card",
+                "booking_summary"
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": "header_card",
+        "component": {
+          "Card": {
+            "child": "header_content"
+          }
+        }
+      },
+      {
+        "id": "header_content",
+        "component": {
+          "Column": {
+            "children": {
+              "explicitList": [
+                "title_row",
+                "subtitle",
+                "divider"
+              ]
+            },
+            "alignment": "center"
+          }
+        }
+      },
+      {
+        "id": "title_row",
+        "component": {
+          "Row": {
+            "children": {
+              "explicitList": [
+                "plane_icon",
+                "title_text"
+              ]
+            },
+            "alignment": "center"
+          }
+        }
+      },
+      {
+        "id": "plane_icon",
+        "component": {
+          "Icon": {
+            "name": {
+              "literalString": "flight"
+            }
+          }
+        }
+      },
+      {
+        "id": "title_text",
+        "component": {
+          "Text": {
+            "usageHint": "h1",
+            "text": {
+              "literalString": "✈️ SkyWings Flight Booking"
+            }
+          }
+        }
+      },
+      {
+        "id": "subtitle",
+        "component": {
+          "Text": {
+            "usageHint": "body",
+            "text": {
+              "literalString": "Your gateway to amazing destinations worldwide"
+            }
+          }
+        }
+      },
+      {
+        "id": "divider",
+        "component": {
+          "Divider": {}
+        }
+      },
+      {
+        "id": "search_card",
+        "component": {
+          "Card": {
+            "child": "search_content"
+          }
+        }
+      },
+      {
+        "id": "search_content",
+        "component": {
+          "Column": {
+            "children": {
+              "explicitList": [
+                "search_title",
+                "origin_field",
+                "destination_field",
+                "passengers_field",
+                "search_button"
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": "search_title",
+        "component": {
+          "Text": {
+            "usageHint": "h2",
+            "text": {
+              "literalString": "🔍 Search Flights"
+            }
+          }
+        }
+      },
+      {
+        "id": "origin_field",
+        "component": {
+          "TextField": {
+            "label": {
+              "literalString": "From"
+            },
+            "text": {
+              "path": "/search/origin"
+            }
+          }
+        }
+      },
+      {
+        "id": "destination_field",
+        "component": {
+          "TextField": {
+            "label": {
+              "literalString": "To"
+            },
+            "text": {
+              "path": "/search/destination"
+            }
+          }
+        }
+      },
+      {
+        "id": "passengers_field",
+        "component": {
+          "TextField": {
+            "label": {
+              "literalString": "Passengers"
+            },
+            "text": {
+              "path": "/search/passengers"
+            }
+          }
+        }
+      },
+      {
+        "id": "search_button",
+        "component": {
+          "Button": {
+            "action": {
+              "name": "searchFlights",
+              "context": [
+                {
+                  "key": "origin",
+                  "value": {
+                    "path": "/search/origin"
+                  }
+                },
+                {
+                  "key": "destination",
+                  "value": {
+                    "path": "/search/destination"
+                  }
+                },
+                {
+                  "key": "passengers",
+                  "value": {
+                    "path": "/search/passengers"
+                  }
+                }
+              ]
+            },
+            "child": "search_text",
+            "primary": true
+          }
+        }
+      },
+      {
+        "id": "search_text",
+        "component": {
+          "Text": {
+            "text": {
+              "literalString": "🔍 Search Flights"
+            }
+          }
+        }
+      },
+      {
+        "id": "results_section",
+        "component": {
+          "Column": {
+            "children": {
+              "explicitList": [
+                "results_title",
+                "flight_card_1"
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": "results_title",
+        "component": {
+          "Text": {
+            "usageHint": "h2",
+            "text": {
+              "literalString": "📋 Available Flights"
+            }
+          }
+        }
+      },
+      {
+        "id": "flight_card_1",
+        "component": {
+          "Card": {
+            "child": "flight_content_1"
+          }
+        }
+      },
+      {
+        "id": "flight_content_1",
+        "component": {
+          "Column": {
+            "children": {
+              "explicitList": [
+                "flight_1_header",
+                "flight_1_details",
+                "flight_1_price"
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": "flight_1_header",
+        "component": {
+          "Text": {
+            "usageHint": "h3",
+            "text": {
+              "literalString": "Flight SW123 - SkyWings"
+            }
+          }
+        }
+      },
+      {
+        "id": "flight_1_details",
+        "component": {
+          "Text": {
+            "text": {
+              "literalString": "08:00 → 20:30 (7h 30m) • Non-stop"
+            }
+          }
+        }
+      },
+      {
+        "id": "flight_1_price",
+        "component": {
+          "Row": {
+            "children": {
+              "explicitList": [
+                "price_text_1",
+                "book_button_1"
+              ]
+            },
+            "alignment": "space_between"
+          }
+        }
+      },
+      {
+        "id": "price_text_1",
+        "component": {
+          "Text": {
+            "usageHint": "h2",
+            "text": {
+              "literalString": "$850"
+            }
+          }
+        }
+      },
+      {
+        "id": "book_button_1",
+        "component": {
+          "Button": {
+            "action": {
+              "name": "bookFlight",
+              "context": [
+                {
+                  "key": "flightId",
+                  "value": {
+                    "literalString": "SW123"
+                  }
+                }
+              ]
+            },
+            "child": "book_text_1",
+            "primary": true
+          }
+        }
+      },
+      {
+        "id": "book_text_1",
+        "component": {
+          "Text": {
+            "text": {
+              "literalString": "✈️ Book Now"
+            }
+          }
+        }
+      },
+      {
+        "id": "booking_summary",
+        "component": {
+          "Card": {
+            "child": "summary_content"
+          }
+        }
+      },
+      {
+        "id": "summary_content",
+        "component": {
+          "Text": {
+            "text": {
+              "literalString": "Ready to fly? Select a flight above to continue."
+            }
+          }
+        }
+      }
+    ]
+    }
+  },
+  {
+    "dataModelUpdate": {
+      "contents": [
+        {
+          "key": "search",
+          "valueMap": [
+            {
+              "key": "origin",
+              "valueString": "New York (JFK)"
+            },
+            {
+              "key": "destination",
+              "valueString": "London (LHR)"
+            },
+            {
+              "key": "passengers",
+              "valueString": "2"
+            }
+          ]
+        }
+      ],
+      "surfaceId": "simple_booking"
+    }
+  },
+  {
+    "beginRendering": {
+      "root": "root",
+      "surfaceId": "simple_booking",
+      "viewportWidthPx": 800,
+      "viewportHeightPx": 600
+    }
+  }
+]

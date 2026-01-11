@@ -1,0 +1,705 @@
+[
+  {  
+    "surfaceUpdate": {  
+      "surfaceId": "sales_dashboard",  
+      "components": [  
+      {  
+        "id": "root",  
+        "component": {  
+          "Column": {  
+            "children": {  
+              "explicitList": [  
+                "header_card",  
+                "metrics_row",  
+                "insights_card",  
+                "trends_card",  
+                "actions_row"  
+              ]  
+            },  
+            "alignment": "stretch"  
+          }  
+        }  
+      },  
+  
+      {  
+        "id": "header_card",  
+        "component": {  
+          "Card": {  
+            "child": "header_content"  
+          }  
+        }  
+      },  
+  
+      {  
+        "id": "header_content",  
+        "component": {  
+          "Column": {  
+            "children": {  
+              "explicitList": [  
+                "title_row",  
+                "subtitle",  
+                "divider"  
+              ]  
+            },  
+            "alignment": "center"  
+          }  
+        }  
+      },  
+  
+      {  
+        "id": "title_row",  
+        "component": {  
+          "Row": {  
+            "children": {  
+              "explicitList": [  
+                "rocket_icon",  
+                "title_text"  
+              ]  
+            },  
+            "alignment": "center"  
+          }  
+        }  
+      },  
+  
+      {  
+        "id": "rocket_icon",  
+        "component": {  
+          "Icon": {  
+            "name": {  
+              "literalString": "rocket_launch"  
+            }  
+          }  
+        }  
+      },  
+  
+      {  
+        "id": "title_text",  
+        "component": {  
+          "Text": {  
+            "usageHint": "h1",  
+            "text": {  
+              "literalString": "Sales Performance Command Center"  
+            }  
+          }  
+        }  
+      },  
+  
+      {  
+        "id": "subtitle",  
+        "component": {  
+          "Text": {  
+            "usageHint": "body",  
+            "text": {  
+              "literalString": "AI-powered insights driving revenue growth"  
+            }  
+          }  
+        }  
+      },  
+  
+      {  
+        "id": "divider",  
+        "component": {  
+          "Divider": {  
+            "thickness": 2,  
+            "color": "#E0E0E0"  
+          }  
+        }  
+      },  
+  
+      {  
+        "id": "metrics_row",  
+        "component": {  
+          "Row": {  
+            "children": {  
+              "explicitList": [  
+                "revenue_card",  
+                "growth_card",  
+                "deals_card"  
+              ]  
+            },  
+            "alignment": "stretch"  
+          }  
+        }  
+      },  
+  
+      {  
+        "id": "revenue_card",  
+        "weight": 1,  
+        "component": {  
+          "Card": {  
+            "child": "revenue_content"  
+          }  
+        }  
+      },  
+  
+      {  
+        "id": "revenue_content",  
+        "component": {  
+          "Column": {  
+            "children": {  
+              "explicitList": [  
+                "revenue_icon",  
+                "revenue_amount",  
+                "revenue_label",  
+                "revenue_trend"  
+              ]  
+            },  
+            "alignment": "center"  
+          }  
+        }  
+      },  
+  
+      {  
+        "id": "revenue_icon",  
+        "component": {  
+          "Icon": {  
+            "name": {  
+              "literalString": "attach_money"  
+            }  
+          }  
+        }  
+      },  
+  
+      {  
+        "id": "revenue_amount",  
+        "component": {  
+          "Text": {  
+            "usageHint": "h2",  
+            "text": {  
+              "literalString": "$4.8M"  
+            }  
+          }  
+        }  
+      },  
+  
+      {  
+        "id": "revenue_label",  
+        "component": {  
+          "Text": {  
+            "usageHint": "caption",  
+            "text": {  
+              "literalString": "Total Revenue"  
+            }  
+          }  
+        }  
+      },  
+  
+      {  
+        "id": "revenue_trend",  
+        "component": {  
+          "Text": {  
+            "usageHint": "body",  
+            "text": {  
+              "literalString": "↑ 12% vs last quarter"  
+            }  
+          }  
+        }  
+      },  
+  
+      {  
+        "id": "growth_card",  
+        "weight": 1,  
+        "component": {  
+          "Card": {  
+            "child": "growth_content"  
+          }  
+        }  
+      },  
+  
+      {  
+        "id": "growth_content",  
+        "component": {  
+          "Column": {  
+            "children": {  
+              "explicitList": [  
+                "growth_icon",  
+                "growth_percent",  
+                "growth_label",  
+                "growth_indicator"  
+              ]  
+            },  
+            "alignment": "center"  
+          }  
+        }  
+      },  
+  
+      {  
+        "id": "growth_icon",  
+        "component": {  
+          "Icon": {  
+            "name": {  
+              "literalString": "trending_up"  
+            }  
+          }  
+        }  
+      },  
+  
+      {  
+        "id": "growth_percent",  
+        "component": {  
+          "Text": {  
+            "usageHint": "h2",  
+            "text": {  
+              "literalString": "+18.6%"  
+            }  
+          }  
+        }  
+      },  
+  
+      {  
+        "id": "growth_label",  
+        "component": {  
+          "Text": {  
+            "usageHint": "caption",  
+            "text": {  
+              "literalString": "QoQ Growth"  
+            }  
+          }  
+        }  
+      },  
+  
+      {  
+        "id": "growth_indicator",  
+        "component": {  
+          "Text": {  
+            "usageHint": "body",  
+            "text": {  
+              "literalString": "🟢 Exceeding targets"  
+            }  
+          }  
+        }  
+      },  
+  
+      {  
+        "id": "deals_card",  
+        "weight": 1,  
+        "component": {  
+          "Card": {  
+            "child": "deals_content"  
+          }  
+        }  
+      },  
+  
+      {  
+        "id": "deals_content",  
+        "component": {  
+          "Column": {  
+            "children": {  
+              "explicitList": [  
+                "deals_icon",  
+                "deals_count",  
+                "deals_label",  
+                "deals_progress"  
+              ]  
+            },  
+            "alignment": "center"  
+          }  
+        }  
+      },  
+  
+      {  
+        "id": "deals_icon",  
+        "component": {  
+          "Icon": {  
+            "name": {  
+              "literalString": "handshake"  
+            }  
+          }  
+        }  
+      },  
+  
+      {  
+        "id": "deals_count",  
+        "component": {  
+          "Text": {  
+            "usageHint": "h2",  
+            "text": {  
+              "literalString": "312"  
+            }  
+          }  
+        }  
+      },  
+  
+      {  
+        "id": "deals_label",  
+        "component": {  
+          "Text": {  
+            "usageHint": "caption",  
+            "text": {  
+              "literalString": "Deals Closed"  
+            }  
+          }  
+        }  
+      },  
+  
+      {  
+        "id": "deals_progress",  
+        "component": {  
+          "Text": {  
+            "usageHint": "body",  
+            "text": {  
+              "literalString": "78% of quarterly goal"  
+            }  
+          }  
+        }  
+      },  
+  
+      {  
+        "id": "insights_card",  
+        "component": {  
+          "Card": {  
+            "child": "insights_content"  
+          }  
+        }  
+      },  
+  
+      {  
+        "id": "insights_content",  
+        "component": {  
+          "Column": {  
+            "children": {  
+              "explicitList": [  
+                "insights_header",  
+                "insights_body"  
+              ]  
+            }  
+          }  
+        }  
+      },  
+  
+      {  
+        "id": "insights_header",  
+        "component": {  
+          "Row": {  
+            "children": {  
+              "explicitList": [  
+                "insights_icon",  
+                "insights_title"  
+              ]  
+            },  
+            "alignment": "center"  
+          }  
+        }  
+      },  
+  
+      {  
+        "id": "insights_icon",  
+        "component": {  
+          "Icon": {  
+            "name": {  
+              "literalString": "lightbulb"  
+            }  
+          }  
+        }  
+      },  
+  
+      {  
+        "id": "insights_title",  
+        "component": {  
+          "Text": {  
+            "usageHint": "h3",  
+            "text": {  
+              "literalString": "🔍 Strategic Insight"  
+            }  
+          }  
+        }  
+      },  
+  
+      {  
+        "id": "insights_body",  
+        "component": {  
+          "Text": {  
+            "usageHint": "body",  
+            "text": {  
+              "literalString": "Enterprise segment showing 156% YoY growth. AI-powered recommendations driving 23% increase in average deal size. Focus expansion resources on Tier 1 accounts for maximum ROI."  
+            }  
+          }  
+        }  
+      },  
+  
+      {  
+        "id": "trends_card",  
+        "component": {  
+          "Card": {  
+            "child": "trends_content"  
+          }  
+        }  
+      },  
+  
+      {  
+        "id": "trends_content",  
+        "component": {  
+          "Column": {  
+            "children": {  
+              "explicitList": [  
+                "trends_header",  
+                "trends_visual",  
+                "trends_highlights"  
+              ]  
+            }  
+          }  
+        }  
+      },  
+  
+      {  
+        "id": "trends_header",  
+        "component": {  
+          "Row": {  
+            "children": {  
+              "explicitList": [  
+                "trends_icon",  
+                "trends_title"  
+              ]  
+            },  
+            "alignment": "center"  
+          }  
+        }  
+      },  
+  
+      {  
+        "id": "trends_icon",  
+        "component": {  
+          "Icon": {  
+            "name": {  
+              "literalString": "show_chart"  
+            }  
+          }  
+        }  
+      },  
+  
+      {  
+        "id": "trends_title",  
+        "component": {  
+          "Text": {  
+            "usageHint": "h3",  
+            "text": {  
+              "literalString": "📈 Performance Trends"  
+            }  
+          }  
+        }  
+      },  
+  
+      {  
+        "id": "trends_visual",  
+        "component": {  
+          "Text": {  
+            "usageHint": "body",  
+            "text": {  
+              "literalString": "▂▃▅▆▇█▇▆▅▃▂▂▃▅▆▇█▇▆▅▃▂\nSteady upward trajectory with accelerating growth"  
+            }  
+          }  
+        }  
+      },  
+  
+      {  
+        "id": "trends_highlights",  
+        "component": {  
+          "Column": {  
+            "children": {  
+              "explicitList": [  
+                "top_region",  
+                "top_product"  
+              ]  
+            }  
+          }  
+        }  
+      },  
+  
+      {  
+        "id": "top_region",  
+        "component": {  
+          "Row": {  
+            "children": {  
+              "explicitList": [  
+                "region_icon",  
+                "region_text"  
+              ]  
+            },  
+            "alignment": "center"  
+          }  
+        }  
+      },  
+  
+      {  
+        "id": "region_icon",  
+        "component": {  
+          "Icon": {  
+            "name": {  
+              "literalString": "public"  
+            }  
+          }  
+        }  
+      },  
+  
+      {  
+        "id": "region_text",  
+        "component": {  
+          "Text": {  
+            "usageHint": "h4",  
+            "text": {  
+              "literalString": "🌟 North America: $2.1M (44% of total)"  
+            }  
+          }  
+        }  
+      },  
+  
+      {  
+        "id": "top_product",  
+        "component": {  
+          "Row": {  
+            "children": {  
+              "explicitList": [  
+                "product_icon",  
+                "product_text"  
+              ]  
+            },  
+            "alignment": "center"  
+          }  
+        }  
+      },  
+  
+      {  
+        "id": "product_icon",  
+        "component": {  
+          "Icon": {  
+            "name": {  
+              "literalString": "stars"  
+            }  
+          }  
+        }  
+      },  
+  
+      {  
+        "id": "product_text",  
+        "component": {  
+          "Text": {  
+            "usageHint": "h4",  
+            "text": {  
+              "literalString": "🏆 AI Analytics Suite: Top performer"  
+            }  
+          }  
+        }  
+      },  
+  
+      {  
+        "id": "actions_row",  
+        "component": {  
+          "Row": {  
+            "children": {  
+              "explicitList": [  
+                "refresh_button",  
+                "export_button",  
+                "details_button"  
+              ]  
+            },  
+            "alignment": "center"  
+          }  
+        }  
+      },  
+  
+      {  
+        "id": "refresh_button",  
+        "weight": 1,  
+        "component": {  
+          "Button": {  
+            "action": {  
+              "name": "refreshDashboard"  
+            },  
+            "child": "refresh_text"  
+          }  
+        }  
+      },  
+  
+      {  
+        "id": "refresh_text",  
+        "component": {  
+          "Text": {  
+            "text": {  
+              "literalString": "🔄 Refresh"  
+            }  
+          }  
+        }  
+      },  
+  
+      {  
+        "id": "export_button",  
+        "weight": 1,  
+        "component": {  
+          "Button": {  
+            "action": {  
+              "name": "exportData"  
+            },  
+            "child": "export_text",  
+            "primary": true  
+          }  
+        }  
+      },  
+  
+      {  
+        "id": "export_text",  
+        "component": {  
+          "Text": {  
+            "text": {  
+              "literalString": "📊 Export Report"  
+            }  
+          }  
+        }  
+      },  
+  
+      {  
+        "id": "details_button",  
+        "weight": 1,  
+        "component": {  
+          "Button": {  
+            "action": {  
+              "name": "viewDetailedReport"  
+            },  
+            "child": "details_text"  
+          }  
+        }  
+      },  
+  
+      {  
+        "id": "details_text",  
+        "component": {  
+          "Text": {  
+            "text": {  
+              "literalString": "📈 Full Analysis"  
+            }  
+          }  
+        }  
+      }  
+    ]  
+  }  
+},
+{
+  "dataModelUpdate": {
+    "surfaceId": "sales_dashboard",
+    "contents": [
+      {
+        "key": "/",
+        "valueMap": [
+          {
+            "key": "revenue",
+            "valueString": "$4.8M"
+          },
+          {
+            "key": "growth",
+            "valueString": "+18.6%"
+          },
+          {
+            "key": "deals",
+            "valueString": "312"
+          }
+        ]
+      }
+    ]
+  }
+},
+{
+  "beginRendering": {
+    "surfaceId": "sales_dashboard",
+    "root": "root"
+  }
+}
+]

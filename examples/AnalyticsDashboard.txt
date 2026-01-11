@@ -1,0 +1,1426 @@
+[
+  {
+    "surfaceUpdate": {
+      "surfaceId": "analytics_dashboard",
+      "components": [
+        {
+          "id": "root",
+          "component": {
+            "Column": {
+              "children": {
+                "explicitList": [
+                  "header",
+                  "time_selector",
+                  "kpi_row",
+                  "charts_section",
+                  "insights_section",
+                  "data_table_section"
+                ]
+              },
+              "alignment": "stretch"
+            }
+          }
+        },
+        {
+          "id": "header",
+          "component": {
+            "Card": {
+              "child": "header_content"
+            }
+          }
+        },
+        {
+          "id": "header_content",
+          "component": {
+            "Row": {
+              "children": {
+                "explicitList": [
+                  "analytics_icon",
+                  "analytics_title",
+                  "live_badge"
+                ]
+              },
+              "alignment": "center"
+            }
+          }
+        },
+        {
+          "id": "analytics_icon",
+          "component": {
+            "Icon": {
+              "name": {
+                "literalString": "analytics"
+              }
+            }
+          }
+        },
+        {
+          "id": "analytics_title",
+          "weight": 1,
+          "component": {
+            "Text": {
+              "usageHint": "h1",
+              "text": {
+                "literalString": "Analytics Dashboard"
+              }
+            }
+          }
+        },
+        {
+          "id": "live_badge",
+          "component": {
+            "Card": {
+              "child": "live_text"
+            }
+          }
+        },
+        {
+          "id": "live_text",
+          "component": {
+            "Text": {
+              "usageHint": "body",
+              "text": {
+                "literalString": "🔴 Live"
+              }
+            }
+          }
+        },
+        {
+          "id": "time_selector",
+          "component": {
+            "Card": {
+              "child": "time_selector_content"
+            }
+          }
+        },
+        {
+          "id": "time_selector_content",
+          "component": {
+            "Row": {
+              "children": {
+                "explicitList": [
+                  "time_icon",
+                  "time_label",
+                  "time_7d",
+                  "time_30d",
+                  "time_90d",
+                  "time_1y"
+                ]
+              },
+              "alignment": "center"
+            }
+          }
+        },
+        {
+          "id": "time_icon",
+          "component": {
+            "Icon": {
+              "name": {
+                "literalString": "calendar_today"
+              }
+            }
+          }
+        },
+        {
+          "id": "time_label",
+          "component": {
+            "Text": {
+              "usageHint": "body",
+              "text": {
+                "literalString": "Time Range:"
+              }
+            }
+          }
+        },
+        {
+          "id": "time_7d",
+          "weight": 1,
+          "component": {
+            "Button": {
+              "action": {
+                "name": "setTimeRange",
+                "context": {
+                  "days": 7
+                }
+              },
+              "child": "time_7d_text"
+            }
+          }
+        },
+        {
+          "id": "time_7d_text",
+          "component": {
+            "Text": {
+              "text": {
+                "literalString": "7 Days"
+              }
+            }
+          }
+        },
+        {
+          "id": "time_30d",
+          "weight": 1,
+          "component": {
+            "Button": {
+              "action": {
+                "name": "setTimeRange",
+                "context": {
+                  "days": 30
+                }
+              },
+              "child": "time_30d_text",
+              "primary": true
+            }
+          }
+        },
+        {
+          "id": "time_30d_text",
+          "component": {
+            "Text": {
+              "text": {
+                "literalString": "30 Days"
+              }
+            }
+          }
+        },
+        {
+          "id": "time_90d",
+          "weight": 1,
+          "component": {
+            "Button": {
+              "action": {
+                "name": "setTimeRange",
+                "context": {
+                  "days": 90
+                }
+              },
+              "child": "time_90d_text"
+            }
+          }
+        },
+        {
+          "id": "time_90d_text",
+          "component": {
+            "Text": {
+              "text": {
+                "literalString": "90 Days"
+              }
+            }
+          }
+        },
+        {
+          "id": "time_1y",
+          "weight": 1,
+          "component": {
+            "Button": {
+              "action": {
+                "name": "setTimeRange",
+                "context": {
+                  "days": 365
+                }
+              },
+              "child": "time_1y_text"
+            }
+          }
+        },
+        {
+          "id": "time_1y_text",
+          "component": {
+            "Text": {
+              "text": {
+                "literalString": "1 Year"
+              }
+            }
+          }
+        },
+        {
+          "id": "kpi_row",
+          "component": {
+            "Row": {
+              "children": {
+                "explicitList": [
+                  "users_card",
+                  "sessions_card",
+                  "pageviews_card",
+                  "conversion_card"
+                ]
+              },
+              "alignment": "stretch"
+            }
+          }
+        },
+        {
+          "id": "users_card",
+          "weight": 1,
+          "component": {
+            "Card": {
+              "child": "users_content"
+            }
+          }
+        },
+        {
+          "id": "users_content",
+          "component": {
+            "Column": {
+              "children": {
+                "explicitList": [
+                  "users_icon",
+                  "users_value",
+                  "users_label",
+                  "users_change"
+                ]
+              },
+              "alignment": "center"
+            }
+          }
+        },
+        {
+          "id": "users_icon",
+          "component": {
+            "Icon": {
+              "name": {
+                "literalString": "person"
+              }
+            }
+          }
+        },
+        {
+          "id": "users_value",
+          "component": {
+            "Text": {
+              "usageHint": "h2",
+              "text": {
+                "path": "/kpi/users"
+              }
+            }
+          }
+        },
+        {
+          "id": "users_label",
+          "component": {
+            "Text": {
+              "usageHint": "caption",
+              "text": {
+                "literalString": "Total Users"
+              }
+            }
+          }
+        },
+        {
+          "id": "users_change",
+          "component": {
+            "Text": {
+              "usageHint": "body",
+              "text": {
+                "path": "/kpi/usersChange"
+              }
+            }
+          }
+        },
+        {
+          "id": "sessions_card",
+          "weight": 1,
+          "component": {
+            "Card": {
+              "child": "sessions_content"
+            }
+          }
+        },
+        {
+          "id": "sessions_content",
+          "component": {
+            "Column": {
+              "children": {
+                "explicitList": [
+                  "sessions_icon",
+                  "sessions_value",
+                  "sessions_label",
+                  "sessions_change"
+                ]
+              },
+              "alignment": "center"
+            }
+          }
+        },
+        {
+          "id": "sessions_icon",
+          "component": {
+            "Icon": {
+              "name": {
+                "literalString": "login"
+              }
+            }
+          }
+        },
+        {
+          "id": "sessions_value",
+          "component": {
+            "Text": {
+              "usageHint": "h2",
+              "text": {
+                "path": "/kpi/sessions"
+              }
+            }
+          }
+        },
+        {
+          "id": "sessions_label",
+          "component": {
+            "Text": {
+              "usageHint": "caption",
+              "text": {
+                "literalString": "Sessions"
+              }
+            }
+          }
+        },
+        {
+          "id": "sessions_change",
+          "component": {
+            "Text": {
+              "usageHint": "body",
+              "text": {
+                "path": "/kpi/sessionsChange"
+              }
+            }
+          }
+        },
+        {
+          "id": "pageviews_card",
+          "weight": 1,
+          "component": {
+            "Card": {
+              "child": "pageviews_content"
+            }
+          }
+        },
+        {
+          "id": "pageviews_content",
+          "component": {
+            "Column": {
+              "children": {
+                "explicitList": [
+                  "pageviews_icon",
+                  "pageviews_value",
+                  "pageviews_label",
+                  "pageviews_change"
+                ]
+              },
+              "alignment": "center"
+            }
+          }
+        },
+        {
+          "id": "pageviews_icon",
+          "component": {
+            "Icon": {
+              "name": {
+                "literalString": "pageview"
+              }
+            }
+          }
+        },
+        {
+          "id": "pageviews_value",
+          "component": {
+            "Text": {
+              "usageHint": "h2",
+              "text": {
+                "path": "/kpi/pageviews"
+              }
+            }
+          }
+        },
+        {
+          "id": "pageviews_label",
+          "component": {
+            "Text": {
+              "usageHint": "caption",
+              "text": {
+                "literalString": "Page Views"
+              }
+            }
+          }
+        },
+        {
+          "id": "pageviews_change",
+          "component": {
+            "Text": {
+              "usageHint": "body",
+              "text": {
+                "path": "/kpi/pageviewsChange"
+              }
+            }
+          }
+        },
+        {
+          "id": "conversion_card",
+          "weight": 1,
+          "component": {
+            "Card": {
+              "child": "conversion_content"
+            }
+          }
+        },
+        {
+          "id": "conversion_content",
+          "component": {
+            "Column": {
+              "children": {
+                "explicitList": [
+                  "conversion_icon",
+                  "conversion_value",
+                  "conversion_label",
+                  "conversion_change"
+                ]
+              },
+              "alignment": "center"
+            }
+          }
+        },
+        {
+          "id": "conversion_icon",
+          "component": {
+            "Icon": {
+              "name": {
+                "literalString": "monetization_on"
+              }
+            }
+          }
+        },
+        {
+          "id": "conversion_value",
+          "component": {
+            "Text": {
+              "usageHint": "h2",
+              "text": {
+                "path": "/kpi/conversion"
+              }
+            }
+          }
+        },
+        {
+          "id": "conversion_label",
+          "component": {
+            "Text": {
+              "usageHint": "caption",
+              "text": {
+                "literalString": "Conversion Rate"
+              }
+            }
+          }
+        },
+        {
+          "id": "conversion_change",
+          "component": {
+            "Text": {
+              "usageHint": "body",
+              "text": {
+                "path": "/kpi/conversionChange"
+              }
+            }
+          }
+        },
+        {
+          "id": "charts_section",
+          "component": {
+            "Row": {
+              "children": {
+                "explicitList": [
+                  "traffic_chart",
+                  "sources_chart"
+                ]
+              },
+              "alignment": "stretch"
+            }
+          }
+        },
+        {
+          "id": "traffic_chart",
+          "weight": 1,
+          "component": {
+            "Card": {
+              "child": "traffic_chart_content"
+            }
+          }
+        },
+        {
+          "id": "traffic_chart_content",
+          "component": {
+            "Column": {
+              "children": {
+                "explicitList": [
+                  "traffic_header",
+                  "traffic_divider",
+                  "traffic_visual"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "traffic_header",
+          "component": {
+            "Row": {
+              "children": {
+                "explicitList": [
+                  "traffic_icon",
+                  "traffic_title"
+                ]
+              },
+              "alignment": "center"
+            }
+          }
+        },
+        {
+          "id": "traffic_icon",
+          "component": {
+            "Icon": {
+              "name": {
+                "literalString": "show_chart"
+              }
+            }
+          }
+        },
+        {
+          "id": "traffic_title",
+          "component": {
+            "Text": {
+              "usageHint": "h3",
+              "text": {
+                "literalString": "📊 Traffic Trend"
+              }
+            }
+          }
+        },
+        {
+          "id": "traffic_divider",
+          "component": {
+            "Divider": {}
+          }
+        },
+        {
+          "id": "traffic_visual",
+          "component": {
+            "Column": {
+              "children": {
+                "explicitList": [
+                  "traffic_graph",
+                  "traffic_legend"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "traffic_graph",
+          "component": {
+            "Text": {
+              "usageHint": "body",
+              "text": {
+                "literalString": "▁▂▃▅▆▇██▇▆▅▃▂▁▂▃▅▆▇██▇▆▅▃▂▁▁▂▃▅\n▁▁▂▃▄▅▆▇▆▅▄▃▂▁▁▂▃▄▅▆▇▆▅▄▃▂▁▁▂▃"
+              }
+            }
+          }
+        },
+        {
+          "id": "traffic_legend",
+          "component": {
+            "Text": {
+              "usageHint": "caption",
+              "text": {
+                "literalString": "─ Current Period    ─ Previous Period"
+              }
+            }
+          }
+        },
+        {
+          "id": "sources_chart",
+          "weight": 1,
+          "component": {
+            "Card": {
+              "child": "sources_chart_content"
+            }
+          }
+        },
+        {
+          "id": "sources_chart_content",
+          "component": {
+            "Column": {
+              "children": {
+                "explicitList": [
+                  "sources_header",
+                  "sources_divider",
+                  "sources_list"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "sources_header",
+          "component": {
+            "Row": {
+              "children": {
+                "explicitList": [
+                  "sources_icon",
+                  "sources_title"
+                ]
+              },
+              "alignment": "center"
+            }
+          }
+        },
+        {
+          "id": "sources_icon",
+          "component": {
+            "Icon": {
+              "name": {
+                "literalString": "pie_chart"
+              }
+            }
+          }
+        },
+        {
+          "id": "sources_title",
+          "component": {
+            "Text": {
+              "usageHint": "h3",
+              "text": {
+                "literalString": "🌐 Traffic Sources"
+              }
+            }
+          }
+        },
+        {
+          "id": "sources_divider",
+          "component": {
+            "Divider": {}
+          }
+        },
+        {
+          "id": "sources_list",
+          "component": {
+            "Column": {
+              "children": {
+                "explicitList": [
+                  "source_1",
+                  "source_2",
+                  "source_3",
+                  "source_4"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "source_1",
+          "component": {
+            "Row": {
+              "children": {
+                "explicitList": [
+                  "source_1_label",
+                  "source_1_bar",
+                  "source_1_value"
+                ]
+              },
+              "alignment": "center"
+            }
+          }
+        },
+        {
+          "id": "source_1_label",
+          "component": {
+            "Text": {
+              "usageHint": "body",
+              "text": {
+                "literalString": "Direct"
+              }
+            }
+          }
+        },
+        {
+          "id": "source_1_bar",
+          "weight": 1,
+          "component": {
+            "Text": {
+              "usageHint": "body",
+              "text": {
+                "literalString": "████████░░"
+              }
+            }
+          }
+        },
+        {
+          "id": "source_1_value",
+          "component": {
+            "Text": {
+              "usageHint": "h4",
+              "text": {
+                "literalString": "42%"
+              }
+            }
+          }
+        },
+        {
+          "id": "source_2",
+          "component": {
+            "Row": {
+              "children": {
+                "explicitList": [
+                  "source_2_label",
+                  "source_2_bar",
+                  "source_2_value"
+                ]
+              },
+              "alignment": "center"
+            }
+          }
+        },
+        {
+          "id": "source_2_label",
+          "component": {
+            "Text": {
+              "usageHint": "body",
+              "text": {
+                "literalString": "Organic"
+              }
+            }
+          }
+        },
+        {
+          "id": "source_2_bar",
+          "weight": 1,
+          "component": {
+            "Text": {
+              "usageHint": "body",
+              "text": {
+                "literalString": "██████░░░░"
+              }
+            }
+          }
+        },
+        {
+          "id": "source_2_value",
+          "component": {
+            "Text": {
+              "usageHint": "h4",
+              "text": {
+                "literalString": "31%"
+              }
+            }
+          }
+        },
+        {
+          "id": "source_3",
+          "component": {
+            "Row": {
+              "children": {
+                "explicitList": [
+                  "source_3_label",
+                  "source_3_bar",
+                  "source_3_value"
+                ]
+              },
+              "alignment": "center"
+            }
+          }
+        },
+        {
+          "id": "source_3_label",
+          "component": {
+            "Text": {
+              "usageHint": "body",
+              "text": {
+                "literalString": "Social"
+              }
+            }
+          }
+        },
+        {
+          "id": "source_3_bar",
+          "weight": 1,
+          "component": {
+            "Text": {
+              "usageHint": "body",
+              "text": {
+                "literalString": "███░░░░░░░"
+              }
+            }
+          }
+        },
+        {
+          "id": "source_3_value",
+          "component": {
+            "Text": {
+              "usageHint": "h4",
+              "text": {
+                "literalString": "18%"
+              }
+            }
+          }
+        },
+        {
+          "id": "source_4",
+          "component": {
+            "Row": {
+              "children": {
+                "explicitList": [
+                  "source_4_label",
+                  "source_4_bar",
+                  "source_4_value"
+                ]
+              },
+              "alignment": "center"
+            }
+          }
+        },
+        {
+          "id": "source_4_label",
+          "component": {
+            "Text": {
+              "usageHint": "body",
+              "text": {
+                "literalString": "Referral"
+              }
+            }
+          }
+        },
+        {
+          "id": "source_4_bar",
+          "weight": 1,
+          "component": {
+            "Text": {
+              "usageHint": "body",
+              "text": {
+                "literalString": "█░░░░░░░░░"
+              }
+            }
+          }
+        },
+        {
+          "id": "source_4_value",
+          "component": {
+            "Text": {
+              "usageHint": "h4",
+              "text": {
+                "literalString": "9%"
+              }
+            }
+          }
+        },
+        {
+          "id": "insights_section",
+          "component": {
+            "Card": {
+              "child": "insights_content"
+            }
+          }
+        },
+        {
+          "id": "insights_content",
+          "component": {
+            "Column": {
+              "children": {
+                "explicitList": [
+                  "insights_header",
+                  "insights_divider",
+                  "insight_1",
+                  "insight_2"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "insights_header",
+          "component": {
+            "Row": {
+              "children": {
+                "explicitList": [
+                  "insights_icon",
+                  "insights_title"
+                ]
+              },
+              "alignment": "center"
+            }
+          }
+        },
+        {
+          "id": "insights_icon",
+          "component": {
+            "Icon": {
+              "name": {
+                "literalString": "psychology"
+              }
+            }
+          }
+        },
+        {
+          "id": "insights_title",
+          "component": {
+            "Text": {
+              "usageHint": "h3",
+              "text": {
+                "literalString": "💡 AI-Powered Insights"
+              }
+            }
+          }
+        },
+        {
+          "id": "insights_divider",
+          "component": {
+            "Divider": {}
+          }
+        },
+        {
+          "id": "insight_1",
+          "component": {
+            "Row": {
+              "children": {
+                "explicitList": [
+                  "insight_1_icon",
+                  "insight_1_text"
+                ]
+              },
+              "alignment": "center"
+            }
+          }
+        },
+        {
+          "id": "insight_1_icon",
+          "component": {
+            "Icon": {
+              "name": {
+                "literalString": "trending_up"
+              }
+            }
+          }
+        },
+        {
+          "id": "insight_1_text",
+          "component": {
+            "Text": {
+              "usageHint": "body",
+              "text": {
+                "literalString": "Mobile traffic increased 34% compared to last period. Consider optimizing mobile experience."
+              }
+            }
+          }
+        },
+        {
+          "id": "insight_2",
+          "component": {
+            "Row": {
+              "children": {
+                "explicitList": [
+                  "insight_2_icon",
+                  "insight_2_text"
+                ]
+              },
+              "alignment": "center"
+            }
+          }
+        },
+        {
+          "id": "insight_2_icon",
+          "component": {
+            "Icon": {
+              "name": {
+                "literalString": "notification_important"
+              }
+            }
+          }
+        },
+        {
+          "id": "insight_2_text",
+          "component": {
+            "Text": {
+              "usageHint": "body",
+              "text": {
+                "literalString": "Peak traffic hours: 2-4 PM EST. Schedule important updates outside this window."
+              }
+            }
+          }
+        },
+        {
+          "id": "data_table_section",
+          "component": {
+            "Card": {
+              "child": "data_table_content"
+            }
+          }
+        },
+        {
+          "id": "data_table_content",
+          "component": {
+            "Column": {
+              "children": {
+                "explicitList": [
+                  "table_header",
+                  "table_divider",
+                  "table_headers_row",
+                  "table_row_1",
+                  "table_row_2",
+                  "table_row_3"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "table_header",
+          "component": {
+            "Row": {
+              "children": {
+                "explicitList": [
+                  "table_icon",
+                  "table_title"
+                ]
+              },
+              "alignment": "center"
+            }
+          }
+        },
+        {
+          "id": "table_icon",
+          "component": {
+            "Icon": {
+              "name": {
+                "literalString": "table_chart"
+              }
+            }
+          }
+        },
+        {
+          "id": "table_title",
+          "component": {
+            "Text": {
+              "usageHint": "h3",
+              "text": {
+                "literalString": "📋 Top Pages"
+              }
+            }
+          }
+        },
+        {
+          "id": "table_divider",
+          "component": {
+            "Divider": {}
+          }
+        },
+        {
+          "id": "table_headers_row",
+          "component": {
+            "Row": {
+              "children": {
+                "explicitList": [
+                  "header_page",
+                  "header_views",
+                  "header_time",
+                  "header_bounce"
+                ]
+              },
+              "alignment": "stretch"
+            }
+          }
+        },
+        {
+          "id": "header_page",
+          "weight": 2,
+          "component": {
+            "Text": {
+              "usageHint": "h4",
+              "text": {
+                "literalString": "Page"
+              }
+            }
+          }
+        },
+        {
+          "id": "header_views",
+          "weight": 1,
+          "component": {
+            "Text": {
+              "usageHint": "h4",
+              "text": {
+                "literalString": "Views"
+              }
+            }
+          }
+        },
+        {
+          "id": "header_time",
+          "weight": 1,
+          "component": {
+            "Text": {
+              "usageHint": "h4",
+              "text": {
+                "literalString": "Avg Time"
+              }
+            }
+          }
+        },
+        {
+          "id": "header_bounce",
+          "weight": 1,
+          "component": {
+            "Text": {
+              "usageHint": "h4",
+              "text": {
+                "literalString": "Bounce %"
+              }
+            }
+          }
+        },
+        {
+          "id": "table_row_1",
+          "component": {
+            "Row": {
+              "children": {
+                "explicitList": [
+                  "row_1_page",
+                  "row_1_views",
+                  "row_1_time",
+                  "row_1_bounce"
+                ]
+              },
+              "alignment": "stretch"
+            }
+          }
+        },
+        {
+          "id": "row_1_page",
+          "weight": 2,
+          "component": {
+            "Text": {
+              "usageHint": "body",
+              "text": {
+                "literalString": "/products"
+              }
+            }
+          }
+        },
+        {
+          "id": "row_1_views",
+          "weight": 1,
+          "component": {
+            "Text": {
+              "usageHint": "body",
+              "text": {
+                "literalString": "12,456"
+              }
+            }
+          }
+        },
+        {
+          "id": "row_1_time",
+          "weight": 1,
+          "component": {
+            "Text": {
+              "usageHint": "body",
+              "text": {
+                "literalString": "3:42"
+              }
+            }
+          }
+        },
+        {
+          "id": "row_1_bounce",
+          "weight": 1,
+          "component": {
+            "Text": {
+              "usageHint": "body",
+              "text": {
+                "literalString": "32%"
+              }
+            }
+          }
+        },
+        {
+          "id": "table_row_2",
+          "component": {
+            "Row": {
+              "children": {
+                "explicitList": [
+                  "row_2_page",
+                  "row_2_views",
+                  "row_2_time",
+                  "row_2_bounce"
+                ]
+              },
+              "alignment": "stretch"
+            }
+          }
+        },
+        {
+          "id": "row_2_page",
+          "weight": 2,
+          "component": {
+            "Text": {
+              "usageHint": "body",
+              "text": {
+                "literalString": "/home"
+              }
+            }
+          }
+        },
+        {
+          "id": "row_2_views",
+          "weight": 1,
+          "component": {
+            "Text": {
+              "usageHint": "body",
+              "text": {
+                "literalString": "8,921"
+              }
+            }
+          }
+        },
+        {
+          "id": "row_2_time",
+          "weight": 1,
+          "component": {
+            "Text": {
+              "usageHint": "body",
+              "text": {
+                "literalString": "2:18"
+              }
+            }
+          }
+        },
+        {
+          "id": "row_2_bounce",
+          "weight": 1,
+          "component": {
+            "Text": {
+              "usageHint": "body",
+              "text": {
+                "literalString": "45%"
+              }
+            }
+          }
+        },
+        {
+          "id": "table_row_3",
+          "component": {
+            "Row": {
+              "children": {
+                "explicitList": [
+                  "row_3_page",
+                  "row_3_views",
+                  "row_3_time",
+                  "row_3_bounce"
+                ]
+              },
+              "alignment": "stretch"
+            }
+          }
+        },
+        {
+          "id": "row_3_page",
+          "weight": 2,
+          "component": {
+            "Text": {
+              "usageHint": "body",
+              "text": {
+                "literalString": "/about"
+              }
+            }
+          }
+        },
+        {
+          "id": "row_3_views",
+          "weight": 1,
+          "component": {
+            "Text": {
+              "usageHint": "body",
+              "text": {
+                "literalString": "5,234"
+              }
+            }
+          }
+        },
+        {
+          "id": "row_3_time",
+          "weight": 1,
+          "component": {
+            "Text": {
+              "usageHint": "body",
+              "text": {
+                "literalString": "1:56"
+              }
+            }
+          }
+        },
+        {
+          "id": "row_3_bounce",
+          "weight": 1,
+          "component": {
+            "Text": {
+              "usageHint": "body",
+              "text": {
+                "literalString": "58%"
+              }
+            }
+          }
+        }
+      ]
+    }
+  },
+  {
+    "dataModelUpdate": {
+      "surfaceId": "analytics_dashboard",
+      "contents": [
+        {
+          "key": "/",
+          "valueMap": [
+            {
+              "key": "kpi",
+              "valueMap": [
+                {
+                  "key": "users",
+                  "valueString": "45.2K"
+                },
+                {
+                  "key": "usersChange",
+                  "valueString": "↑ 12.3% vs last period"
+                },
+                {
+                  "key": "sessions",
+                  "valueString": "89.4K"
+                },
+                {
+                  "key": "sessionsChange",
+                  "valueString": "↑ 8.7% vs last period"
+                },
+                {
+                  "key": "pageviews",
+                  "valueString": "234K"
+                },
+                {
+                  "key": "pageviewsChange",
+                  "valueString": "↑ 15.2% vs last period"
+                },
+                {
+                  "key": "conversion",
+                  "valueString": "3.8%"
+                },
+                {
+                  "key": "conversionChange",
+                  "valueString": "↑ 0.4% vs last period"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "beginRendering": {
+      "surfaceId": "analytics_dashboard",
+      "root": "root"
+    }
+  }
+]

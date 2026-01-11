@@ -151,4 +151,4 @@ Navigate to `http://localhost:4200` in your browser.
 
 The client will attempt to connect to an A2A server at `http://localhost:7860` by default. Use the "Change Server" button to configure a different endpoint.
 
-
+** I have copied the responses from my local server in the examples diectory for you to quickly render and see how the a2ui displays , you are free to build your own server as demonstrated here  https://github.com/vishalmysore/springa2ui

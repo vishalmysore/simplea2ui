@@ -1,0 +1,228 @@
+{
+  "surfaceUpdate": {
+    "surfaceId": "sales_dashboard",
+    "components": [
+      {
+        "id": "root",
+        "component": {
+          "Column": {
+            "children": {
+              "explicitList": [
+                "title",
+                "subtitle",
+                "spacer1",
+                "kpi_section",
+                "spacer2",
+                "insights_section",
+                "spacer3",
+                "highlights_section",
+                "spacer4",
+                "cta_button"
+              ]
+            }
+          }
+        }
+      },
+
+      {
+        "id": "title",
+        "component": {
+          "Text": {
+            "usageHint": "h1",
+            "text": { "literalString": "🚀 Sales Performance Snapshot" }
+          }
+        }
+      },
+
+      {
+        "id": "subtitle",
+        "component": {
+          "Text": {
+            "usageHint": "body",
+            "text": {
+              "literalString": "Real-time executive insights powered by intelligent agents"
+            }
+          }
+        }
+      },
+
+      {
+        "id": "spacer1",
+        "component": {
+          "Text": { "text": { "literalString": "" } }
+        }
+      },
+
+
+      {
+        "id": "kpi_section",
+        "component": {
+          "Column": {
+            "children": {
+              "explicitList": [
+                "kpi_revenue",
+                "kpi_growth",
+                "kpi_deals"
+              ]
+            }
+          }
+        }
+      },
+
+      {
+        "id": "kpi_revenue",
+        "component": {
+          "Text": {
+            "usageHint": "h2",
+            "text": { "literalString": "💰 Revenue: $4.8M" }
+          }
+        }
+      },
+
+      {
+        "id": "kpi_growth",
+        "component": {
+          "Text": {
+            "usageHint": "h2",
+            "text": { "literalString": "📈 QoQ Growth: +18.6%" }
+          }
+        }
+      },
+
+      {
+        "id": "kpi_deals",
+        "component": {
+          "Text": {
+            "usageHint": "h2",
+            "text": { "literalString": "🤝 Deals Closed: 312" }
+          }
+        }
+      },
+
+      {
+        "id": "spacer2",
+        "component": {
+          "Text": { "text": { "literalString": "" } }
+        }
+      },
+
+
+      {
+        "id": "insights_section",
+        "component": {
+          "Column": {
+            "children": {
+              "explicitList": [
+                "insights_title",
+                "insights_text"
+              ]
+            }
+          }
+        }
+      },
+
+      {
+        "id": "insights_title",
+        "component": {
+          "Text": {
+            "usageHint": "h3",
+            "text": { "literalString": "📊 Key Insight" }
+          }
+        }
+      },
+
+      {
+        "id": "insights_text",
+        "component": {
+          "Text": {
+            "text": {
+              "literalString": "Enterprise subscriptions surged following pricing optimization and AI-assisted upsell recommendations."
+            }
+          }
+        }
+      },
+
+      {
+        "id": "spacer3",
+        "component": {
+          "Text": { "text": { "literalString": "" } }
+        }
+      },
+
+
+      {
+        "id": "highlights_section",
+        "component": {
+          "Column": {
+            "children": {
+              "explicitList": [
+                "top_region",
+                "top_product"
+              ]
+            }
+          }
+        }
+      },
+
+      {
+        "id": "top_region",
+        "component": {
+          "Text": {
+            "usageHint": "h3",
+            "text": {
+              "literalString": "🌍 Top Region: North America ($2.1M)"
+            }
+          }
+        }
+      },
+
+      {
+        "id": "top_product",
+        "component": {
+          "Text": {
+            "usageHint": "h3",
+            "text": {
+              "literalString": "🏆 Top Product: AI Analytics Suite"
+            }
+          }
+        }
+      },
+
+      {
+        "id": "spacer4",
+        "component": {
+          "Text": { "text": { "literalString": "" } }
+        }
+      },
+
+      
+      {
+        "id": "cta_button",
+        "component": {
+          "Button": {
+            "action": {
+              "name": "viewDetailedReport"
+            },
+            "child": "cta_text"
+          }
+        }
+      },
+
+      {
+        "id": "cta_text",
+        "component": {
+          "Text": {
+            "text": {
+              "literalString": "📥 View Full Sales Report"
+            }
+          }
+        }
+      }
+    ]
+  },
+
+  "beginRendering": {
+    "surfaceId": "sales_dashboard",
+    "root": "root"
+  }
+}

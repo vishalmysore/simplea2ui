@@ -1,0 +1,1225 @@
+[
+  {
+    "surfaceUpdate": {
+      "surfaceId": "project_dashboard",
+      "components": [
+        {
+          "id": "root",
+          "component": {
+            "Column": {
+              "children": {
+                "explicitList": [
+                  "header_section",
+                  "stats_row",
+                  "tasks_section",
+                  "team_section",
+                  "actions_footer"
+                ]
+              },
+              "alignment": "stretch"
+            }
+          }
+        },
+        {
+          "id": "header_section",
+          "component": {
+            "Card": {
+              "child": "header_content"
+            }
+          }
+        },
+        {
+          "id": "header_content",
+          "component": {
+            "Column": {
+              "children": {
+                "explicitList": [
+                  "header_row",
+                  "project_subtitle",
+                  "header_divider"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "header_row",
+          "component": {
+            "Row": {
+              "children": {
+                "explicitList": [
+                  "project_icon",
+                  "project_title",
+                  "status_badge"
+                ]
+              },
+              "alignment": "center"
+            }
+          }
+        },
+        {
+          "id": "project_icon",
+          "component": {
+            "Icon": {
+              "name": {
+                "literalString": "account_tree"
+              }
+            }
+          }
+        },
+        {
+          "id": "project_title",
+          "weight": 1,
+          "component": {
+            "Text": {
+              "usageHint": "h1",
+              "text": {
+                "literalString": "Vidyaastra Redesign Project"
+              }
+            }
+          }
+        },
+        {
+          "id": "status_badge",
+          "component": {
+            "Card": {
+              "child": "status_text"
+            }
+          }
+        },
+        {
+          "id": "status_text",
+          "component": {
+            "Text": {
+              "usageHint": "body",
+              "text": {
+                "literalString": "🟢 Active"
+              }
+            }
+          }
+        },
+        {
+          "id": "project_subtitle",
+          "component": {
+            "Text": {
+              "usageHint": "body",
+              "text": {
+                "literalString": "Q1 2026 • Design & Engineering • Due: March 31"
+              }
+            }
+          }
+        },
+        {
+          "id": "header_divider",
+          "component": {
+            "Divider": {
+              "thickness": 2
+            }
+          }
+        },
+        {
+          "id": "stats_row",
+          "component": {
+            "Row": {
+              "children": {
+                "explicitList": [
+                  "progress_card",
+                  "tasks_card",
+                  "team_card",
+                  "deadline_card"
+                ]
+              },
+              "alignment": "stretch"
+            }
+          }
+        },
+        {
+          "id": "progress_card",
+          "weight": 1,
+          "component": {
+            "Card": {
+              "child": "progress_content"
+            }
+          }
+        },
+        {
+          "id": "progress_content",
+          "component": {
+            "Column": {
+              "children": {
+                "explicitList": [
+                  "progress_icon",
+                  "progress_value",
+                  "progress_label",
+                  "progress_bar"
+                ]
+              },
+              "alignment": "center"
+            }
+          }
+        },
+        {
+          "id": "progress_icon",
+          "component": {
+            "Icon": {
+              "name": {
+                "literalString": "donut_large"
+              }
+            }
+          }
+        },
+        {
+          "id": "progress_value",
+          "component": {
+            "Text": {
+              "usageHint": "h2",
+              "text": {
+                "path": "/stats/progress"
+              }
+            }
+          }
+        },
+        {
+          "id": "progress_label",
+          "component": {
+            "Text": {
+              "usageHint": "caption",
+              "text": {
+                "literalString": "Overall Progress"
+              }
+            }
+          }
+        },
+        {
+          "id": "progress_bar",
+          "component": {
+            "Text": {
+              "usageHint": "body",
+              "text": {
+                "literalString": "███████░░░"
+              }
+            }
+          }
+        },
+        {
+          "id": "tasks_card",
+          "weight": 1,
+          "component": {
+            "Card": {
+              "child": "tasks_content"
+            }
+          }
+        },
+        {
+          "id": "tasks_content",
+          "component": {
+            "Column": {
+              "children": {
+                "explicitList": [
+                  "tasks_icon",
+                  "tasks_value",
+                  "tasks_label",
+                  "tasks_breakdown"
+                ]
+              },
+              "alignment": "center"
+            }
+          }
+        },
+        {
+          "id": "tasks_icon",
+          "component": {
+            "Icon": {
+              "name": {
+                "literalString": "checklist"
+              }
+            }
+          }
+        },
+        {
+          "id": "tasks_value",
+          "component": {
+            "Text": {
+              "usageHint": "h2",
+              "text": {
+                "path": "/stats/tasksCompleted"
+              }
+            }
+          }
+        },
+        {
+          "id": "tasks_label",
+          "component": {
+            "Text": {
+              "usageHint": "caption",
+              "text": {
+                "literalString": "Tasks Complete"
+              }
+            }
+          }
+        },
+        {
+          "id": "tasks_breakdown",
+          "component": {
+            "Text": {
+              "usageHint": "body",
+              "text": {
+                "path": "/stats/tasksSummary"
+              }
+            }
+          }
+        },
+        {
+          "id": "team_card",
+          "weight": 1,
+          "component": {
+            "Card": {
+              "child": "team_stat_content"
+            }
+          }
+        },
+        {
+          "id": "team_stat_content",
+          "component": {
+            "Column": {
+              "children": {
+                "explicitList": [
+                  "team_icon",
+                  "team_value",
+                  "team_label",
+                  "team_status"
+                ]
+              },
+              "alignment": "center"
+            }
+          }
+        },
+        {
+          "id": "team_icon",
+          "component": {
+            "Icon": {
+              "name": {
+                "literalString": "groups"
+              }
+            }
+          }
+        },
+        {
+          "id": "team_value",
+          "component": {
+            "Text": {
+              "usageHint": "h2",
+              "text": {
+                "path": "/stats/teamSize"
+              }
+            }
+          }
+        },
+        {
+          "id": "team_label",
+          "component": {
+            "Text": {
+              "usageHint": "caption",
+              "text": {
+                "literalString": "Team Members"
+              }
+            }
+          }
+        },
+        {
+          "id": "team_status",
+          "component": {
+            "Text": {
+              "usageHint": "body",
+              "text": {
+                "literalString": "6 active • 2 standby"
+              }
+            }
+          }
+        },
+        {
+          "id": "deadline_card",
+          "weight": 1,
+          "component": {
+            "Card": {
+              "child": "deadline_content"
+            }
+          }
+        },
+        {
+          "id": "deadline_content",
+          "component": {
+            "Column": {
+              "children": {
+                "explicitList": [
+                  "deadline_icon",
+                  "deadline_value",
+                  "deadline_label",
+                  "deadline_status"
+                ]
+              },
+              "alignment": "center"
+            }
+          }
+        },
+        {
+          "id": "deadline_icon",
+          "component": {
+            "Icon": {
+              "name": {
+                "literalString": "schedule"
+              }
+            }
+          }
+        },
+        {
+          "id": "deadline_value",
+          "component": {
+            "Text": {
+              "usageHint": "h2",
+              "text": {
+                "path": "/stats/daysRemaining"
+              }
+            }
+          }
+        },
+        {
+          "id": "deadline_label",
+          "component": {
+            "Text": {
+              "usageHint": "caption",
+              "text": {
+                "literalString": "Days Remaining"
+              }
+            }
+          }
+        },
+        {
+          "id": "deadline_status",
+          "component": {
+            "Text": {
+              "usageHint": "body",
+              "text": {
+                "literalString": "🟢 On schedule"
+              }
+            }
+          }
+        },
+        {
+          "id": "tasks_section",
+          "component": {
+            "Card": {
+              "child": "tasks_section_content"
+            }
+          }
+        },
+        {
+          "id": "tasks_section_content",
+          "component": {
+            "Column": {
+              "children": {
+                "explicitList": [
+                  "tasks_header",
+                  "tasks_divider",
+                  "task_1",
+                  "task_2",
+                  "task_3",
+                  "task_4"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "tasks_header",
+          "component": {
+            "Row": {
+              "children": {
+                "explicitList": [
+                  "tasks_header_icon",
+                  "tasks_header_text"
+                ]
+              },
+              "alignment": "center"
+            }
+          }
+        },
+        {
+          "id": "tasks_header_icon",
+          "component": {
+            "Icon": {
+              "name": {
+                "literalString": "assignment"
+              }
+            }
+          }
+        },
+        {
+          "id": "tasks_header_text",
+          "component": {
+            "Text": {
+              "usageHint": "h3",
+              "text": {
+                "literalString": "📋 Active Tasks"
+              }
+            }
+          }
+        },
+        {
+          "id": "tasks_divider",
+          "component": {
+            "Divider": {}
+          }
+        },
+        {
+          "id": "task_1",
+          "component": {
+            "Row": {
+              "children": {
+                "explicitList": [
+                  "task_1_status",
+                  "task_1_content",
+                  "task_1_action"
+                ]
+              },
+              "alignment": "center"
+            }
+          }
+        },
+        {
+          "id": "task_1_status",
+          "component": {
+            "Icon": {
+              "name": {
+                "literalString": "check_circle"
+              }
+            }
+          }
+        },
+        {
+          "id": "task_1_content",
+          "weight": 1,
+          "component": {
+            "Column": {
+              "children": {
+                "explicitList": [
+                  "task_1_title",
+                  "task_1_meta"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "task_1_title",
+          "component": {
+            "Text": {
+              "usageHint": "h4",
+              "text": {
+                "literalString": "Complete UI mockups for mobile version"
+              }
+            }
+          }
+        },
+        {
+          "id": "task_1_meta",
+          "component": {
+            "Text": {
+              "usageHint": "caption",
+              "text": {
+                "literalString": "Design • Sarah Chen • Completed"
+              }
+            }
+          }
+        },
+        {
+          "id": "task_1_action",
+          "component": {
+            "Button": {
+              "action": {
+                "name": "viewTask",
+                "context": {
+                  "taskId": "T-001"
+                }
+              },
+              "child": "task_1_button_text"
+            }
+          }
+        },
+        {
+          "id": "task_1_button_text",
+          "component": {
+            "Text": {
+              "text": {
+                "literalString": "View"
+              }
+            }
+          }
+        },
+        {
+          "id": "task_2",
+          "component": {
+            "Row": {
+              "children": {
+                "explicitList": [
+                  "task_2_status",
+                  "task_2_content",
+                  "task_2_action"
+                ]
+              },
+              "alignment": "center"
+            }
+          }
+        },
+        {
+          "id": "task_2_status",
+          "component": {
+            "Icon": {
+              "name": {
+                "literalString": "pending"
+              }
+            }
+          }
+        },
+        {
+          "id": "task_2_content",
+          "weight": 1,
+          "component": {
+            "Column": {
+              "children": {
+                "explicitList": [
+                  "task_2_title",
+                  "task_2_meta"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "task_2_title",
+          "component": {
+            "Text": {
+              "usageHint": "h4",
+              "text": {
+                "literalString": "Implement authentication flow"
+              }
+            }
+          }
+        },
+        {
+          "id": "task_2_meta",
+          "component": {
+            "Text": {
+              "usageHint": "caption",
+              "text": {
+                "literalString": "Engineering • Alex Kumar • In Progress"
+              }
+            }
+          }
+        },
+        {
+          "id": "task_2_action",
+          "component": {
+            "Button": {
+              "action": {
+                "name": "viewTask",
+                "context": {
+                  "taskId": "T-002"
+                }
+              },
+              "child": "task_2_button_text",
+              "primary": true
+            }
+          }
+        },
+        {
+          "id": "task_2_button_text",
+          "component": {
+            "Text": {
+              "text": {
+                "literalString": "View"
+              }
+            }
+          }
+        },
+        {
+          "id": "task_3",
+          "component": {
+            "Row": {
+              "children": {
+                "explicitList": [
+                  "task_3_status",
+                  "task_3_content",
+                  "task_3_action"
+                ]
+              },
+              "alignment": "center"
+            }
+          }
+        },
+        {
+          "id": "task_3_status",
+          "component": {
+            "Icon": {
+              "name": {
+                "literalString": "hourglass_empty"
+              }
+            }
+          }
+        },
+        {
+          "id": "task_3_content",
+          "weight": 1,
+          "component": {
+            "Column": {
+              "children": {
+                "explicitList": [
+                  "task_3_title",
+                  "task_3_meta"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "task_3_title",
+          "component": {
+            "Text": {
+              "usageHint": "h4",
+              "text": {
+                "literalString": "Set up CI/CD pipeline"
+              }
+            }
+          }
+        },
+        {
+          "id": "task_3_meta",
+          "component": {
+            "Text": {
+              "usageHint": "caption",
+              "text": {
+                "literalString": "DevOps • Mike Wilson • Pending"
+              }
+            }
+          }
+        },
+        {
+          "id": "task_3_action",
+          "component": {
+            "Button": {
+              "action": {
+                "name": "viewTask",
+                "context": {
+                  "taskId": "T-003"
+                }
+              },
+              "child": "task_3_button_text"
+            }
+          }
+        },
+        {
+          "id": "task_3_button_text",
+          "component": {
+            "Text": {
+              "text": {
+                "literalString": "View"
+              }
+            }
+          }
+        },
+        {
+          "id": "task_4",
+          "component": {
+            "Row": {
+              "children": {
+                "explicitList": [
+                  "task_4_status",
+                  "task_4_content",
+                  "task_4_action"
+                ]
+              },
+              "alignment": "center"
+            }
+          }
+        },
+        {
+          "id": "task_4_status",
+          "component": {
+            "Icon": {
+              "name": {
+                "literalString": "error"
+              }
+            }
+          }
+        },
+        {
+          "id": "task_4_content",
+          "weight": 1,
+          "component": {
+            "Column": {
+              "children": {
+                "explicitList": [
+                  "task_4_title",
+                  "task_4_meta"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "task_4_title",
+          "component": {
+            "Text": {
+              "usageHint": "h4",
+              "text": {
+                "literalString": "Fix performance issues on dashboard"
+              }
+            }
+          }
+        },
+        {
+          "id": "task_4_meta",
+          "component": {
+            "Text": {
+              "usageHint": "caption",
+              "text": {
+                "literalString": "Engineering • Lisa Park • Blocked"
+              }
+            }
+          }
+        },
+        {
+          "id": "task_4_action",
+          "component": {
+            "Button": {
+              "action": {
+                "name": "viewTask",
+                "context": {
+                  "taskId": "T-004"
+                }
+              },
+              "child": "task_4_button_text"
+            }
+          }
+        },
+        {
+          "id": "task_4_button_text",
+          "component": {
+            "Text": {
+              "text": {
+                "literalString": "View"
+              }
+            }
+          }
+        },
+        {
+          "id": "team_section",
+          "component": {
+            "Card": {
+              "child": "team_section_content"
+            }
+          }
+        },
+        {
+          "id": "team_section_content",
+          "component": {
+            "Column": {
+              "children": {
+                "explicitList": [
+                  "team_header",
+                  "team_divider",
+                  "team_members"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "team_header",
+          "component": {
+            "Row": {
+              "children": {
+                "explicitList": [
+                  "team_header_icon",
+                  "team_header_text"
+                ]
+              },
+              "alignment": "center"
+            }
+          }
+        },
+        {
+          "id": "team_header_icon",
+          "component": {
+            "Icon": {
+              "name": {
+                "literalString": "people"
+              }
+            }
+          }
+        },
+        {
+          "id": "team_header_text",
+          "component": {
+            "Text": {
+              "usageHint": "h3",
+              "text": {
+                "literalString": "👥 Team Members"
+              }
+            }
+          }
+        },
+        {
+          "id": "team_divider",
+          "component": {
+            "Divider": {}
+          }
+        },
+        {
+          "id": "team_members",
+          "component": {
+            "Row": {
+              "children": {
+                "explicitList": [
+                  "member_1_card",
+                  "member_2_card",
+                  "member_3_card"
+                ]
+              },
+              "alignment": "stretch"
+            }
+          }
+        },
+        {
+          "id": "member_1_card",
+          "weight": 1,
+          "component": {
+            "Card": {
+              "child": "member_1_content"
+            }
+          }
+        },
+        {
+          "id": "member_1_content",
+          "component": {
+            "Column": {
+              "children": {
+                "explicitList": [
+                  "member_1_icon",
+                  "member_1_name",
+                  "member_1_role",
+                  "member_1_tasks"
+                ]
+              },
+              "alignment": "center"
+            }
+          }
+        },
+        {
+          "id": "member_1_icon",
+          "component": {
+            "Icon": {
+              "name": {
+                "literalString": "account_circle"
+              }
+            }
+          }
+        },
+        {
+          "id": "member_1_name",
+          "component": {
+            "Text": {
+              "usageHint": "h4",
+              "text": {
+                "literalString": "Sarah Chen"
+              }
+            }
+          }
+        },
+        {
+          "id": "member_1_role",
+          "component": {
+            "Text": {
+              "usageHint": "caption",
+              "text": {
+                "literalString": "Lead Designer"
+              }
+            }
+          }
+        },
+        {
+          "id": "member_1_tasks",
+          "component": {
+            "Text": {
+              "usageHint": "body",
+              "text": {
+                "literalString": "✓ 12 tasks"
+              }
+            }
+          }
+        },
+        {
+          "id": "member_2_card",
+          "weight": 1,
+          "component": {
+            "Card": {
+              "child": "member_2_content"
+            }
+          }
+        },
+        {
+          "id": "member_2_content",
+          "component": {
+            "Column": {
+              "children": {
+                "explicitList": [
+                  "member_2_icon",
+                  "member_2_name",
+                  "member_2_role",
+                  "member_2_tasks"
+                ]
+              },
+              "alignment": "center"
+            }
+          }
+        },
+        {
+          "id": "member_2_icon",
+          "component": {
+            "Icon": {
+              "name": {
+                "literalString": "account_circle"
+              }
+            }
+          }
+        },
+        {
+          "id": "member_2_name",
+          "component": {
+            "Text": {
+              "usageHint": "h4",
+              "text": {
+                "literalString": "Alex Kumar"
+              }
+            }
+          }
+        },
+        {
+          "id": "member_2_role",
+          "component": {
+            "Text": {
+              "usageHint": "caption",
+              "text": {
+                "literalString": "Senior Engineer"
+              }
+            }
+          }
+        },
+        {
+          "id": "member_2_tasks",
+          "component": {
+            "Text": {
+              "usageHint": "body",
+              "text": {
+                "literalString": "⚡ 8 tasks"
+              }
+            }
+          }
+        },
+        {
+          "id": "member_3_card",
+          "weight": 1,
+          "component": {
+            "Card": {
+              "child": "member_3_content"
+            }
+          }
+        },
+        {
+          "id": "member_3_content",
+          "component": {
+            "Column": {
+              "children": {
+                "explicitList": [
+                  "member_3_icon",
+                  "member_3_name",
+                  "member_3_role",
+                  "member_3_tasks"
+                ]
+              },
+              "alignment": "center"
+            }
+          }
+        },
+        {
+          "id": "member_3_icon",
+          "component": {
+            "Icon": {
+              "name": {
+                "literalString": "account_circle"
+              }
+            }
+          }
+        },
+        {
+          "id": "member_3_name",
+          "component": {
+            "Text": {
+              "usageHint": "h4",
+              "text": {
+                "literalString": "Mike Wilson"
+              }
+            }
+          }
+        },
+        {
+          "id": "member_3_role",
+          "component": {
+            "Text": {
+              "usageHint": "caption",
+              "text": {
+                "literalString": "DevOps Lead"
+              }
+            }
+          }
+        },
+        {
+          "id": "member_3_tasks",
+          "component": {
+            "Text": {
+              "usageHint": "body",
+              "text": {
+                "literalString": "⏳ 5 tasks"
+              }
+            }
+          }
+        },
+        {
+          "id": "actions_footer",
+          "component": {
+            "Row": {
+              "children": {
+                "explicitList": [
+                  "add_task_button",
+                  "add_member_button",
+                  "export_button"
+                ]
+              },
+              "alignment": "center"
+            }
+          }
+        },
+        {
+          "id": "add_task_button",
+          "weight": 1,
+          "component": {
+            "Button": {
+              "action": {
+                "name": "addTask"
+              },
+              "child": "add_task_text",
+              "primary": true
+            }
+          }
+        },
+        {
+          "id": "add_task_text",
+          "component": {
+            "Text": {
+              "text": {
+                "literalString": "➕ Add Task"
+              }
+            }
+          }
+        },
+        {
+          "id": "add_member_button",
+          "weight": 1,
+          "component": {
+            "Button": {
+              "action": {
+                "name": "addMember"
+              },
+              "child": "add_member_text"
+            }
+          }
+        },
+        {
+          "id": "add_member_text",
+          "component": {
+            "Text": {
+              "text": {
+                "literalString": "👤 Invite Member"
+              }
+            }
+          }
+        },
+        {
+          "id": "export_button",
+          "weight": 1,
+          "component": {
+            "Button": {
+              "action": {
+                "name": "exportReport"
+              },
+              "child": "export_text"
+            }
+          }
+        },
+        {
+          "id": "export_text",
+          "component": {
+            "Text": {
+              "text": {
+                "literalString": "📊 Export Report"
+              }
+            }
+          }
+        }
+      ]
+    }
+  },
+  {
+    "dataModelUpdate": {
+      "surfaceId": "project_dashboard",
+      "contents": [
+        {
+          "key": "/",
+          "valueMap": [
+            {
+              "key": "stats",
+              "valueMap": [
+                {
+                  "key": "progress",
+                  "valueString": "72%"
+                },
+                {
+                  "key": "tasksCompleted",
+                  "valueString": "34/47"
+                },
+                {
+                  "key": "tasksSummary",
+                  "valueString": "13 remaining"
+                },
+                {
+                  "key": "teamSize",
+                  "valueString": "8"
+                },
+                {
+                  "key": "daysRemaining",
+                  "valueString": "79"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "beginRendering": {
+      "surfaceId": "project_dashboard",
+      "root": "root"
+    }
+  }
+]

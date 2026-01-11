@@ -1,0 +1,97 @@
+{
+  "surfaceUpdate": {
+    "surfaceId": "test_cards",
+    "components": [
+      {
+        "id": "root",
+        "component": {
+          "Column": {
+            "children": {
+              "explicitList": [
+                "title",
+                "card1",
+                "card2",
+                "card3"
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": "title",
+        "component": {
+          "Text": {
+            "usageHint": "h2",
+            "text": {
+              "literalString": "Test with Multiple Cards"
+            }
+          }
+        }
+      },
+      {
+        "id": "card1",
+        "component": {
+          "Card": {
+            "child": "card1_content"
+          }
+        }
+      },
+      {
+        "id": "card1_content",
+        "component": {
+          "Text": {
+            "text": {
+              "literalString": "Card 1 Content"
+            }
+          }
+        }
+      },
+      {
+        "id": "card2",
+        "component": {
+          "Card": {
+            "child": "card2_content"
+          }
+        }
+      },
+      {
+        "id": "card2_content",
+        "component": {
+          "Text": {
+            "text": {
+              "literalString": "Card 2 Content"
+            }
+          }
+        }
+      },
+      {
+        "id": "card3",
+        "component": {
+          "Card": {
+            "child": "card3_content"
+          }
+        }
+      },
+      {
+        "id": "card3_content",
+        "component": {
+          "Text": {
+            "text": {
+              "literalString": "Card 3 Content"
+            }
+          }
+        }
+      }
+    ]
+  },
+  "dataModelUpdate": {
+    "contents": [],
+    "surfaceId": "test_cards"
+  },
+  "beginRendering": {
+    "root": "root",
+    "surfaceId": "test_cards",
+    "viewportWidthPx": 800,
+    "viewportHeightPx": 600
+  }
+}

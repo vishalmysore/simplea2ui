@@ -1,0 +1,106 @@
+{
+  "surfaceUpdate": {
+    "surfaceId": "test_simple",
+    "components": [
+      {
+        "id": "root",
+        "component": {
+          "Column": {
+            "children": {
+              "explicitList": [
+                "title",
+                "description",
+                "name_input",
+                "button"
+              ]
+            }
+          }
+        }
+      },
+      {
+        "id": "title",
+        "component": {
+          "Text": {
+            "usageHint": "h2",
+            "text": {
+              "literalString": "Simple Test"
+            }
+          }
+        }
+      },
+      {
+        "id": "description",
+        "component": {
+          "Text": {
+            "usageHint": "body",
+            "text": {
+              "literalString": "This is a simple test with basic components."
+            }
+          }
+        }
+      },
+      {
+        "id": "name_input",
+        "component": {
+          "TextField": {
+            "label": {
+              "literalString": "Your Name"
+            },
+            "text": {
+              "path": "/form/name"
+            }
+          }
+        }
+      },
+      {
+        "id": "button",
+        "component": {
+          "Button": {
+            "action": {
+              "name": "testAction",
+              "context": [
+                {
+                  "key": "name",
+                  "value": {
+                    "path": "/form/name"
+                  }
+                }
+              ]
+            },
+            "child": "button_text"
+          }
+        }
+      },
+      {
+        "id": "button_text",
+        "component": {
+          "Text": {
+            "text": {
+              "literalString": "Submit"
+            }
+          }
+        }
+      }
+    ]
+  },
+  "dataModelUpdate": {
+    "contents": [
+      {
+        "key": "form",
+        "valueMap": [
+          {
+            "key": "name",
+            "valueString": ""
+          }
+        ]
+      }
+    ],
+    "surfaceId": "test_simple"
+  },
+  "beginRendering": {
+    "root": "root",
+    "surfaceId": "test_simple",
+    "viewportWidthPx": 800,
+    "viewportHeightPx": 600
+  }
+}

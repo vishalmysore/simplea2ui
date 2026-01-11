@@ -1,0 +1,181 @@
+{
+  "timestamp": "2026-01-11T22:13:17.868Z",
+  "data": {
+    "jsonrpc": "2.0",
+    "id": "msg-1768169591414-hktgkjcj7",
+    "result": {
+      "id": "msg-1768169591414-hktgkjcj7",
+      "sessionId": "9224f35f-d29d-4225-92c2-64e7f2a1be38",
+      "status": {
+        "state": "completed",
+        "message": {
+          "role": "agent",
+          "parts": [
+            {
+              "metadata": {},
+              "text": " Your Task with id msg-1768169591414-hktgkjcj7 is submitted"
+            },
+            {
+              "metadata": {
+                "mimeType": "application/json+a2ui"
+              },
+              "data": {
+                "surfaceUpdate": {
+                  "components": [
+                    {
+                      "component": {
+                        "Column": {
+                          "children": {
+                            "explicitList": [
+                              "title",
+                              "result",
+                              "divider",
+                              "form_title",
+                              "name_input",
+                              "submit_button",
+                              "submit_button_text"
+                            ]
+                          }
+                        }
+                      },
+                      "id": "root"
+                    },
+                    {
+                      "component": {
+                        "Text": {
+                          "usageHint": "h2",
+                          "text": {
+                            "literalString": "🍽️ Favorite Food Finder"
+                          }
+                        }
+                      },
+                      "id": "title"
+                    },
+                    {
+                      "component": {
+                        "Text": {
+                          "usageHint": "body",
+                          "text": {
+                            "literalString": "Vishal's favorite food is: Paneer Butter Masala 😋"
+                          }
+                        }
+                      },
+                      "id": "result"
+                    },
+                    {
+                      "component": {
+                        "Text": {
+                          "usageHint": "body",
+                          "text": {
+                            "literalString": "───────────────────────"
+                          }
+                        }
+                      },
+                      "id": "divider"
+                    },
+                    {
+                      "component": {
+                        "Text": {
+                          "usageHint": "h3",
+                          "text": {
+                            "literalString": "Find another person's favorite food:"
+                          }
+                        }
+                      },
+                      "id": "form_title"
+                    },
+                    {
+                      "component": {
+                        "TextField": {
+                          "label": {
+                            "literalString": "Person's Name"
+                          },
+                          "text": {
+                            "path": "/form/name"
+                          }
+                        }
+                      },
+                      "id": "name_input"
+                    },
+                    {
+                      "component": {
+                        "Button": {
+                          "action": {
+                            "name": "whatThisPersonFavFood",
+                            "context": [
+                              {
+                                "value": {
+                                  "path": "/form/name"
+                                },
+                                "key": "name"
+                              }
+                            ]
+                          },
+                          "child": "submit_button_text"
+                        }
+                      },
+                      "id": "submit_button"
+                    },
+                    {
+                      "component": {
+                        "Text": {
+                          "text": {
+                            "literalString": "Find Favorite Food"
+                          }
+                        }
+                      },
+                      "id": "submit_button_text"
+                    }
+                  ],
+                  "surfaceId": "favorite_food"
+                },
+                "dataModelUpdate": {
+                  "contents": [
+                    {
+                      "valueMap": [
+                        {
+                          "valueString": "",
+                          "key": "name"
+                        }
+                      ],
+                      "key": "form"
+                    }
+                  ],
+                  "surfaceId": "favorite_food"
+                },
+                "beginRendering": {
+                  "root": "root",
+                  "surfaceId": "favorite_food"
+                }
+              }
+            }
+          ],
+          "metadata": null
+        },
+        "timestamp": "2026-01-11T22:13:11.204894328Z"
+      },
+      "history": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "metadata": {},
+              "text": "what is vishals fav good"
+            }
+          ],
+          "metadata": null
+        }
+      ],
+      "artifacts": null,
+      "metadata": null,
+      "pushNotificationConfig": null,
+      "pushNotificationUrl": null,
+      "subscribed": false,
+      "subscriptionDateNow": null,
+      "cancelled": false,
+      "textResult": ""
+    },
+    "error": null,
+    "textResult": ""
+  }
+}

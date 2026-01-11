@@ -963,12 +963,34 @@ export class App implements OnInit, OnDestroy {
       return;
     }
     
+    // Clear any existing test surfaces before rendering new content
+    const surfaceIds = Array.from(this.activeSurfaceIds());
+    for (const surfaceId of surfaceIds) {
+      try {
+        this.processor.processMessages([{
+          deleteSurface: {
+            surfaceId: surfaceId
+          }
+        }]);
+      } catch (deleteErr) {
+        console.warn('Failed to delete surface:', surfaceId, deleteErr);
+      }
+    }
+    this.activeSurfaceIds.set(new Set());
+    
     try {
       const parsed = JSON.parse(jsonStr);
       let a2uiMessages: any[] = [];
       
-      // Check if it's direct A2UI JSON or nested response
-      if (parsed.surfaceUpdate || parsed.dataModelUpdate || parsed.beginRendering) {
+      // Check if it's an array of A2UI messages (JSONL-style array)
+      if (Array.isArray(parsed)) {
+        // Array of A2UI messages
+        for (const msg of parsed) {
+          if (msg.surfaceUpdate || msg.dataModelUpdate || msg.beginRendering) {
+            a2uiMessages.push(msg);
+          }
+        }
+      } else if (parsed.surfaceUpdate || parsed.dataModelUpdate || parsed.beginRendering) {
         // Direct A2UI JSON
         a2uiMessages = [parsed];
       } else if (parsed.result?.status?.message?.parts) {
@@ -994,15 +1016,82 @@ export class App implements OnInit, OnDestroy {
         return;
       }
       
-      // Process all A2UI messages through the MessageProcessor
+      // Validate and clean up A2UI messages before rendering
       for (const msg of a2uiMessages) {
-        this.processor.processMessages([msg]);
+        // Validate surfaceUpdate components
+        if (msg.surfaceUpdate?.components) {
+          const originalCount = msg.surfaceUpdate.components.length;
+          console.log(`Validating ${originalCount} components...`);
+          
+          // Filter out null/undefined components and validate structure
+          msg.surfaceUpdate.components = msg.surfaceUpdate.components.filter((c: any, idx: number) => {
+            try {
+              if (!c) {
+                console.warn(`[Index ${idx}] Null or undefined component`);
+                return false;
+              }
+              
+              if (!c.id) {
+                console.warn(`[Index ${idx}] Missing id:`, JSON.stringify(c).substring(0, 200));
+                return false;
+              }
+              
+              if (!c.component) {
+                console.warn(`[Index ${idx}] Component "${c.id}" missing component property`);
+                return false;
+              }
+              
+              // Check if component object has at least one component type
+              const componentKeys = Object.keys(c.component);
+              if (componentKeys.length === 0) {
+                console.warn(`[Index ${idx}] Component "${c.id}" has empty component object`);
+                return false;
+              }
+              
+              // Validate the component type object is not null
+              const componentTypeName = componentKeys[0];
+              const componentType = c.component[componentTypeName];
+              if (componentType === null || componentType === undefined) {
+                console.warn(`[Index ${idx}] Component "${c.id}" has null ${componentTypeName} type`);
+                return false;
+              }
+              
+              return true;
+            } catch (validateErr: any) {
+              console.error(`[Index ${idx}] Validation error:`, validateErr);
+              return false;
+            }
+          });
+          
+          const removedCount = originalCount - msg.surfaceUpdate.components.length;
+          if (removedCount > 0) {
+            console.warn(`⚠️ Removed ${removedCount} invalid component(s)`);
+          }
+          
+          if (msg.surfaceUpdate.components.length === 0) {
+            this.testError.set('All components were invalid. Check console for validation warnings.');
+            return;
+          }
+          
+          console.log(`✓ ${msg.surfaceUpdate.components.length} valid components ready to render`);
+        }
         
-        // Track active surface IDs from test renders
-        if (msg.surfaceUpdate?.surfaceId) {
-          const currentIds = new Set(this.activeSurfaceIds());
-          currentIds.add(msg.surfaceUpdate.surfaceId);
-          this.activeSurfaceIds.set(currentIds);
+        try {
+          console.log('Rendering A2UI message...');
+          this.processor.processMessages([msg]);
+          console.log('✓ Render successful');
+          
+          // Track active surface IDs from test renders
+          if (msg.surfaceUpdate?.surfaceId) {
+            const currentIds = new Set(this.activeSurfaceIds());
+            currentIds.add(msg.surfaceUpdate.surfaceId);
+            this.activeSurfaceIds.set(currentIds);
+          }
+        } catch (renderErr: any) {
+          console.error('❌ Rendering failed:', renderErr);
+          console.error('Failed message:', JSON.stringify(msg, null, 2).substring(0, 1000));
+          this.testError.set(`Rendering Error: ${renderErr.message || 'Failed to render A2UI JSON'}. Check console for full error.`);
+          return;
         }
       }
       console.log(`Test A2UI JSON rendered successfully (${a2uiMessages.length} message(s)):`, a2uiMessages);
