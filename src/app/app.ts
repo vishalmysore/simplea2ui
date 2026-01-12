@@ -845,6 +845,97 @@ OR full response:
       font-size: 0.9rem;
       font-weight: 500;
     }
+    
+    /* Mobile responsive styles */
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+        height: auto;
+        min-height: calc(100vh - 60px);
+      }
+      
+      .left-panel {
+        padding: 1rem;
+        width: 100%;
+      }
+      
+      .right-panel {
+        width: 100%;
+        border-left: none;
+        border-top: 1px solid #e1e8ed;
+        padding: 1rem;
+      }
+      
+      h1 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+      }
+      
+      .message-form {
+        flex-direction: column;
+      }
+      
+      .message-form input[type="text"] {
+        width: 100%;
+      }
+      
+      .message-form button {
+        width: 100%;
+      }
+      
+      .debug-content {
+        max-height: 300px;
+      }
+      
+      .test-textarea {
+        min-height: 150px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .left-panel {
+        padding: 0.75rem;
+      }
+      
+      .right-panel {
+        padding: 0.75rem;
+      }
+      
+      h1 {
+        font-size: 1.25rem;
+      }
+      
+      button {
+        padding: 0.625rem 1rem;
+        font-size: 0.9rem;
+      }
+      
+      input[type="text"] {
+        padding: 0.625rem;
+        font-size: 0.9rem;
+      }
+      
+      .mode-toggle,
+      .server-status,
+      .about-section,
+      .test-panel {
+        padding: 0.75rem;
+      }
+      
+      .agent-header h2 {
+        font-size: 1.25rem;
+      }
+      
+      .skill-card {
+        padding: 1rem;
+      }
+      
+      .footer p {
+        font-size: 0.8rem;
+        padding: 0 1rem;
+        text-align: center;
+      }
+    }
   `
 })  
 export class App implements OnInit, OnDestroy {  
