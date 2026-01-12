@@ -36,16 +36,6 @@ button:hover{background:#1a91da}
 .server-status{background:#f7fafc;padding:1rem;border-radius:8px;margin-bottom:1rem}
 .status-info{margin-bottom:.75rem;font-size:.9rem;color:#444;word-break:break-all}
 .status-info strong{color:#1a1a1a}
-.connect-btn{width:100%;padding:.75rem;background:#10b981;color:#fff;border:none;border-radius:8px;font-weight:600;cursor:pointer;transition:background .2s}
-.connect-btn:hover{background:#059669}
-.connect-form{background:#fff;padding:1rem;border:1px solid #e1e8ed;border-radius:8px;margin-bottom:1rem}
-.connect-form input{width:100%;margin-bottom:.5rem}
-.connect-form button{width:100%;background:#10b981}
-.connect-form button:hover{background:#059669}
-.toggle-btn{width:100%;padding:.75rem;background:#667eea;color:#fff;border:none;border-radius:8px;font-weight:600;cursor:pointer;transition:background .2s;margin-top:.75rem}
-.toggle-btn:hover{background:#5568d3}
-.about-btn{width:100%;padding:.75rem;background:#f59e0b;color:#fff;border:none;border-radius:8px;font-weight:600;cursor:pointer;transition:background .2s;margin-top:.75rem;margin-bottom:1rem}
-.about-btn:hover{background:#d97706}
 
 
 .mode-toggle{background:#f7fafc;padding:1rem;border-radius:8px;margin-bottom:1rem;border:1px solid #e1e8ed}

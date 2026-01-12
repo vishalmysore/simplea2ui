@@ -1,3 +1,13 @@
+.connect-btn{width:100%;padding:.75rem;background:#10b981;color:#fff;border:none;border-radius:8px;font-weight:600;cursor:pointer;transition:background .2s}
+.connect-btn:hover{background:#059669}
+.connect-form{background:#fff;padding:1rem;border:1px solid #e1e8ed;border-radius:8px;margin-bottom:1rem}
+.connect-form input{width:100%;margin-bottom:.5rem}
+.connect-form button{width:100%;background:#10b981}
+.connect-form button:hover{background:#059669}
+.toggle-btn{width:100%;padding:.75rem;background:#667eea;color:#fff;border:none;border-radius:8px;font-weight:600;cursor:pointer;transition:background .2s;margin-top:.75rem}
+.toggle-btn:hover{background:#5568d3}
+.about-btn{width:100%;padding:.75rem;background:#f59e0b;color:#fff;border:none;border-radius:8px;font-weight:600;cursor:pointer;transition:background .2s;margin-top:.75rem;margin-bottom:1rem}
+.about-btn:hover{background:#d97706}
 .test-btn{width:100%;padding:.75rem;background:#8b5cf6;color:#fff;border:none;border-radius:8px;font-weight:600;cursor:pointer;transition:background .2s;margin-top:.75rem}
 .test-btn:hover{background:#7c3aed}
 .test-panel{background:#fff;border-radius:8px;padding:1.5rem;margin-top:1rem;box-shadow:0 1px 3px rgba(0,0,0,.1)}
