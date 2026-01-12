@@ -22,11 +22,6 @@
               {
                 "glob": "**/*",
                 "input": "public"
-              },
-              {
-                "glob": "**/*",
-                "input": "examples",
-                "output": "/examples"
               }
             ],
             "styles": [
