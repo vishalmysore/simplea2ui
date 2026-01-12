@@ -381,7 +381,7 @@ export class App implements OnInit, OnDestroy {
     this.testError.set(null);
     
     try {
-      const response = await fetch(`/examples/${filename}`);
+      const response = await fetch(`examples/${filename}`);
       if (!response.ok) {
         throw new Error(`Failed to load example: ${response.statusText}`);
       }
