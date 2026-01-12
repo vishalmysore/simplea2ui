@@ -1,0 +1,457 @@
+[
+  {
+    "surfaceUpdate": {
+      "surfaceId": "analytics_dashboard",
+      "components": [
+        {
+          "id": "root",
+          "component": {
+            "Column": {
+              "children": {
+                "explicitList": [
+                  "header_card",
+                  "graphs_section"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "header_card",
+          "component": {
+            "Card": {
+              "child": "header_content"
+            }
+          }
+        },
+        {
+          "id": "header_content",
+          "component": {
+            "Column": {
+              "children": {
+                "explicitList": [
+                  "dashboard_title",
+                  "dashboard_subtitle",
+                  "divider"
+                ]
+              },
+              "alignment": "center"
+            }
+          }
+        },
+        {
+          "id": "dashboard_title",
+          "component": {
+            "Text": {
+              "usageHint": "h1",
+              "text": {
+                "literalString": "📊 Sales Analytics Dashboard"
+              }
+            }
+          }
+        },
+        {
+          "id": "dashboard_subtitle",
+          "component": {
+            "Text": {
+              "usageHint": "body",
+              "text": {
+                "literalString": "Real-time business metrics and performance data"
+              }
+            }
+          }
+        },
+        {
+          "id": "divider",
+          "component": {
+            "Divider": {}
+          }
+        },
+        {
+          "id": "graphs_section",
+          "component": {
+            "Column": {
+              "children": {
+                "explicitList": [
+                  "monthly_sales_card",
+                  "category_breakdown_card",
+                  "quarterly_trend_card"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "monthly_sales_card",
+          "component": {
+            "Card": {
+              "child": "monthly_sales_graph"
+            }
+          }
+        },
+        {
+          "id": "monthly_sales_graph",
+          "component": {
+            "Graph": {
+              "data": {
+                "path": "/monthlySales"
+              },
+              "graphType": "line",
+              "title": "Monthly Sales (2025)",
+              "xLabel": "Month",
+              "yLabel": "Revenue ($)",
+              "interactive": true
+            }
+          }
+        },
+        {
+          "id": "category_breakdown_card",
+          "component": {
+            "Card": {
+              "child": "category_breakdown_graph"
+            }
+          }
+        },
+        {
+          "id": "category_breakdown_graph",
+          "component": {
+            "Graph": {
+              "data": {
+                "path": "/categoryBreakdown"
+              },
+              "graphType": "pie",
+              "title": "Sales by Category",
+              "interactive": true
+            }
+          }
+        },
+        {
+          "id": "quarterly_trend_card",
+          "component": {
+            "Card": {
+              "child": "quarterly_trend_graph"
+            }
+          }
+        },
+        {
+          "id": "quarterly_trend_graph",
+          "component": {
+            "Graph": {
+              "data": {
+                "path": "/quarterlyTrend"
+              },
+              "graphType": "bar",
+              "title": "Quarterly Performance",
+              "xLabel": "Quarter",
+              "yLabel": "Units Sold",
+              "interactive": true
+            }
+          }
+        }
+      ]
+    }
+  },
+  {
+    "dataModelUpdate": {
+      "contents": [
+        {
+          "key": "monthlySales",
+          "valueArray": [
+            {
+              "key": "0",
+              "valueMap": [
+                {
+                  "key": "x",
+                  "valueString": "Jan"
+                },
+                {
+                  "key": "y",
+                  "valueNumber": 12500
+                }
+              ]
+            },
+            {
+              "key": "1",
+              "valueMap": [
+                {
+                  "key": "x",
+                  "valueString": "Feb"
+                },
+                {
+                  "key": "y",
+                  "valueNumber": 15800
+                }
+              ]
+            },
+            {
+              "key": "2",
+              "valueMap": [
+                {
+                  "key": "x",
+                  "valueString": "Mar"
+                },
+                {
+                  "key": "y",
+                  "valueNumber": 18200
+                }
+              ]
+            },
+            {
+              "key": "3",
+              "valueMap": [
+                {
+                  "key": "x",
+                  "valueString": "Apr"
+                },
+                {
+                  "key": "y",
+                  "valueNumber": 22100
+                }
+              ]
+            },
+            {
+              "key": "4",
+              "valueMap": [
+                {
+                  "key": "x",
+                  "valueString": "May"
+                },
+                {
+                  "key": "y",
+                  "valueNumber": 19500
+                }
+              ]
+            },
+            {
+              "key": "5",
+              "valueMap": [
+                {
+                  "key": "x",
+                  "valueString": "Jun"
+                },
+                {
+                  "key": "y",
+                  "valueNumber": 24300
+                }
+              ]
+            },
+            {
+              "key": "6",
+              "valueMap": [
+                {
+                  "key": "x",
+                  "valueString": "Jul"
+                },
+                {
+                  "key": "y",
+                  "valueNumber": 26700
+                }
+              ]
+            },
+            {
+              "key": "7",
+              "valueMap": [
+                {
+                  "key": "x",
+                  "valueString": "Aug"
+                },
+                {
+                  "key": "y",
+                  "valueNumber": 23900
+                }
+              ]
+            },
+            {
+              "key": "8",
+              "valueMap": [
+                {
+                  "key": "x",
+                  "valueString": "Sep"
+                },
+                {
+                  "key": "y",
+                  "valueNumber": 28500
+                }
+              ]
+            },
+            {
+              "key": "9",
+              "valueMap": [
+                {
+                  "key": "x",
+                  "valueString": "Oct"
+                },
+                {
+                  "key": "y",
+                  "valueNumber": 31200
+                }
+              ]
+            },
+            {
+              "key": "10",
+              "valueMap": [
+                {
+                  "key": "x",
+                  "valueString": "Nov"
+                },
+                {
+                  "key": "y",
+                  "valueNumber": 29800
+                }
+              ]
+            },
+            {
+              "key": "11",
+              "valueMap": [
+                {
+                  "key": "x",
+                  "valueString": "Dec"
+                },
+                {
+                  "key": "y",
+                  "valueNumber": 35600
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "categoryBreakdown",
+          "valueArray": [
+            {
+              "key": "0",
+              "valueMap": [
+                {
+                  "key": "label",
+                  "valueString": "Electronics"
+                },
+                {
+                  "key": "value",
+                  "valueNumber": 45000
+                }
+              ]
+            },
+            {
+              "key": "1",
+              "valueMap": [
+                {
+                  "key": "label",
+                  "valueString": "Clothing"
+                },
+                {
+                  "key": "value",
+                  "valueNumber": 32000
+                }
+              ]
+            },
+            {
+              "key": "2",
+              "valueMap": [
+                {
+                  "key": "label",
+                  "valueString": "Home & Garden"
+                },
+                {
+                  "key": "value",
+                  "valueNumber": 28000
+                }
+              ]
+            },
+            {
+              "key": "3",
+              "valueMap": [
+                {
+                  "key": "label",
+                  "valueString": "Sports"
+                },
+                {
+                  "key": "value",
+                  "valueNumber": 19000
+                }
+              ]
+            },
+            {
+              "key": "4",
+              "valueMap": [
+                {
+                  "key": "label",
+                  "valueString": "Books"
+                },
+                {
+                  "key": "value",
+                  "valueNumber": 15000
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "quarterlyTrend",
+          "valueArray": [
+            {
+              "key": "0",
+              "valueMap": [
+                {
+                  "key": "x",
+                  "valueString": "Q1 2025"
+                },
+                {
+                  "key": "y",
+                  "valueNumber": 15400
+                }
+              ]
+            },
+            {
+              "key": "1",
+              "valueMap": [
+                {
+                  "key": "x",
+                  "valueString": "Q2 2025"
+                },
+                {
+                  "key": "y",
+                  "valueNumber": 18900
+                }
+              ]
+            },
+            {
+              "key": "2",
+              "valueMap": [
+                {
+                  "key": "x",
+                  "valueString": "Q3 2025"
+                },
+                {
+                  "key": "y",
+                  "valueNumber": 22300
+                }
+              ]
+            },
+            {
+              "key": "3",
+              "valueMap": [
+                {
+                  "key": "x",
+                  "valueString": "Q4 2025"
+                },
+                {
+                  "key": "y",
+                  "valueNumber": 26800
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "surfaceId": "analytics_dashboard"
+    }
+  },
+  {
+    "beginRendering": {
+      "root": "root",
+      "surfaceId": "analytics_dashboard",
+      "viewportWidthPx": 1200,
+      "viewportHeightPx": 800
+    }
+  }
+]

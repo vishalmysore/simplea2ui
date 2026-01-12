@@ -1,0 +1,858 @@
+[
+  {
+    "surfaceUpdate": {
+      "surfaceId": "marketing_dashboard",
+      "components": [
+        {
+          "id": "root",
+          "component": {
+            "Column": {
+              "children": {
+                "explicitList": [
+                  "header_section",
+                  "metrics_row",
+                  "charts_section"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "header_section",
+          "component": {
+            "Card": {
+              "child": "header_content"
+            }
+          }
+        },
+        {
+          "id": "header_content",
+          "component": {
+            "Column": {
+              "children": {
+                "explicitList": [
+                  "dashboard_title",
+                  "dashboard_subtitle",
+                  "date_range",
+                  "divider"
+                ]
+              },
+              "alignment": "center"
+            }
+          }
+        },
+        {
+          "id": "dashboard_title",
+          "component": {
+            "Text": {
+              "usageHint": "h1",
+              "text": {
+                "literalString": "📈 Marketing Analytics Dashboard"
+              }
+            }
+          }
+        },
+        {
+          "id": "dashboard_subtitle",
+          "component": {
+            "Text": {
+              "usageHint": "body",
+              "text": {
+                "literalString": "Campaign performance metrics and customer insights"
+              }
+            }
+          }
+        },
+        {
+          "id": "date_range",
+          "component": {
+            "Text": {
+              "usageHint": "caption",
+              "text": {
+                "literalString": "January 1 - December 31, 2025"
+              }
+            }
+          }
+        },
+        {
+          "id": "divider",
+          "component": {
+            "Divider": {}
+          }
+        },
+        {
+          "id": "metrics_row",
+          "component": {
+            "Row": {
+              "children": {
+                "explicitList": [
+                  "metric_card_1",
+                  "metric_card_2",
+                  "metric_card_3",
+                  "metric_card_4"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "metric_card_1",
+          "component": {
+            "Card": {
+              "child": "metric_1_content"
+            }
+          }
+        },
+        {
+          "id": "metric_1_content",
+          "component": {
+            "Column": {
+              "children": {
+                "explicitList": [
+                  "metric_1_label",
+                  "metric_1_value"
+                ]
+              },
+              "alignment": "center"
+            }
+          }
+        },
+        {
+          "id": "metric_1_label",
+          "component": {
+            "Text": {
+              "usageHint": "caption",
+              "text": {
+                "literalString": "Total Revenue"
+              }
+            }
+          }
+        },
+        {
+          "id": "metric_1_value",
+          "component": {
+            "Text": {
+              "usageHint": "h2",
+              "text": {
+                "literalString": "$2.4M"
+              }
+            }
+          }
+        },
+        {
+          "id": "metric_card_2",
+          "component": {
+            "Card": {
+              "child": "metric_2_content"
+            }
+          }
+        },
+        {
+          "id": "metric_2_content",
+          "component": {
+            "Column": {
+              "children": {
+                "explicitList": [
+                  "metric_2_label",
+                  "metric_2_value"
+                ]
+              },
+              "alignment": "center"
+            }
+          }
+        },
+        {
+          "id": "metric_2_label",
+          "component": {
+            "Text": {
+              "usageHint": "caption",
+              "text": {
+                "literalString": "Conversion Rate"
+              }
+            }
+          }
+        },
+        {
+          "id": "metric_2_value",
+          "component": {
+            "Text": {
+              "usageHint": "h2",
+              "text": {
+                "literalString": "3.8%"
+              }
+            }
+          }
+        },
+        {
+          "id": "metric_card_3",
+          "component": {
+            "Card": {
+              "child": "metric_3_content"
+            }
+          }
+        },
+        {
+          "id": "metric_3_content",
+          "component": {
+            "Column": {
+              "children": {
+                "explicitList": [
+                  "metric_3_label",
+                  "metric_3_value"
+                ]
+              },
+              "alignment": "center"
+            }
+          }
+        },
+        {
+          "id": "metric_3_label",
+          "component": {
+            "Text": {
+              "usageHint": "caption",
+              "text": {
+                "literalString": "Active Campaigns"
+              }
+            }
+          }
+        },
+        {
+          "id": "metric_3_value",
+          "component": {
+            "Text": {
+              "usageHint": "h2",
+              "text": {
+                "literalString": "24"
+              }
+            }
+          }
+        },
+        {
+          "id": "metric_card_4",
+          "component": {
+            "Card": {
+              "child": "metric_4_content"
+            }
+          }
+        },
+        {
+          "id": "metric_4_content",
+          "component": {
+            "Column": {
+              "children": {
+                "explicitList": [
+                  "metric_4_label",
+                  "metric_4_value"
+                ]
+              },
+              "alignment": "center"
+            }
+          }
+        },
+        {
+          "id": "metric_4_label",
+          "component": {
+            "Text": {
+              "usageHint": "caption",
+              "text": {
+                "literalString": "New Customers"
+              }
+            }
+          }
+        },
+        {
+          "id": "metric_4_value",
+          "component": {
+            "Text": {
+              "usageHint": "h2",
+              "text": {
+                "literalString": "1,847"
+              }
+            }
+          }
+        },
+        {
+          "id": "charts_section",
+          "component": {
+            "Column": {
+              "children": {
+                "explicitList": [
+                  "traffic_sources_card",
+                  "campaign_performance_card",
+                  "customer_acquisition_card",
+                  "device_breakdown_card",
+                  "engagement_trend_card"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "traffic_sources_card",
+          "component": {
+            "Card": {
+              "child": "traffic_sources_graph"
+            }
+          }
+        },
+        {
+          "id": "traffic_sources_graph",
+          "component": {
+            "Graph": {
+              "data": {
+                "path": "/trafficSources"
+              },
+              "graphType": "doughnut",
+              "title": "Traffic Sources Distribution",
+              "interactive": true
+            }
+          }
+        },
+        {
+          "id": "campaign_performance_card",
+          "component": {
+            "Card": {
+              "child": "campaign_performance_graph"
+            }
+          }
+        },
+        {
+          "id": "campaign_performance_graph",
+          "component": {
+            "Graph": {
+              "data": {
+                "path": "/campaignPerformance"
+              },
+              "graphType": "bar",
+              "title": "Campaign Performance (ROI %)",
+              "xLabel": "Campaign",
+              "yLabel": "ROI Percentage",
+              "interactive": true
+            }
+          }
+        },
+        {
+          "id": "customer_acquisition_card",
+          "component": {
+            "Card": {
+              "child": "customer_acquisition_graph"
+            }
+          }
+        },
+        {
+          "id": "customer_acquisition_graph",
+          "component": {
+            "Graph": {
+              "data": {
+                "path": "/customerAcquisition"
+              },
+              "graphType": "line",
+              "title": "Customer Acquisition Trend (2025)",
+              "xLabel": "Month",
+              "yLabel": "New Customers",
+              "interactive": true
+            }
+          }
+        },
+        {
+          "id": "device_breakdown_card",
+          "component": {
+            "Card": {
+              "child": "device_breakdown_graph"
+            }
+          }
+        },
+        {
+          "id": "device_breakdown_graph",
+          "component": {
+            "Graph": {
+              "data": {
+                "path": "/deviceBreakdown"
+              },
+              "graphType": "pie",
+              "title": "User Device Distribution",
+              "interactive": true
+            }
+          }
+        },
+        {
+          "id": "engagement_trend_card",
+          "component": {
+            "Card": {
+              "child": "engagement_trend_graph"
+            }
+          }
+        },
+        {
+          "id": "engagement_trend_graph",
+          "component": {
+            "Graph": {
+              "data": {
+                "path": "/engagementMetrics"
+              },
+              "graphType": "radar",
+              "title": "Engagement Metrics Comparison",
+              "interactive": true
+            }
+          }
+        }
+      ]
+    }
+  },
+  {
+    "dataModelUpdate": {
+      "contents": [
+        {
+          "key": "trafficSources",
+          "valueArray": [
+            {
+              "key": "0",
+              "valueMap": [
+                {
+                  "key": "label",
+                  "valueString": "Organic Search"
+                },
+                {
+                  "key": "value",
+                  "valueNumber": 42
+                }
+              ]
+            },
+            {
+              "key": "1",
+              "valueMap": [
+                {
+                  "key": "label",
+                  "valueString": "Paid Ads"
+                },
+                {
+                  "key": "value",
+                  "valueNumber": 28
+                }
+              ]
+            },
+            {
+              "key": "2",
+              "valueMap": [
+                {
+                  "key": "label",
+                  "valueString": "Social Media"
+                },
+                {
+                  "key": "value",
+                  "valueNumber": 18
+                }
+              ]
+            },
+            {
+              "key": "3",
+              "valueMap": [
+                {
+                  "key": "label",
+                  "valueString": "Direct"
+                },
+                {
+                  "key": "value",
+                  "valueNumber": 8
+                }
+              ]
+            },
+            {
+              "key": "4",
+              "valueMap": [
+                {
+                  "key": "label",
+                  "valueString": "Referral"
+                },
+                {
+                  "key": "value",
+                  "valueNumber": 4
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "campaignPerformance",
+          "valueArray": [
+            {
+              "key": "0",
+              "valueMap": [
+                {
+                  "key": "x",
+                  "valueString": "Email Q4"
+                },
+                {
+                  "key": "y",
+                  "valueNumber": 285
+                }
+              ]
+            },
+            {
+              "key": "1",
+              "valueMap": [
+                {
+                  "key": "x",
+                  "valueString": "Google Ads"
+                },
+                {
+                  "key": "y",
+                  "valueNumber": 320
+                }
+              ]
+            },
+            {
+              "key": "2",
+              "valueMap": [
+                {
+                  "key": "x",
+                  "valueString": "Facebook"
+                },
+                {
+                  "key": "y",
+                  "valueNumber": 195
+                }
+              ]
+            },
+            {
+              "key": "3",
+              "valueMap": [
+                {
+                  "key": "x",
+                  "valueString": "Instagram"
+                },
+                {
+                  "key": "y",
+                  "valueNumber": 240
+                }
+              ]
+            },
+            {
+              "key": "4",
+              "valueMap": [
+                {
+                  "key": "x",
+                  "valueString": "LinkedIn"
+                },
+                {
+                  "key": "y",
+                  "valueNumber": 410
+                }
+              ]
+            },
+            {
+              "key": "5",
+              "valueMap": [
+                {
+                  "key": "x",
+                  "valueString": "Content Mktg"
+                },
+                {
+                  "key": "y",
+                  "valueNumber": 365
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "customerAcquisition",
+          "valueArray": [
+            {
+              "key": "0",
+              "valueMap": [
+                {
+                  "key": "x",
+                  "valueString": "Jan"
+                },
+                {
+                  "key": "y",
+                  "valueNumber": 142
+                }
+              ]
+            },
+            {
+              "key": "1",
+              "valueMap": [
+                {
+                  "key": "x",
+                  "valueString": "Feb"
+                },
+                {
+                  "key": "y",
+                  "valueNumber": 156
+                }
+              ]
+            },
+            {
+              "key": "2",
+              "valueMap": [
+                {
+                  "key": "x",
+                  "valueString": "Mar"
+                },
+                {
+                  "key": "y",
+                  "valueNumber": 178
+                }
+              ]
+            },
+            {
+              "key": "3",
+              "valueMap": [
+                {
+                  "key": "x",
+                  "valueString": "Apr"
+                },
+                {
+                  "key": "y",
+                  "valueNumber": 164
+                }
+              ]
+            },
+            {
+              "key": "4",
+              "valueMap": [
+                {
+                  "key": "x",
+                  "valueString": "May"
+                },
+                {
+                  "key": "y",
+                  "valueNumber": 189
+                }
+              ]
+            },
+            {
+              "key": "5",
+              "valueMap": [
+                {
+                  "key": "x",
+                  "valueString": "Jun"
+                },
+                {
+                  "key": "y",
+                  "valueNumber": 203
+                }
+              ]
+            },
+            {
+              "key": "6",
+              "valueMap": [
+                {
+                  "key": "x",
+                  "valueString": "Jul"
+                },
+                {
+                  "key": "y",
+                  "valueNumber": 195
+                }
+              ]
+            },
+            {
+              "key": "7",
+              "valueMap": [
+                {
+                  "key": "x",
+                  "valueString": "Aug"
+                },
+                {
+                  "key": "y",
+                  "valueNumber": 187
+                }
+              ]
+            },
+            {
+              "key": "8",
+              "valueMap": [
+                {
+                  "key": "x",
+                  "valueString": "Sep"
+                },
+                {
+                  "key": "y",
+                  "valueNumber": 210
+                }
+              ]
+            },
+            {
+              "key": "9",
+              "valueMap": [
+                {
+                  "key": "x",
+                  "valueString": "Oct"
+                },
+                {
+                  "key": "y",
+                  "valueNumber": 224
+                }
+              ]
+            },
+            {
+              "key": "10",
+              "valueMap": [
+                {
+                  "key": "x",
+                  "valueString": "Nov"
+                },
+                {
+                  "key": "y",
+                  "valueNumber": 238
+                }
+              ]
+            },
+            {
+              "key": "11",
+              "valueMap": [
+                {
+                  "key": "x",
+                  "valueString": "Dec"
+                },
+                {
+                  "key": "y",
+                  "valueNumber": 261
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "deviceBreakdown",
+          "valueArray": [
+            {
+              "key": "0",
+              "valueMap": [
+                {
+                  "key": "label",
+                  "valueString": "Desktop"
+                },
+                {
+                  "key": "value",
+                  "valueNumber": 45
+                }
+              ]
+            },
+            {
+              "key": "1",
+              "valueMap": [
+                {
+                  "key": "label",
+                  "valueString": "Mobile"
+                },
+                {
+                  "key": "value",
+                  "valueNumber": 38
+                }
+              ]
+            },
+            {
+              "key": "2",
+              "valueMap": [
+                {
+                  "key": "label",
+                  "valueString": "Tablet"
+                },
+                {
+                  "key": "value",
+                  "valueNumber": 17
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "key": "engagementMetrics",
+          "valueArray": [
+            {
+              "key": "0",
+              "valueMap": [
+                {
+                  "key": "label",
+                  "valueString": "Email Open Rate"
+                },
+                {
+                  "key": "value",
+                  "valueNumber": 68
+                }
+              ]
+            },
+            {
+              "key": "1",
+              "valueMap": [
+                {
+                  "key": "label",
+                  "valueString": "Click-Through Rate"
+                },
+                {
+                  "key": "value",
+                  "valueNumber": 42
+                }
+              ]
+            },
+            {
+              "key": "2",
+              "valueMap": [
+                {
+                  "key": "label",
+                  "valueString": "Social Engagement"
+                },
+                {
+                  "key": "value",
+                  "valueNumber": 55
+                }
+              ]
+            },
+            {
+              "key": "3",
+              "valueMap": [
+                {
+                  "key": "label",
+                  "valueString": "Video Views"
+                },
+                {
+                  "key": "value",
+                  "valueNumber": 78
+                }
+              ]
+            },
+            {
+              "key": "4",
+              "valueMap": [
+                {
+                  "key": "label",
+                  "valueString": "Landing Page CVR"
+                },
+                {
+                  "key": "value",
+                  "valueNumber": 38
+                }
+              ]
+            },
+            {
+              "key": "5",
+              "valueMap": [
+                {
+                  "key": "label",
+                  "valueString": "Customer Retention"
+                },
+                {
+                  "key": "value",
+                  "valueNumber": 85
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "surfaceId": "marketing_dashboard"
+    }
+  },
+  {
+    "beginRendering": {
+      "root": "root",
+      "surfaceId": "marketing_dashboard",
+      "viewportWidthPx": 1200,
+      "viewportHeightPx": 800
+    }
+  }
+]

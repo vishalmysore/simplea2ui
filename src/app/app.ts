@@ -135,6 +135,18 @@ import { ServerConfigService } from './server-config.service';
           <div class="test-panel">
             <h3>Test A2UI JSON</h3>
             <p class="test-description">Paste your A2UI JSON below to see how it renders. Supports both direct A2UI JSON and full JSON-RPC responses.</p>
+            <div class="example-selector">
+              <label for="exampleSelect">Load Example:</label>
+              <select 
+                id="exampleSelect"
+                [value]="selectedExample()"
+                (change)="onExampleSelect($any($event.target).value)">
+                <option value="">-- Select an example --</option>
+                @for (file of exampleFiles(); track file) {
+                  <option [value]="file">{{ file }}</option>
+                }
+              </select>
+            </div>
             <textarea 
               class="test-textarea"
               [value]="testJson()"
@@ -262,6 +274,21 @@ export class App implements OnInit, OnDestroy {
   protected testError = signal<string | null>(null);
   protected showSurfaces = signal(true);
   protected activeSurfaceIds = signal<Set<string>>(new Set());
+  protected exampleFiles = signal<string[]>([
+    'AnalyticsDashboard.txt',
+    'EcommerceProduct.txt',
+    'FlightExample.txt',
+    'food.txt',
+    'GraphDashboard-Backend.json',
+    'MarketingDashboard-Backend.json',
+    'ProjectDashboard.txt',
+    'sakesadvanced.txt',
+    'salesex.txt',
+    'SimpleGraph-Backend.json',
+    'test-simple.json',
+    'test-with-list.json'
+  ]);
+  protected selectedExample = signal<string>('');
   
   private eventSubscription?: Subscription;
   
@@ -347,6 +374,33 @@ export class App implements OnInit, OnDestroy {
     }
   }
   
+  async loadExample() {
+    const filename = this.selectedExample();
+    if (!filename) return;
+    
+    this.testError.set(null);
+    
+    try {
+      const response = await fetch(`/examples/${filename}`);
+      if (!response.ok) {
+        throw new Error(`Failed to load example: ${response.statusText}`);
+      }
+      const content = await response.text();
+      this.testJson.set(content);
+      console.log(`Loaded example: ${filename}`, content.substring(0, 100));
+    } catch (err: any) {
+      this.testError.set(`Failed to load example: ${err.message}`);
+      console.error('Error loading example:', err);
+    }
+  }
+  
+  onExampleSelect(filename: string) {
+    this.selectedExample.set(filename);
+    if (filename) {
+      this.loadExample();
+    }
+  }
+  
   renderTestJson() {
     this.testError.set(null);
     const jsonStr = this.testJson().trim();
@@ -411,6 +465,11 @@ export class App implements OnInit, OnDestroy {
       
       // Validate and clean up A2UI messages before rendering
       for (const msg of a2uiMessages) {
+        // Extract Graph components before A2UI processing
+        if (msg.surfaceUpdate?.components) {
+
+        }
+        
         // Validate surfaceUpdate components
         if (msg.surfaceUpdate?.components) {
           const originalCount = msg.surfaceUpdate.components.length;
@@ -702,5 +761,7 @@ export class App implements OnInit, OnDestroy {
     } finally {  
       this.loading.set(false);  
     }  
-  }  
+  }
+  
+
 }

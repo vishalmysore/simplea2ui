@@ -1,0 +1,167 @@
+[
+  {
+    "surfaceUpdate": {
+      "surfaceId": "simple_graph",
+      "components": [
+        {
+          "id": "root",
+          "component": {
+            "Column": {
+              "children": {
+                "explicitList": [
+                  "title_text",
+                  "graph_card"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "title_text",
+          "component": {
+            "Text": {
+              "usageHint": "h2",
+              "text": {
+                "literalString": "📈 Simple Line Chart"
+              }
+            }
+          }
+        },
+        {
+          "id": "graph_card",
+          "component": {
+            "Card": {
+              "child": "my_graph"
+            }
+          }
+        },
+        {
+          "id": "my_graph",
+          "component": {
+            "Graph": {
+              "data": {
+                "path": "/chartData"
+              },
+              "graphType": "line",
+              "title": "Website Visitors",
+              "xLabel": "Day",
+              "yLabel": "Visitors",
+              "interactive": true
+            }
+          }
+        }
+      ]
+    }
+  },
+  {
+    "dataModelUpdate": {
+      "contents": [
+        {
+          "key": "chartData",
+          "valueArray": [
+            {
+              "key": "0",
+              "valueMap": [
+                {
+                  "key": "x",
+                  "valueString": "Mon"
+                },
+                {
+                  "key": "y",
+                  "valueNumber": 120
+                }
+              ]
+            },
+            {
+              "key": "1",
+              "valueMap": [
+                {
+                  "key": "x",
+                  "valueString": "Tue"
+                },
+                {
+                  "key": "y",
+                  "valueNumber": 150
+                }
+              ]
+            },
+            {
+              "key": "2",
+              "valueMap": [
+                {
+                  "key": "x",
+                  "valueString": "Wed"
+                },
+                {
+                  "key": "y",
+                  "valueNumber": 180
+                }
+              ]
+            },
+            {
+              "key": "3",
+              "valueMap": [
+                {
+                  "key": "x",
+                  "valueString": "Thu"
+                },
+                {
+                  "key": "y",
+                  "valueNumber": 220
+                }
+              ]
+            },
+            {
+              "key": "4",
+              "valueMap": [
+                {
+                  "key": "x",
+                  "valueString": "Fri"
+                },
+                {
+                  "key": "y",
+                  "valueNumber": 250
+                }
+              ]
+            },
+            {
+              "key": "5",
+              "valueMap": [
+                {
+                  "key": "x",
+                  "valueString": "Sat"
+                },
+                {
+                  "key": "y",
+                  "valueNumber": 190
+                }
+              ]
+            },
+            {
+              "key": "6",
+              "valueMap": [
+                {
+                  "key": "x",
+                  "valueString": "Sun"
+                },
+                {
+                  "key": "y",
+                  "valueNumber": 160
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "surfaceId": "simple_graph"
+    }
+  },
+  {
+    "beginRendering": {
+      "root": "root",
+      "surfaceId": "simple_graph",
+      "viewportWidthPx": 800,
+      "viewportHeightPx": 600
+    }
+  }
+]
