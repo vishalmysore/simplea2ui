@@ -10,7 +10,7 @@ import { ServerConfigService } from './server-config.service';
   selector: 'app-root',  
   standalone: true,  
   imports: [Surface, CommonModule],
-  styleUrls: ['./app.css'],
+  styleUrls: ['./app.css', './app-extra.css'],
   template: `  
     <div class="container">
       <div class="left-panel">
