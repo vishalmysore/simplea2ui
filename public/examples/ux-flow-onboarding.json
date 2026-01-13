@@ -1,0 +1,276 @@
+[
+    {
+        "surfaceUpdate": {
+            "surfaceId": "ux-flow",
+            "components": [
+                {
+                    "id": "root",
+                    "component": {
+                        "Column": {
+                            "children": {
+                                "explicitList": [
+                                    "flow-graph"
+                                ]
+                            }
+                        }
+                    }
+                },
+                {
+                    "id": "flow-graph",
+                    "component": {
+                        "KnowledgeGraph": {
+                            "title": "Mobile App User Flow - Onboarding (A/B Test)",
+                            "layout": "breadthfirst",
+                            "data": {
+                                "path": "/flowData"
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "dataModelUpdate": {
+            "surfaceId": "ux-flow",
+            "contents": [
+                {
+                    "key": "flowData",
+                    "valueArray": [
+                        {
+                            "key": "0",
+                            "valueMap": [
+                                {
+                                    "key": "id",
+                                    "valueString": "splash"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "Splash Screen\n(1000 new users)"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "1",
+                            "valueMap": [
+                                {
+                                    "key": "id",
+                                    "valueString": "welcome"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "Welcome Message\n(950 users)"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "2",
+                            "valueMap": [
+                                {
+                                    "key": "id",
+                                    "valueString": "signup"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "Sign Up Form\n(820 users)"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "3",
+                            "valueMap": [
+                                {
+                                    "key": "id",
+                                    "valueString": "permissions"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "App Permissions\n(720 users)"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "4",
+                            "valueMap": [
+                                {
+                                    "key": "id",
+                                    "valueString": "tutorial"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "Interactive Tutorial\n(650 users)"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "5",
+                            "valueMap": [
+                                {
+                                    "key": "id",
+                                    "valueString": "preferences"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "Set Preferences\n(580 users)"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "6",
+                            "valueMap": [
+                                {
+                                    "key": "id",
+                                    "valueString": "home"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "Main Dashboard\n(520 users)"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "7",
+                            "valueMap": [
+                                {
+                                    "key": "id",
+                                    "valueString": "skip"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "Skip Tutorial\n(70 users - dropped)"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "8",
+                            "valueMap": [
+                                {
+                                    "key": "source",
+                                    "valueString": "splash"
+                                },
+                                {
+                                    "key": "target",
+                                    "valueString": "welcome"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "95% continue"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "9",
+                            "valueMap": [
+                                {
+                                    "key": "source",
+                                    "valueString": "welcome"
+                                },
+                                {
+                                    "key": "target",
+                                    "valueString": "signup"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "86% sign up"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "10",
+                            "valueMap": [
+                                {
+                                    "key": "source",
+                                    "valueString": "signup"
+                                },
+                                {
+                                    "key": "target",
+                                    "valueString": "permissions"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "88% allow"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "11",
+                            "valueMap": [
+                                {
+                                    "key": "source",
+                                    "valueString": "permissions"
+                                },
+                                {
+                                    "key": "target",
+                                    "valueString": "tutorial"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "90% start"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "12",
+                            "valueMap": [
+                                {
+                                    "key": "source",
+                                    "valueString": "permissions"
+                                },
+                                {
+                                    "key": "target",
+                                    "valueString": "skip"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "10% skip"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "13",
+                            "valueMap": [
+                                {
+                                    "key": "source",
+                                    "valueString": "tutorial"
+                                },
+                                {
+                                    "key": "target",
+                                    "valueString": "preferences"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "89% complete"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "14",
+                            "valueMap": [
+                                {
+                                    "key": "source",
+                                    "valueString": "preferences"
+                                },
+                                {
+                                    "key": "target",
+                                    "valueString": "home"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "90% finish"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "beginRendering": {
+            "root": "root",
+            "surfaceId": "ux-flow",
+            "viewportWidthPx": 800,
+            "viewportHeightPx": 600
+        }
+    }
+]

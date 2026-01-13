@@ -1,0 +1,233 @@
+[
+    {
+        "surfaceUpdate": {
+            "surfaceId": "delivery-routes",
+            "components": [
+                {
+                    "id": "root",
+                    "component": {
+                        "Column": {
+                            "children": {
+                                "explicitList": [
+                                    "route-graph"
+                                ]
+                            }
+                        }
+                    }
+                },
+                {
+                    "id": "route-graph",
+                    "component": {
+                        "KnowledgeGraph": {
+                            "title": "Morning Delivery Routes - Zone A (Optimized)",
+                            "layout": "cose",
+                            "data": {
+                                "path": "/routeData"
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "dataModelUpdate": {
+            "surfaceId": "delivery-routes",
+            "contents": [
+                {
+                    "key": "routeData",
+                    "valueArray": [
+                        {
+                            "key": "0",
+                            "valueMap": [
+                                {
+                                    "key": "id",
+                                    "valueString": "warehouse"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "Distribution Center"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "1",
+                            "valueMap": [
+                                {
+                                    "key": "id",
+                                    "valueString": "stop1"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "Downtown Office (Priority)"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "2",
+                            "valueMap": [
+                                {
+                                    "key": "id",
+                                    "valueString": "stop2"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "Retail Store #42"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "3",
+                            "valueMap": [
+                                {
+                                    "key": "id",
+                                    "valueString": "stop3"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "Restaurant Supply"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "4",
+                            "valueMap": [
+                                {
+                                    "key": "id",
+                                    "valueString": "stop4"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "Medical Center"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "5",
+                            "valueMap": [
+                                {
+                                    "key": "id",
+                                    "valueString": "stop5"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "City Hall"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "6",
+                            "valueMap": [
+                                {
+                                    "key": "source",
+                                    "valueString": "warehouse"
+                                },
+                                {
+                                    "key": "target",
+                                    "valueString": "stop1"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "4.2 km · 8 min"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "7",
+                            "valueMap": [
+                                {
+                                    "key": "source",
+                                    "valueString": "stop1"
+                                },
+                                {
+                                    "key": "target",
+                                    "valueString": "stop2"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "2.8 km · 6 min"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "8",
+                            "valueMap": [
+                                {
+                                    "key": "source",
+                                    "valueString": "stop2"
+                                },
+                                {
+                                    "key": "target",
+                                    "valueString": "stop3"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "3.1 km · 7 min"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "9",
+                            "valueMap": [
+                                {
+                                    "key": "source",
+                                    "valueString": "stop3"
+                                },
+                                {
+                                    "key": "target",
+                                    "valueString": "stop4"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "5.4 km · 11 min"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "10",
+                            "valueMap": [
+                                {
+                                    "key": "source",
+                                    "valueString": "stop4"
+                                },
+                                {
+                                    "key": "target",
+                                    "valueString": "stop5"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "1.9 km · 5 min"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "11",
+                            "valueMap": [
+                                {
+                                    "key": "source",
+                                    "valueString": "stop5"
+                                },
+                                {
+                                    "key": "target",
+                                    "valueString": "warehouse"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "6.7 km · 14 min"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "beginRendering": {
+            "root": "root",
+            "surfaceId": "delivery-routes",
+            "viewportWidthPx": 800,
+            "viewportHeightPx": 600
+        }
+    }
+]

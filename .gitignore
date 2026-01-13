@@ -42,3 +42,5 @@ __screenshots__/
 .DS_Store
 Thumbs.db
 custom_component.md
+
+docs/knowledge-graph-extension.md

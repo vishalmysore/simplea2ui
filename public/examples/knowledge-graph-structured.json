@@ -1,0 +1,156 @@
+[
+    {
+        "surfaceUpdate": {
+            "surfaceId": "kg-structured-test",
+            "components": [
+                {
+                    "id": "root",
+                    "component": {
+                        "Column": {
+                            "children": {
+                                "explicitList": [
+                                    "kg1"
+                                ]
+                            }
+                        }
+                    }
+                },
+                {
+                    "id": "kg1",
+                    "component": {
+                        "KnowledgeGraph": {
+                            "title": "Structured Knowledge Graph",
+                            "layout": "cose",
+                            "data": {
+                                "path": "/graphData"
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "dataModelUpdate": {
+            "surfaceId": "kg-structured-test",
+            "contents": [
+                {
+                    "key": "graphData",
+                    "valueArray": [
+                        {
+                            "key": "0",
+                            "valueMap": [
+                                {
+                                    "key": "id",
+                                    "valueString": "p1"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "Person"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "1",
+                            "valueMap": [
+                                {
+                                    "key": "id",
+                                    "valueString": "c1"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "City"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "2",
+                            "valueMap": [
+                                {
+                                    "key": "id",
+                                    "valueString": "j1"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "John"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "3",
+                            "valueMap": [
+                                {
+                                    "key": "id",
+                                    "valueString": "ny1"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "New York"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "4",
+                            "valueMap": [
+                                {
+                                    "key": "source",
+                                    "valueString": "j1"
+                                },
+                                {
+                                    "key": "target",
+                                    "valueString": "p1"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "type"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "5",
+                            "valueMap": [
+                                {
+                                    "key": "source",
+                                    "valueString": "ny1"
+                                },
+                                {
+                                    "key": "target",
+                                    "valueString": "c1"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "type"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "6",
+                            "valueMap": [
+                                {
+                                    "key": "source",
+                                    "valueString": "j1"
+                                },
+                                {
+                                    "key": "target",
+                                    "valueString": "ny1"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "livesIn"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "beginRendering": {
+            "root": "root",
+            "surfaceId": "kg-structured-test",
+            "viewportWidthPx": 800,
+            "viewportHeightPx": 600
+        }
+    }
+]

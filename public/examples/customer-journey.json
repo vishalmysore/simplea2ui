@@ -1,0 +1,276 @@
+[
+    {
+        "surfaceUpdate": {
+            "surfaceId": "customer-journey",
+            "components": [
+                {
+                    "id": "root",
+                    "component": {
+                        "Column": {
+                            "children": {
+                                "explicitList": [
+                                    "journey-graph"
+                                ]
+                            }
+                        }
+                    }
+                },
+                {
+                    "id": "journey-graph",
+                    "component": {
+                        "KnowledgeGraph": {
+                            "title": "E-Commerce Customer Journey - Black Friday Campaign",
+                            "layout": "breadthfirst",
+                            "data": {
+                                "path": "/journeyData"
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "dataModelUpdate": {
+            "surfaceId": "customer-journey",
+            "contents": [
+                {
+                    "key": "journeyData",
+                    "valueArray": [
+                        {
+                            "key": "0",
+                            "valueMap": [
+                                {
+                                    "key": "id",
+                                    "valueString": "awareness"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "Social Media Ad\n(10,000 users)"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "1",
+                            "valueMap": [
+                                {
+                                    "key": "id",
+                                    "valueString": "landing"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "Landing Page\n(6,500 users)"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "2",
+                            "valueMap": [
+                                {
+                                    "key": "id",
+                                    "valueString": "browse"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "Product Browse\n(4,200 users)"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "3",
+                            "valueMap": [
+                                {
+                                    "key": "id",
+                                    "valueString": "cart"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "Add to Cart\n(2,100 users)"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "4",
+                            "valueMap": [
+                                {
+                                    "key": "id",
+                                    "valueString": "checkout"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "Checkout Page\n(1,400 users)"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "5",
+                            "valueMap": [
+                                {
+                                    "key": "id",
+                                    "valueString": "purchase"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "Purchase Complete\n(980 users)"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "6",
+                            "valueMap": [
+                                {
+                                    "key": "id",
+                                    "valueString": "email"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "Email Campaign\n(8,000 users)"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "7",
+                            "valueMap": [
+                                {
+                                    "key": "id",
+                                    "valueString": "organic"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "Organic Search\n(3,500 users)"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "8",
+                            "valueMap": [
+                                {
+                                    "key": "source",
+                                    "valueString": "awareness"
+                                },
+                                {
+                                    "key": "target",
+                                    "valueString": "landing"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "65% CTR"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "9",
+                            "valueMap": [
+                                {
+                                    "key": "source",
+                                    "valueString": "email"
+                                },
+                                {
+                                    "key": "target",
+                                    "valueString": "landing"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "42% CTR"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "10",
+                            "valueMap": [
+                                {
+                                    "key": "source",
+                                    "valueString": "organic"
+                                },
+                                {
+                                    "key": "target",
+                                    "valueString": "browse"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "Direct"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "11",
+                            "valueMap": [
+                                {
+                                    "key": "source",
+                                    "valueString": "landing"
+                                },
+                                {
+                                    "key": "target",
+                                    "valueString": "browse"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "64% continue"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "12",
+                            "valueMap": [
+                                {
+                                    "key": "source",
+                                    "valueString": "browse"
+                                },
+                                {
+                                    "key": "target",
+                                    "valueString": "cart"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "50% add"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "13",
+                            "valueMap": [
+                                {
+                                    "key": "source",
+                                    "valueString": "cart"
+                                },
+                                {
+                                    "key": "target",
+                                    "valueString": "checkout"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "67% proceed"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "14",
+                            "valueMap": [
+                                {
+                                    "key": "source",
+                                    "valueString": "checkout"
+                                },
+                                {
+                                    "key": "target",
+                                    "valueString": "purchase"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "70% convert"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "beginRendering": {
+            "root": "root",
+            "surfaceId": "customer-journey",
+            "viewportWidthPx": 800,
+            "viewportHeightPx": 600
+        }
+    }
+]

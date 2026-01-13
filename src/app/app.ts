@@ -1,14 +1,14 @@
-import { Component, inject, signal, OnInit, OnDestroy } from '@angular/core';  
-import { MessageProcessor, Surface } from '@a2ui/angular';  
-import { A2aService } from './a2a.service';  
+import { Component, inject, signal, OnInit, OnDestroy } from '@angular/core';
+import { MessageProcessor, Surface } from '@a2ui/angular';
+import { A2aService } from './a2a.service';
 import type { Part } from '@a2a-js/sdk';
 import { Subscription } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { ServerConfigService } from './server-config.service';
-  
-@Component({  
-  selector: 'app-root',  
-  standalone: true,  
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
   imports: [Surface, CommonModule],
   styleUrls: ['./app.css', './app-extra.css'],
   template: `  
@@ -251,13 +251,13 @@ OR full response:
       <p>SimpleA2UI is an open source client implementation of the A2UI protocol developed by Vishal Mysore</p>
     </div>
   `
-})  
-export class App implements OnInit, OnDestroy {  
-  private a2aService = inject(A2aService);  
-  protected processor = inject(MessageProcessor);  
+})
+export class App implements OnInit, OnDestroy {
+  private a2aService = inject(A2aService);
+  protected processor = inject(MessageProcessor);
   protected serverConfig = inject(ServerConfigService);
-    
-  protected loading = signal(false);  
+
+  protected loading = signal(false);
   protected error = signal<string | null>(null);
   protected showAgentCard = signal(false);
   protected agentCard = signal<any>(null);
@@ -286,12 +286,17 @@ export class App implements OnInit, OnDestroy {
     'salesex.txt',
     'SimpleGraph-Backend.json',
     'test-simple.json',
-    'test-with-list.json'
+    'test-with-list.json',
+    'knowledge-graph-test.json',
+    'knowledge-graph-structured.json',
+    'delivery-routes.json',
+    'customer-journey.json',
+    'ux-flow-onboarding.json'
   ]);
   protected selectedExample = signal<string>('');
-  
+
   private eventSubscription?: Subscription;
-  
+
   async ngOnInit() {
     // Fetch agent card on initialization
     try {
@@ -301,15 +306,15 @@ export class App implements OnInit, OnDestroy {
     } catch (err) {
       console.warn('Failed to load agent card:', err);
     }
-    
+
     // Subscribe to A2UI events (button clicks, form submissions, etc.)
     this.eventSubscription = this.processor.events.subscribe(async (event) => {
       console.log('A2UI Event:', event);
       console.log('Event message:', JSON.stringify(event.message, null, 2));
-      
+
       try {
         this.loading.set(true);
-        
+
         // Send the client event message to the server
         const parts: Part[] = [
           {
@@ -320,28 +325,28 @@ export class App implements OnInit, OnDestroy {
             data: event.message
           } as any
         ];
-        
+
         // Capture request for debug
         this.lastRequest.set({
           timestamp: new Date().toISOString(),
           parts: parts
         });
-        
+
         console.log('Sending action to server:', JSON.stringify(parts, null, 2));
-        
+
         const response: any = await this.a2aService.sendMessage(parts);
-        
+
         // Capture response for debug
         this.lastResponse.set({
           timestamp: new Date().toISOString(),
           data: response
         });
-        
+
         console.log('Action response:', response);
-        
+
         // Process the response and get server messages
         const serverMessages = this.processResponse(response);
-        
+
         // Complete the event with server messages
         event.completion.next(serverMessages);
         event.completion.complete();
@@ -354,32 +359,32 @@ export class App implements OnInit, OnDestroy {
       }
     });
   }
-  
+
   ngOnDestroy() {
     this.eventSubscription?.unsubscribe();
   }
-  
+
   toggleAgentCard() {
     this.showAgentCard.set(!this.showAgentCard());
   }
-  
+
   toggleAbout() {
     this.showAbout.set(!this.showAbout());
   }
-  
+
   toggleTestPanel() {
     this.showTestPanel.set(!this.showTestPanel());
     if (!this.showTestPanel()) {
       this.testError.set(null);
     }
   }
-  
+
   async loadExample() {
     const filename = this.selectedExample();
     if (!filename) return;
-    
+
     this.testError.set(null);
-    
+
     try {
       const response = await fetch(`examples/${filename}`);
       if (!response.ok) {
@@ -393,23 +398,23 @@ export class App implements OnInit, OnDestroy {
       console.error('Error loading example:', err);
     }
   }
-  
+
   onExampleSelect(filename: string) {
     this.selectedExample.set(filename);
     if (filename) {
       this.loadExample();
     }
   }
-  
+
   renderTestJson() {
     this.testError.set(null);
     const jsonStr = this.testJson().trim();
-    
+
     if (!jsonStr) {
       this.testError.set('Please enter A2UI JSON to test');
       return;
     }
-    
+
     // Clear any existing test surfaces before rendering new content
     const surfaceIds = Array.from(this.activeSurfaceIds());
     for (const surfaceId of surfaceIds) {
@@ -424,11 +429,11 @@ export class App implements OnInit, OnDestroy {
       }
     }
     this.activeSurfaceIds.set(new Set());
-    
+
     try {
       const parsed = JSON.parse(jsonStr);
       let a2uiMessages: any[] = [];
-      
+
       // Check if it's an array of A2UI messages (JSONL-style array)
       if (Array.isArray(parsed)) {
         // Array of A2UI messages
@@ -457,24 +462,24 @@ export class App implements OnInit, OnDestroy {
           }
         }
       }
-      
+
       if (a2uiMessages.length === 0) {
         this.testError.set('No A2UI data found. Expected surfaceUpdate, dataModelUpdate, or beginRendering in JSON');
         return;
       }
-      
+
       // Validate and clean up A2UI messages before rendering
       for (const msg of a2uiMessages) {
         // Extract Graph components before A2UI processing
         if (msg.surfaceUpdate?.components) {
 
         }
-        
+
         // Validate surfaceUpdate components
         if (msg.surfaceUpdate?.components) {
           const originalCount = msg.surfaceUpdate.components.length;
           console.log(`Validating ${originalCount} components...`);
-          
+
           // Filter out null/undefined components and validate structure
           msg.surfaceUpdate.components = msg.surfaceUpdate.components.filter((c: any, idx: number) => {
             try {
@@ -482,24 +487,24 @@ export class App implements OnInit, OnDestroy {
                 console.warn(`[Index ${idx}] Null or undefined component`);
                 return false;
               }
-              
+
               if (!c.id) {
                 console.warn(`[Index ${idx}] Missing id:`, JSON.stringify(c).substring(0, 200));
                 return false;
               }
-              
+
               if (!c.component) {
                 console.warn(`[Index ${idx}] Component "${c.id}" missing component property`);
                 return false;
               }
-              
+
               // Check if component object has at least one component type
               const componentKeys = Object.keys(c.component);
               if (componentKeys.length === 0) {
                 console.warn(`[Index ${idx}] Component "${c.id}" has empty component object`);
                 return false;
               }
-              
+
               // Validate the component type object is not null
               const componentTypeName = componentKeys[0];
               const componentType = c.component[componentTypeName];
@@ -507,32 +512,32 @@ export class App implements OnInit, OnDestroy {
                 console.warn(`[Index ${idx}] Component "${c.id}" has null ${componentTypeName} type`);
                 return false;
               }
-              
+
               return true;
             } catch (validateErr: any) {
               console.error(`[Index ${idx}] Validation error:`, validateErr);
               return false;
             }
           });
-          
+
           const removedCount = originalCount - msg.surfaceUpdate.components.length;
           if (removedCount > 0) {
             console.warn(`⚠️ Removed ${removedCount} invalid component(s)`);
           }
-          
+
           if (msg.surfaceUpdate.components.length === 0) {
             this.testError.set('All components were invalid. Check console for validation warnings.');
             return;
           }
-          
+
           console.log(`✓ ${msg.surfaceUpdate.components.length} valid components ready to render`);
         }
-        
+
         try {
           console.log('Rendering A2UI message...');
           this.processor.processMessages([msg]);
           console.log('✓ Render successful');
-          
+
           // Track active surface IDs from test renders
           if (msg.surfaceUpdate?.surfaceId) {
             const currentIds = new Set(this.activeSurfaceIds());
@@ -552,11 +557,11 @@ export class App implements OnInit, OnDestroy {
       console.error('Failed to parse test JSON:', err);
     }
   }
-  
+
   clearTest() {
     // Get all active surface IDs
     const surfaceIds = Array.from(this.activeSurfaceIds());
-    
+
     // Delete each surface using the proper A2UI protocol message
     for (const surfaceId of surfaceIds) {
       this.processor.processMessages([{
@@ -565,29 +570,29 @@ export class App implements OnInit, OnDestroy {
         }
       }]);
     }
-    
+
     // Clear active surface IDs
     this.activeSurfaceIds.set(new Set());
-    
+
     // Clear the textarea and error
     this.testJson.set('');
     this.testError.set(null);
   }
-  
+
   toggleDebug() {
     this.showDebug.set(!this.showDebug());
   }
-  
+
   setMode(isUiMode: boolean) {
     this.serverConfig.uiMode.set(isUiMode);
     this.textResponse.set(null); // Clear text response when switching modes
     console.log(`Mode switched to: ${isUiMode ? 'UI' : 'Text'}`);
   }
-  
+
   clearChat() {
     // Get all active surface IDs
     const surfaceIds = Array.from(this.activeSurfaceIds());
-    
+
     // Delete each surface using the proper A2UI protocol message
     for (const surfaceId of surfaceIds) {
       this.processor.processMessages([{
@@ -596,23 +601,23 @@ export class App implements OnInit, OnDestroy {
         }
       }]);
     }
-    
+
     // Clear the list of active surface IDs
     this.activeSurfaceIds.set(new Set());
-    
+
     // Clear text response
     this.textResponse.set(null);
-    
+
     // Clear error
     this.error.set(null);
-    
+
     // Clear debug data
     this.lastRequest.set(null);
     this.lastResponse.set(null);
-    
+
     console.log(`Chat cleared - ${surfaceIds.length} surface(s) deleted`);
   }
-  
+
   copyToClipboard(text: string) {
     navigator.clipboard.writeText(text).then(() => {
       console.log('Copied to clipboard');
@@ -621,7 +626,7 @@ export class App implements OnInit, OnDestroy {
       console.error('Failed to copy:', err);
     });
   }
-  
+
   formatJson(obj: any): string {
     try {
       return JSON.stringify(obj, null, 2);
@@ -629,25 +634,25 @@ export class App implements OnInit, OnDestroy {
       return String(obj);
     }
   }
-  
+
   toggleConnectForm() {
     this.showConnectForm.set(!this.showConnectForm());
     if (!this.showConnectForm()) {
       this.tempUrl.set(this.serverUrl());
     }
   }
-  
+
   async connectToServer() {
     const url = this.tempUrl().trim();
     if (!url) return;
-    
+
     this.serverUrl.set(url);
     this.showConnectForm.set(false);
-    
+
     // Clear debug data when switching servers
     this.lastRequest.set(null);
     this.lastResponse.set(null);
-    
+
     // Reload agent card from new server
     try {
       this.agentCard.set(null);
@@ -659,38 +664,38 @@ export class App implements OnInit, OnDestroy {
       this.error.set('Failed to connect to server');
     }
   }
-  
+
   private processResponse(response: any): any[] {
     console.log('Processing response:', response);
-    
+
     const serverMessages: any[] = [];
-    
-    if (response.result?.status?.message?.parts) {  
-      const responseParts = response.result.status.message.parts;  
-        
+
+    if (response.result?.status?.message?.parts) {
+      const responseParts = response.result.status.message.parts;
+
       // Check mode to decide how to process response
       if (this.serverConfig.uiMode()) {
         // UI Mode: Process A2UI data parts
-        responseParts.forEach((part: any) => {  
-          if (part.data && part.metadata?.mimeType === 'application/json+a2ui') {  
+        responseParts.forEach((part: any) => {
+          if (part.data && part.metadata?.mimeType === 'application/json+a2ui') {
             console.log('A2UI Data:', part.data);
             serverMessages.push(part.data);
             this.processor.processMessages([part.data]);
-            
+
             // Track active surface IDs
             if (part.data.surfaceUpdate?.surfaceId) {
               const currentIds = new Set(this.activeSurfaceIds());
               currentIds.add(part.data.surfaceUpdate.surfaceId);
               this.activeSurfaceIds.set(currentIds);
             }
-          }  
+          }
         });
       } else {
         // Text Mode: Extract and display text parts
-        responseParts.forEach((part: any) => {  
-          if (part.text) {  
+        responseParts.forEach((part: any) => {
+          if (part.text) {
             console.log('Text part:', part.text);
-            
+
             // Try to parse JSON strings - if it's A2UI data, skip it in text mode
             try {
               const parsed = JSON.parse(part.text);
@@ -705,63 +710,63 @@ export class App implements OnInit, OnDestroy {
               // Not JSON, just regular text
               serverMessages.push(part.text);
             }
-          }  
+          }
         });
-        
+
         // Display text parts in a simple format
         if (serverMessages.length > 0) {
           this.textResponse.set(serverMessages.join('\n\n'));
         }
       }
     }
-    
+
     return serverMessages;
-  }  
-  
-  async handleSubmit(event: SubmitEvent) {  
-    event.preventDefault();  
-      
-    if (!(event.target instanceof HTMLFormElement)) return;  
-      
-    const data = new FormData(event.target);  
-    const body = data.get('body') as string;  
-      
-    if (!body) return;  
-      
-    this.loading.set(true);  
+  }
+
+  async handleSubmit(event: SubmitEvent) {
+    event.preventDefault();
+
+    if (!(event.target instanceof HTMLFormElement)) return;
+
+    const data = new FormData(event.target);
+    const body = data.get('body') as string;
+
+    if (!body) return;
+
+    this.loading.set(true);
     this.error.set(null);
     this.textResponse.set(null); // Clear previous text response
-      
-    try {  
-      const parts: Part[] = [{ kind: 'text', text: body }];  
-      
+
+    try {
+      const parts: Part[] = [{ kind: 'text', text: body }];
+
       // Capture request for debug
       this.lastRequest.set({
         timestamp: new Date().toISOString(),
         parts: parts
       });
-      
-      const response: any = await this.a2aService.sendMessage(parts);  
-        
+
+      const response: any = await this.a2aService.sendMessage(parts);
+
       // Capture response for debug
       this.lastResponse.set({
         timestamp: new Date().toISOString(),
         data: response
       });
-      
+
       console.log('Full Response:', response);
-      
+
       // Process JSON-RPC 2.0 response with A2UI data
       this.processResponse(response);
-      
+
       // Clear the form after successful submission
       event.target.reset();
-    } catch (err: any) {  
-      this.error.set(err.message);  
-    } finally {  
-      this.loading.set(false);  
-    }  
+    } catch (err: any) {
+      this.error.set(err.message);
+    } finally {
+      this.loading.set(false);
+    }
   }
-  
+
 
 }
