@@ -295,7 +295,10 @@ export class App implements OnInit, OnDestroy {
     'infrastructure-failure.json',
     'fraud-detection-network.json',
     'medical-diagnosis.json',
-    'portfolio-risk-analysis.json'
+    'portfolio-risk-analysis.json',
+    'org-chart-interactive.json',
+    'supply-chain-disruption.json',
+    'influencer-network.json'
   ]);
   protected selectedExample = signal<string>('');
 

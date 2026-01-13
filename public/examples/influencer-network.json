@@ -1,0 +1,154 @@
+[
+    {
+        "surfaceUpdate": {
+            "surfaceId": "influencer",
+            "components": [
+                {
+                    "id": "root",
+                    "component": {
+                        "Column": {
+                            "children": {
+                                "explicitList": [
+                                    "influencer-graph"
+                                ]
+                            }
+                        }
+                    }
+                },
+                {
+                    "id": "influencer-graph",
+                    "component": {
+                        "KnowledgeGraph": {
+                            "title": "Social Network Influence Mapping - Campaign Strategy",
+                            "layout": "cose",
+                            "data": {
+                                "path": "/influencerData"
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "dataModelUpdate": {
+            "surfaceId": "influencer",
+            "contents": [
+                {
+                    "key": "influencerData",
+                    "valueArray": [
+                        {
+                            "key": "0",
+                            "valueMap": [
+                                {
+                                    "key": "id",
+                                    "valueString": "influencer1"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "Influencer A\n(100K Followers)"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "1",
+                            "valueMap": [
+                                {
+                                    "key": "id",
+                                    "valueString": "influencer2"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "Influencer B\n(10K Followers - High Engagement)"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "2",
+                            "valueMap": [
+                                {
+                                    "key": "id",
+                                    "valueString": "audience1"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "Tech Enthusiasts"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "3",
+                            "valueMap": [
+                                {
+                                    "key": "id",
+                                    "valueString": "audience2"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "Lifestyle Segment"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "4",
+                            "valueMap": [
+                                {
+                                    "key": "source",
+                                    "valueString": "influencer1"
+                                },
+                                {
+                                    "key": "target",
+                                    "valueString": "audience2"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "reaches"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "5",
+                            "valueMap": [
+                                {
+                                    "key": "source",
+                                    "valueString": "influencer2"
+                                },
+                                {
+                                    "key": "target",
+                                    "valueString": "audience1"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "influences"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "6",
+                            "valueMap": [
+                                {
+                                    "key": "source",
+                                    "valueString": "influencer2"
+                                },
+                                {
+                                    "key": "target",
+                                    "valueString": "audience2"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "overlaps with"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "beginRendering": {
+            "root": "root",
+            "surfaceId": "influencer"
+        }
+    }
+]

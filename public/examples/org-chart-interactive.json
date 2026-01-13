@@ -1,0 +1,154 @@
+[
+    {
+        "surfaceUpdate": {
+            "surfaceId": "org-chart",
+            "components": [
+                {
+                    "id": "root",
+                    "component": {
+                        "Column": {
+                            "children": {
+                                "explicitList": [
+                                    "org-graph"
+                                ]
+                            }
+                        }
+                    }
+                },
+                {
+                    "id": "org-graph",
+                    "component": {
+                        "KnowledgeGraph": {
+                            "title": "Company Organization Chart - Interactive Exploration",
+                            "layout": "breadthfirst",
+                            "data": {
+                                "path": "/orgData"
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "dataModelUpdate": {
+            "surfaceId": "org-chart",
+            "contents": [
+                {
+                    "key": "orgData",
+                    "valueArray": [
+                        {
+                            "key": "0",
+                            "valueMap": [
+                                {
+                                    "key": "id",
+                                    "valueString": "ceo"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "CEO\n(Click to expand)"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "1",
+                            "valueMap": [
+                                {
+                                    "key": "id",
+                                    "valueString": "cto"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "CTO"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "2",
+                            "valueMap": [
+                                {
+                                    "key": "id",
+                                    "valueString": "cfo"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "CFO"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "3",
+                            "valueMap": [
+                                {
+                                    "key": "id",
+                                    "valueString": "coo"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "COO"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "4",
+                            "valueMap": [
+                                {
+                                    "key": "source",
+                                    "valueString": "ceo"
+                                },
+                                {
+                                    "key": "target",
+                                    "valueString": "cto"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "reports to"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "5",
+                            "valueMap": [
+                                {
+                                    "key": "source",
+                                    "valueString": "ceo"
+                                },
+                                {
+                                    "key": "target",
+                                    "valueString": "cfo"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "reports to"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "6",
+                            "valueMap": [
+                                {
+                                    "key": "source",
+                                    "valueString": "ceo"
+                                },
+                                {
+                                    "key": "target",
+                                    "valueString": "coo"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "reports to"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "beginRendering": {
+            "root": "root",
+            "surfaceId": "org-chart"
+        }
+    }
+]

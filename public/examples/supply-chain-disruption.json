@@ -1,0 +1,154 @@
+[
+    {
+        "surfaceUpdate": {
+            "surfaceId": "supply-chain",
+            "components": [
+                {
+                    "id": "root",
+                    "component": {
+                        "Column": {
+                            "children": {
+                                "explicitList": [
+                                    "supply-graph"
+                                ]
+                            }
+                        }
+                    }
+                },
+                {
+                    "id": "supply-graph",
+                    "component": {
+                        "KnowledgeGraph": {
+                            "title": "Supply Chain Rerouting Logic - Suez Blockage",
+                            "layout": "cose",
+                            "data": {
+                                "path": "/supplyData"
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "dataModelUpdate": {
+            "surfaceId": "supply-chain",
+            "contents": [
+                {
+                    "key": "supplyData",
+                    "valueArray": [
+                        {
+                            "key": "0",
+                            "valueMap": [
+                                {
+                                    "key": "id",
+                                    "valueString": "port-strike"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "Suez Blockage\n(CRITICAL)"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "1",
+                            "valueMap": [
+                                {
+                                    "key": "id",
+                                    "valueString": "shipment-A"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "Order #992\n(Delayed)"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "2",
+                            "valueMap": [
+                                {
+                                    "key": "id",
+                                    "valueString": "rail-option"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "Suggested Rail Path\n(Alternative)"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "3",
+                            "valueMap": [
+                                {
+                                    "key": "id",
+                                    "valueString": "destination"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "European Hub"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "4",
+                            "valueMap": [
+                                {
+                                    "key": "source",
+                                    "valueString": "port-strike"
+                                },
+                                {
+                                    "key": "target",
+                                    "valueString": "shipment-A"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "blocks"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "5",
+                            "valueMap": [
+                                {
+                                    "key": "source",
+                                    "valueString": "shipment-A"
+                                },
+                                {
+                                    "key": "target",
+                                    "valueString": "rail-option"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "reroute to"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "6",
+                            "valueMap": [
+                                {
+                                    "key": "source",
+                                    "valueString": "rail-option"
+                                },
+                                {
+                                    "key": "target",
+                                    "valueString": "destination"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "delivers to"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "beginRendering": {
+            "root": "root",
+            "surfaceId": "supply-chain"
+        }
+    }
+]
