@@ -1,0 +1,280 @@
+[
+    {
+        "surfaceUpdate": {
+            "surfaceId": "portfolio-analysis",
+            "components": [
+                {
+                    "id": "root",
+                    "component": {
+                        "Column": {
+                            "children": {
+                                "explicitList": [
+                                    "portfolio-graph"
+                                ]
+                            }
+                        }
+                    }
+                },
+                {
+                    "id": "portfolio-graph",
+                    "component": {
+                        "KnowledgeGraph": {
+                            "title": "Portfolio Risk Analysis - Tech Sector Concentration",
+                            "layout": "cose",
+                            "data": {
+                                "path": "/portfolioData"
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "dataModelUpdate": {
+            "surfaceId": "portfolio-analysis",
+            "contents": [
+                {
+                    "key": "portfolioData",
+                    "valueArray": [
+                        {
+                            "key": "0",
+                            "valueMap": [
+                                {
+                                    "key": "id",
+                                    "valueString": "portfolio"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "Total Portfolio\n$500K"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "1",
+                            "valueMap": [
+                                {
+                                    "key": "id",
+                                    "valueString": "tech-sector"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "Tech Sector\n$300K (60%)"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "2",
+                            "valueMap": [
+                                {
+                                    "key": "id",
+                                    "valueString": "healthcare"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "Healthcare\n$100K (20%)"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "3",
+                            "valueMap": [
+                                {
+                                    "key": "id",
+                                    "valueString": "bonds"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "Bonds\n$100K (20%)"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "4",
+                            "valueMap": [
+                                {
+                                    "key": "id",
+                                    "valueString": "aapl"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "Apple Stock\n$80K"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "5",
+                            "valueMap": [
+                                {
+                                    "key": "id",
+                                    "valueString": "msft"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "Microsoft Stock\n$70K"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "6",
+                            "valueMap": [
+                                {
+                                    "key": "id",
+                                    "valueString": "qqq"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "QQQ ETF\n$150K"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "7",
+                            "valueMap": [
+                                {
+                                    "key": "source",
+                                    "valueString": "portfolio"
+                                },
+                                {
+                                    "key": "target",
+                                    "valueString": "tech-sector"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "60% allocation"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "8",
+                            "valueMap": [
+                                {
+                                    "key": "source",
+                                    "valueString": "portfolio"
+                                },
+                                {
+                                    "key": "target",
+                                    "valueString": "healthcare"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "20% allocation"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "9",
+                            "valueMap": [
+                                {
+                                    "key": "source",
+                                    "valueString": "portfolio"
+                                },
+                                {
+                                    "key": "target",
+                                    "valueString": "bonds"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "20% allocation"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "10",
+                            "valueMap": [
+                                {
+                                    "key": "source",
+                                    "valueString": "tech-sector"
+                                },
+                                {
+                                    "key": "target",
+                                    "valueString": "aapl"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "direct holding"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "11",
+                            "valueMap": [
+                                {
+                                    "key": "source",
+                                    "valueString": "tech-sector"
+                                },
+                                {
+                                    "key": "target",
+                                    "valueString": "msft"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "direct holding"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "12",
+                            "valueMap": [
+                                {
+                                    "key": "source",
+                                    "valueString": "tech-sector"
+                                },
+                                {
+                                    "key": "target",
+                                    "valueString": "qqq"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "ETF contains"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "13",
+                            "valueMap": [
+                                {
+                                    "key": "source",
+                                    "valueString": "qqq"
+                                },
+                                {
+                                    "key": "target",
+                                    "valueString": "aapl"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "holds 10%"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "14",
+                            "valueMap": [
+                                {
+                                    "key": "source",
+                                    "valueString": "qqq"
+                                },
+                                {
+                                    "key": "target",
+                                    "valueString": "msft"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "holds 9%"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "beginRendering": {
+            "root": "root",
+            "surfaceId": "portfolio-analysis",
+            "viewportWidthPx": 800,
+            "viewportHeightPx": 600
+        }
+    }
+]

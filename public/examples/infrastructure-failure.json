@@ -1,0 +1,246 @@
+[
+    {
+        "surfaceUpdate": {
+            "surfaceId": "infrastructure-monitor",
+            "components": [
+                {
+                    "id": "root",
+                    "component": {
+                        "Column": {
+                            "children": {
+                                "explicitList": [
+                                    "infra-graph"
+                                ]
+                            }
+                        }
+                    }
+                },
+                {
+                    "id": "infra-graph",
+                    "component": {
+                        "KnowledgeGraph": {
+                            "title": "IT Infrastructure - Root Cause Analysis (Payment Service Down)",
+                            "layout": "breadthfirst",
+                            "data": {
+                                "path": "/infraData"
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "dataModelUpdate": {
+            "surfaceId": "infrastructure-monitor",
+            "contents": [
+                {
+                    "key": "infraData",
+                    "valueArray": [
+                        {
+                            "key": "0",
+                            "valueMap": [
+                                {
+                                    "key": "id",
+                                    "valueString": "users"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "End Users\n(Error: 500)"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "1",
+                            "valueMap": [
+                                {
+                                    "key": "id",
+                                    "valueString": "web-app"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "Web Application\n(Status: OK)"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "2",
+                            "valueMap": [
+                                {
+                                    "key": "id",
+                                    "valueString": "api-gateway"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "API Gateway\n(Status: OK)"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "3",
+                            "valueMap": [
+                                {
+                                    "key": "id",
+                                    "valueString": "payment-service"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "Payment Service\n(FAILING)"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "4",
+                            "valueMap": [
+                                {
+                                    "key": "id",
+                                    "valueString": "user-service"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "User Service\n(Status: OK)"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "5",
+                            "valueMap": [
+                                {
+                                    "key": "id",
+                                    "valueString": "vault"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "Vault Secret Manager\n(TIMEOUT)"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "6",
+                            "valueMap": [
+                                {
+                                    "key": "id",
+                                    "valueString": "postgres"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "PostgreSQL\n(Status: OK)"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "7",
+                            "valueMap": [
+                                {
+                                    "key": "source",
+                                    "valueString": "users"
+                                },
+                                {
+                                    "key": "target",
+                                    "valueString": "web-app"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "accesses"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "8",
+                            "valueMap": [
+                                {
+                                    "key": "source",
+                                    "valueString": "web-app"
+                                },
+                                {
+                                    "key": "target",
+                                    "valueString": "api-gateway"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "calls"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "9",
+                            "valueMap": [
+                                {
+                                    "key": "source",
+                                    "valueString": "api-gateway"
+                                },
+                                {
+                                    "key": "target",
+                                    "valueString": "payment-service"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "routes to"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "10",
+                            "valueMap": [
+                                {
+                                    "key": "source",
+                                    "valueString": "api-gateway"
+                                },
+                                {
+                                    "key": "target",
+                                    "valueString": "user-service"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "routes to"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "11",
+                            "valueMap": [
+                                {
+                                    "key": "source",
+                                    "valueString": "payment-service"
+                                },
+                                {
+                                    "key": "target",
+                                    "valueString": "vault"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "authenticates with"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "12",
+                            "valueMap": [
+                                {
+                                    "key": "source",
+                                    "valueString": "user-service"
+                                },
+                                {
+                                    "key": "target",
+                                    "valueString": "postgres"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "reads from"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "beginRendering": {
+            "root": "root",
+            "surfaceId": "infrastructure-monitor",
+            "viewportWidthPx": 800,
+            "viewportHeightPx": 600
+        }
+    }
+]

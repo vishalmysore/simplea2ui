@@ -1,0 +1,263 @@
+[
+    {
+        "surfaceUpdate": {
+            "surfaceId": "medical-ai",
+            "components": [
+                {
+                    "id": "root",
+                    "component": {
+                        "Column": {
+                            "children": {
+                                "explicitList": [
+                                    "diagnosis-graph"
+                                ]
+                            }
+                        }
+                    }
+                },
+                {
+                    "id": "diagnosis-graph",
+                    "component": {
+                        "KnowledgeGraph": {
+                            "title": "Differential Diagnosis - Patient Symptoms Analysis",
+                            "layout": "breadthfirst",
+                            "data": {
+                                "path": "/medicalData"
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "dataModelUpdate": {
+            "surfaceId": "medical-ai",
+            "contents": [
+                {
+                    "key": "medicalData",
+                    "valueArray": [
+                        {
+                            "key": "0",
+                            "valueMap": [
+                                {
+                                    "key": "id",
+                                    "valueString": "fever"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "Fever (102°F)"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "1",
+                            "valueMap": [
+                                {
+                                    "key": "id",
+                                    "valueString": "cough"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "Persistent Cough"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "2",
+                            "valueMap": [
+                                {
+                                    "key": "id",
+                                    "valueString": "fatigue"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "Fatigue"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "3",
+                            "valueMap": [
+                                {
+                                    "key": "id",
+                                    "valueString": "shortness"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "Shortness of Breath"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "4",
+                            "valueMap": [
+                                {
+                                    "key": "id",
+                                    "valueString": "pneumonia"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "Bacterial Pneumonia\n(78% match)"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "5",
+                            "valueMap": [
+                                {
+                                    "key": "id",
+                                    "valueString": "bronchitis"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "Acute Bronchitis\n(65% match)"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "6",
+                            "valueMap": [
+                                {
+                                    "key": "id",
+                                    "valueString": "covid"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "COVID-19\n(45% match)"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "7",
+                            "valueMap": [
+                                {
+                                    "key": "source",
+                                    "valueString": "fever"
+                                },
+                                {
+                                    "key": "target",
+                                    "valueString": "pneumonia"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "suggests"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "8",
+                            "valueMap": [
+                                {
+                                    "key": "source",
+                                    "valueString": "cough"
+                                },
+                                {
+                                    "key": "target",
+                                    "valueString": "pneumonia"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "suggests"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "9",
+                            "valueMap": [
+                                {
+                                    "key": "source",
+                                    "valueString": "shortness"
+                                },
+                                {
+                                    "key": "target",
+                                    "valueString": "pneumonia"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "suggests"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "10",
+                            "valueMap": [
+                                {
+                                    "key": "source",
+                                    "valueString": "cough"
+                                },
+                                {
+                                    "key": "target",
+                                    "valueString": "bronchitis"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "suggests"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "11",
+                            "valueMap": [
+                                {
+                                    "key": "source",
+                                    "valueString": "fever"
+                                },
+                                {
+                                    "key": "target",
+                                    "valueString": "bronchitis"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "suggests"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "12",
+                            "valueMap": [
+                                {
+                                    "key": "source",
+                                    "valueString": "fever"
+                                },
+                                {
+                                    "key": "target",
+                                    "valueString": "covid"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "suggests"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "13",
+                            "valueMap": [
+                                {
+                                    "key": "source",
+                                    "valueString": "fatigue"
+                                },
+                                {
+                                    "key": "target",
+                                    "valueString": "covid"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "suggests"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "beginRendering": {
+            "root": "root",
+            "surfaceId": "medical-ai",
+            "viewportWidthPx": 800,
+            "viewportHeightPx": 600
+        }
+    }
+]
