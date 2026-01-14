@@ -10,6 +10,7 @@ export class ServerConfigService {
   uiMode = signal(true); // true = UI mode (with A2UI), false = text mode (no A2UI)
   availableServers = signal<string[]>([
     'http://localhost:7860',
+    'https://vishalmysore-fraudagent.hf.space',
     'https://vishalmysore-a2ui.hf.space',
     'https://vishalmysore-a2amcpdatabase.hf.space/'
   ]);
