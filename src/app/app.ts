@@ -114,11 +114,26 @@ import { ServerConfigService } from './server-config.service';
         
         @if (showConnectForm()) {
           <div class="connect-form">
-            <input 
-              type="text" 
-              [value]="tempUrl()" 
-              (input)="tempUrl.set($any($event.target).value)" 
-              placeholder="http://localhost:7860" />
+            <div class="form-group">
+              <label for="serverSelect">Available Servers:</label>
+              <select 
+                id="serverSelect"
+                (change)="onServerSelect($any($event.target).value)">
+                <option value="">-- Select a server --</option>
+                @for (server of serverConfig.availableServers(); track server) {
+                  <option [value]="server">{{ server }}</option>
+                }
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="serverUrlInput">Server URL:</label>
+              <input 
+                id="serverUrlInput"
+                type="text" 
+                [value]="tempUrl()" 
+                (input)="tempUrl.set($any($event.target).value)" 
+                placeholder="https://your-server-url.com" />
+            </div>
             <button (click)="connectToServer()">Connect</button>
           </div>
         }
@@ -264,7 +279,9 @@ export class App implements OnInit, OnDestroy {
   protected showAbout = signal(false);
   protected serverUrl = this.serverConfig.serverUrl;
   protected showConnectForm = signal(false);
-  protected tempUrl = signal('http://localhost:7860');
+  protected tempUrl = signal(window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+    ? 'http://localhost:7860'
+    : 'https://vishalmysore-a2ui.hf.space');
   protected showDebug = signal(false);
   protected lastRequest = signal<any>(null);
   protected lastResponse = signal<any>(null);
@@ -646,6 +663,12 @@ export class App implements OnInit, OnDestroy {
     this.showConnectForm.set(!this.showConnectForm());
     if (!this.showConnectForm()) {
       this.tempUrl.set(this.serverUrl());
+    }
+  }
+
+  onServerSelect(url: string) {
+    if (url) {
+      this.tempUrl.set(url);
     }
   }
 

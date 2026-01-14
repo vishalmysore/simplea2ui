@@ -2,10 +2,12 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AgentCard, Part, SendMessageSuccessResponse } from '@a2a-js/sdk';
 import { firstValueFrom } from 'rxjs';
+import { ServerConfigService } from './server-config.service';
 
 @Injectable({ providedIn: 'root' })
 export class A2aService {
   private http = inject(HttpClient);
+  private serverConfig = inject(ServerConfigService);
 
   async sendMessage(parts: Part[]): Promise<any> {
     const body = {
@@ -26,8 +28,9 @@ export class A2aService {
   }
 
   async getAgentCard(): Promise<AgentCard> {
+    const baseUrl = this.serverConfig.serverUrl().replace(/\/$/, '');
     return firstValueFrom(
-      this.http.get<AgentCard>('http://localhost:7860/.well-known/agent.json')
+      this.http.get<AgentCard>(`${baseUrl}/.well-known/agent.json`)
     );
   }
 }
