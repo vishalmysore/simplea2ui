@@ -193,6 +193,41 @@ OR full response:
             }
           </div>
         }
+
+        <button class="test-btn open-json-btn" (click)="toggleOpenJsonPanel()">
+          {{ showOpenJsonPanel() ? 'Hide' : 'Test OpenJSONUI Renderer' }}
+        </button>
+
+        @if (showOpenJsonPanel()) {
+          <div class="test-panel open-json-panel">
+            <h3>Test OpenJSONUI JSON</h3>
+            <p class="test-description">Paste your OpenJSONUI JSON below to see how it renders.</p>
+            <div class="example-selector">
+              <label for="openJsonExampleSelect">Load Example:</label>
+              <select 
+                id="openJsonExampleSelect"
+                [value]="selectedOpenJsonExample()"
+                (change)="onOpenJsonExampleSelect($any($event.target).value)">
+                <option value="">-- Select an example --</option>
+                @for (file of openJsonExamples(); track file) {
+                  <option [value]="file">{{ file }}</option>
+                }
+              </select>
+            </div>
+            <textarea 
+              class="test-textarea"
+              [value]="openJsonText()"
+              (input)="openJsonText.set($any($event.target).value)"
+              placeholder='Paste OpenJSONUI JSON here...'></textarea>
+            <div class="test-actions">
+              <button class="render-btn" (click)="renderOpenJson()">Render OpenJSONUI</button>
+              <button class="clear-test-btn" (click)="clearOpenJson()">Clear</button>
+            </div>
+            @if (openJsonError()) {
+              <div class="test-error">{{ openJsonError() }}</div>
+            }
+          </div>
+        }
         
         <button class="about-btn" (click)="toggleAbout()">
           {{ showAbout() ? 'Hide' : 'About' }}
@@ -289,6 +324,9 @@ export class App implements OnInit, OnDestroy {
   protected showTestPanel = signal(false);
   protected testJson = signal('');
   protected testError = signal<string | null>(null);
+  protected showOpenJsonPanel = signal(false);
+  protected openJsonText = signal('');
+  protected openJsonError = signal<string | null>(null);
   protected showSurfaces = signal(true);
   protected activeSurfaceIds = signal<Set<string>>(new Set());
   protected exampleFiles = signal<string[]>([
@@ -318,6 +356,11 @@ export class App implements OnInit, OnDestroy {
     'influencer-network.json'
   ]);
   protected selectedExample = signal<string>('');
+  protected openJsonExamples = signal<string[]>([
+    'open-json-food.json',
+    'open-json-welcome.json'
+  ]);
+  protected selectedOpenJsonExample = signal<string>('');
 
   private eventSubscription?: Subscription;
 
@@ -601,6 +644,284 @@ export class App implements OnInit, OnDestroy {
     // Clear the textarea and error
     this.testJson.set('');
     this.testError.set(null);
+    this.selectedExample.set('');
+  }
+
+  onOpenJsonExampleSelect(fileName: string) {
+    this.selectedOpenJsonExample.set(fileName);
+    if (!fileName) {
+      this.openJsonText.set('');
+      return;
+    }
+
+    fetch(`examples/${fileName}`)
+      .then(response => response.text())
+      .then(text => {
+        this.openJsonText.set(text);
+        this.openJsonError.set(null);
+      })
+      .catch(err => {
+        console.error('Failed to load Open-JSON-UI example:', err);
+        this.openJsonError.set(`Failed to load example: ${err.message}`);
+      });
+  }
+
+  toggleOpenJsonPanel() {
+    this.showOpenJsonPanel.set(!this.showOpenJsonPanel());
+    if (!this.showOpenJsonPanel()) {
+      this.openJsonError.set(null);
+    }
+  }
+
+  renderOpenJson() {
+    this.openJsonError.set(null);
+    const jsonStr = this.openJsonText().trim();
+
+    if (!jsonStr) {
+      this.openJsonError.set('Please enter OpenJSONUI JSON to test');
+      return;
+    }
+
+    // Clear any existing test surfaces before rendering new content
+    const surfaceIds = Array.from(this.activeSurfaceIds());
+    for (const surfaceId of surfaceIds) {
+      try {
+        this.processor.processMessages([{
+          deleteSurface: {
+            surfaceId: surfaceId
+          }
+        }]);
+      } catch (deleteErr) {
+        console.warn('Failed to delete surface:', surfaceId, deleteErr);
+      }
+    }
+    this.activeSurfaceIds.set(new Set());
+
+    try {
+      const parsed = JSON.parse(jsonStr);
+      let a2uiMessages: any[] = [];
+
+      // Check if it's an array of A2UI messages (JSONL-style array)
+      if (Array.isArray(parsed)) {
+        for (const msg of parsed) {
+          if (msg.surfaceUpdate || msg.dataModelUpdate || msg.beginRendering) {
+            a2uiMessages.push(msg);
+          }
+        }
+      } else if (parsed.surfaceUpdate || parsed.dataModelUpdate || parsed.beginRendering) {
+        a2uiMessages = [parsed];
+      } else if (parsed.result?.status?.message?.parts) {
+        const parts = parsed.result.status.message.parts;
+        for (const part of parts) {
+          if (part.data && (part.data.surfaceUpdate || part.data.dataModelUpdate || part.data.beginRendering)) {
+            a2uiMessages.push(part.data);
+          }
+        }
+      } else if (parsed.type === 'screen') {
+        // Handle flattened Open-JSON-UI standard
+        a2uiMessages = this.mapOpenJsonToA2UI(parsed);
+      }
+
+      if (a2uiMessages.length === 0) {
+        this.openJsonError.set('No valid A2UI/OpenJSONUI data found.');
+        return;
+      }
+
+      for (const msg of a2uiMessages) {
+        try {
+          console.log('Rendering OpenJSONUI message...');
+          this.processor.processMessages([msg]);
+
+          if (msg.surfaceUpdate?.surfaceId) {
+            const currentIds = new Set(this.activeSurfaceIds());
+            currentIds.add(msg.surfaceUpdate.surfaceId);
+            this.activeSurfaceIds.set(currentIds);
+          }
+        } catch (renderErr: any) {
+          console.error('❌ Rendering failed:', renderErr);
+          this.openJsonError.set(`Rendering Error: ${renderErr.message}`);
+          return;
+        }
+      }
+    } catch (err: any) {
+      this.openJsonError.set(`JSON Parse Error: ${err.message}`);
+    }
+  }
+
+  clearOpenJson() {
+    const surfaceIds = Array.from(this.activeSurfaceIds());
+    for (const surfaceId of surfaceIds) {
+      this.processor.processMessages([{
+        deleteSurface: {
+          surfaceId: surfaceId
+        }
+      }]);
+    }
+    this.activeSurfaceIds.set(new Set());
+    this.openJsonText.set('');
+    this.openJsonError.set(null);
+  }
+
+  private mapOpenJsonToA2UI(openJson: any): any[] {
+    const surfaceId = `openjson-${Date.now()}`;
+    const allComponents: any[] = [];
+
+    const processItem = (item: any, parentId: string, index: number): string => {
+      const id = `${parentId}-${item.type}-${index}`;
+      let a2uiComponent: any = null;
+
+      if (item.type === 'card') {
+        const cardContentId = `${id}-content`;
+        const children: string[] = [];
+
+        if (item.title) {
+          const titleId = `${id}-title`;
+          allComponents.push({
+            id: titleId,
+            component: {
+              Text: {
+                usageHint: 'h3',
+                text: { literalString: item.title }
+              }
+            }
+          });
+          children.push(titleId);
+        }
+
+        if (item.content) {
+          item.content.forEach((childItem: any, childIndex: number) => {
+            const childId = processItem(childItem, id, childIndex);
+            children.push(childId);
+          });
+        }
+
+        allComponents.push({
+          id: cardContentId,
+          component: {
+            Column: {
+              children: { explicitList: children },
+              alignment: 'stretch'
+            }
+          }
+        });
+
+        a2uiComponent = {
+          Card: { child: cardContentId }
+        };
+      } else if (item.type === 'text') {
+        a2uiComponent = {
+          Text: {
+            text: { literalString: item.content }
+          }
+        };
+      } else if (item.type === 'divider') {
+        a2uiComponent = {
+          Divider: {}
+        };
+      } else if (item.type === 'form') {
+        const children: string[] = [];
+
+        if (item.fields) {
+          item.fields.forEach((f: any, fIndex: number) => {
+            const fieldId = `${id}-field-${fIndex}`;
+            allComponents.push({
+              id: fieldId,
+              component: {
+                TextField: {
+                  label: { literalString: f.label },
+                  placeholder: { literalString: f.placeholder },
+                  required: f.required
+                }
+              }
+            });
+            children.push(fieldId);
+          });
+        }
+
+        if (item.submit) {
+          const submitId = `${id}-submit`;
+          const submitTextId = `${submitId}-text`;
+          allComponents.push({
+            id: submitTextId,
+            component: {
+              Text: { text: { literalString: item.submit.label } }
+            }
+          });
+          allComponents.push({
+            id: submitId,
+            component: {
+              Button: {
+                action: { name: item.submit.action },
+                child: submitTextId,
+                primary: true
+              }
+            }
+          });
+          children.push(submitId);
+        }
+
+        a2uiComponent = {
+          Column: {
+            children: { explicitList: children },
+            alignment: 'stretch'
+          }
+        };
+      }
+
+      allComponents.push({
+        id: id,
+        component: a2uiComponent
+      });
+      return id;
+    };
+
+    const rootChildren: string[] = [];
+    if (openJson.title) {
+      const titleId = `root-title`;
+      allComponents.push({
+        id: titleId,
+        component: {
+          Text: {
+            usageHint: 'h1',
+            text: { literalString: openJson.title }
+          }
+        }
+      });
+      rootChildren.push(titleId);
+    }
+
+    if (openJson.content) {
+      openJson.content.forEach((item: any, index: number) => {
+        const id = processItem(item, 'root', index);
+        rootChildren.push(id);
+      });
+    }
+
+    const rootId = 'root-container';
+    allComponents.push({
+      id: rootId,
+      component: {
+        Column: {
+          children: { explicitList: rootChildren },
+          alignment: 'stretch'
+        }
+      }
+    });
+
+    return [
+      {
+        surfaceUpdate: {
+          surfaceId: surfaceId,
+          components: allComponents
+        }
+      },
+      {
+        beginRendering: {
+          surfaceId: surfaceId,
+          root: rootId
+        }
+      }
+    ];
   }
 
   toggleDebug() {

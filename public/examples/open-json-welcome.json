@@ -1,0 +1,23 @@
+{
+    "type": "screen",
+    "title": "👋 Welcome to Open-JSON-UI",
+    "content": [
+        {
+            "type": "card",
+            "title": "Getting Started",
+            "content": [
+                {
+                    "type": "text",
+                    "content": "Open-JSON-UI is a flattened, token-efficient standard for building agentic UIs."
+                },
+                {
+                    "type": "divider"
+                },
+                {
+                    "type": "text",
+                    "content": "Try creating your own screens by pasting JSON into the renderer!"
+                }
+            ]
+        }
+    ]
+}

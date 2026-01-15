@@ -1,0 +1,35 @@
+{
+    "type": "screen",
+    "title": "🍽️ Favorite Food Finder",
+    "content": [
+        {
+            "type": "card",
+            "title": "Vishal's favorite food is: Paneer Butter Masala 😋",
+            "content": [
+                {
+                    "type": "divider"
+                },
+                {
+                    "type": "text",
+                    "content": "Find another person's favorite food:"
+                },
+                {
+                    "type": "form",
+                    "fields": [
+                        {
+                            "type": "input",
+                            "id": "name",
+                            "label": "Person's Name",
+                            "placeholder": "Enter name",
+                            "required": true
+                        }
+                    ],
+                    "submit": {
+                        "label": "Find Favorite Food",
+                        "action": "whatThisPersonFavFood"
+                    }
+                }
+            ]
+        }
+    ]
+}
