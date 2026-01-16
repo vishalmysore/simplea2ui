@@ -8,6 +8,11 @@ export class ServerConfigService {
     ? 'http://localhost:7860'
     : 'https://vishalmysore-a2ui.hf.space');
   uiMode = signal(true); // true = UI mode (with A2UI), false = text mode (no A2UI)
+  username = signal('');
+  password = signal('');
+  // When true, the client will send Authorization header with username/password
+  sendCredentials = signal(false);
+  lastHeaders = signal<Record<string, string>>({});
   availableServers = signal<string[]>([
     'http://localhost:7860',
     'https://vishalmysore-fraudagent.hf.space',

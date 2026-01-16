@@ -21,6 +21,49 @@ import { ServerConfigService } from './server-config.service';
           <button type="submit">Send</button>
           <button type="button" class="clear-btn" (click)="clearChat()">Clear Chat</button>  
         </form>  
+
+        <div class="advanced-settings">
+          <button type="button" class="advanced-toggle" (click)="toggleAdvanced()">
+            {{ showAdvanced() ? '▼' : '▶' }} Advanced Settings
+          </button>
+          
+          @if (showAdvanced()) {
+            <div class="credentials-form">
+              <div class="credentials-form">
+                <div class="credential-input" [class.disabled]="!serverConfig.sendCredentials()">
+                  <label for="username">User:</label>
+                  <input 
+                    id="username"
+                    type="text" 
+                    [value]="serverConfig.username()" 
+                    (input)="serverConfig.username.set($any($event.target).value)" 
+                    [disabled]="!serverConfig.sendCredentials()"
+                    placeholder="Username" />
+                </div>
+                <div class="credential-input" [class.disabled]="!serverConfig.sendCredentials()">
+                  <label for="password">Pass:</label>
+                  <input 
+                    id="password"
+                    type="password" 
+                    [value]="serverConfig.password()" 
+                    (input)="serverConfig.password.set($any($event.target).value)" 
+                    [disabled]="!serverConfig.sendCredentials()"
+                    placeholder="Password" />
+                </div>
+                <div class="credential-input credential-toggle">
+                  <label for="sendCredentials">
+                    <input
+                      id="sendCredentials"
+                      type="checkbox"
+                      [checked]="serverConfig.sendCredentials()"
+                      (change)="serverConfig.sendCredentials.set($any($event.target).checked)" />
+                    Send username/password with requests
+                  </label>
+                </div>
+              </div>
+            </div>
+          }
+        </div>
           
         @if (loading()) {  
           <div class="loading">Loading...</div>  
@@ -59,10 +102,19 @@ import { ServerConfigService } from './server-config.service';
               @if (lastRequest()) {
                 <div class="debug-section">
                   <div class="debug-header">
-                    <h4>Last Request</h4>
-                    <button class="copy-btn" (click)="copyToClipboard(formatJson(lastRequest()))">Copy</button>
+                    <h4>Last Request (Body)</h4>
+                    <button class="copy-btn" (click)="copyToClipboard(formatJson(lastRequest()))">Copy Body</button>
+                    <button class="copy-btn curl-btn" (click)="copyToClipboard(getCurlCommand())">Copy as CURL</button>
                   </div>
                   <pre>{{ formatJson(lastRequest()) }}</pre>
+                </div>
+
+                <div class="debug-section">
+                  <div class="debug-header">
+                    <h4>Request Headers</h4>
+                    <button class="copy-btn" (click)="copyToClipboard(formatJson(serverConfig.lastHeaders()))">Copy Headers</button>
+                  </div>
+                  <pre>{{ formatJson(serverConfig.lastHeaders()) }}</pre>
                 </div>
               }
               
@@ -318,6 +370,7 @@ export class App implements OnInit, OnDestroy {
     ? 'http://localhost:7860'
     : 'https://vishalmysore-a2ui.hf.space');
   protected showDebug = signal(false);
+  protected showAdvanced = signal(false);
   protected lastRequest = signal<any>(null);
   protected lastResponse = signal<any>(null);
   protected textResponse = signal<string | null>(null);
@@ -928,6 +981,10 @@ export class App implements OnInit, OnDestroy {
     this.showDebug.set(!this.showDebug());
   }
 
+  toggleAdvanced() {
+    this.showAdvanced.set(!this.showAdvanced());
+  }
+
   setMode(isUiMode: boolean) {
     this.serverConfig.uiMode.set(isUiMode);
     this.textResponse.set(null); // Clear text response when switching modes
@@ -970,6 +1027,22 @@ export class App implements OnInit, OnDestroy {
     }).catch(err => {
       console.error('Failed to copy:', err);
     });
+  }
+
+  getCurlCommand(): string {
+    const url = this.serverUrl();
+    const headers = this.serverConfig.lastHeaders();
+    const body = this.lastRequest();
+
+    let curl = `curl -X POST "${url}" \\\n`;
+
+    Object.entries(headers).forEach(([key, value]) => {
+      curl += `  -H "${key}: ${value}" \\\n`;
+    });
+
+    curl += `  -d '${JSON.stringify(body, null, 2)}'`;
+
+    return curl;
   }
 
   formatJson(obj: any): string {
@@ -1020,14 +1093,30 @@ export class App implements OnInit, OnDestroy {
     console.log('Processing response:', response);
 
     const serverMessages: any[] = [];
+    let parts: any[] = [];
 
+    // 1. Try Standard JSON-RPC 2.0 (response.result.status.message.parts)
     if (response.result?.status?.message?.parts) {
-      const responseParts = response.result.status.message.parts;
+      parts = response.result.status.message.parts;
+    }
+    // 2. Try Direct Object (response.status.message.parts)
+    else if (response.status?.message?.parts) {
+      parts = response.status.message.parts;
+    }
+    // 3. Try Direct Message (response.message.parts)
+    else if (response.message?.parts) {
+      parts = response.message.parts;
+    }
+    // 4. Try Root Parts (response.parts)
+    else if (response.parts) {
+      parts = response.parts;
+    }
 
+    if (parts.length > 0) {
       // Check mode to decide how to process response
       if (this.serverConfig.uiMode()) {
         // UI Mode: Process A2UI data parts
-        responseParts.forEach((part: any) => {
+        parts.forEach((part: any) => {
           if (part.data && part.metadata?.mimeType === 'application/json+a2ui') {
             console.log('A2UI Data:', part.data);
             serverMessages.push(part.data);
@@ -1039,11 +1128,15 @@ export class App implements OnInit, OnDestroy {
               currentIds.add(part.data.surfaceUpdate.surfaceId);
               this.activeSurfaceIds.set(currentIds);
             }
+          } else if (part.text) {
+            // If we are in UI mode but get text, show it in the text response area or as a fallback
+            console.log('Text part in UI mode:', part.text);
+            // Optional: You could render this as a simple text card if you wanted
           }
         });
       } else {
         // Text Mode: Extract and display text parts
-        responseParts.forEach((part: any) => {
+        parts.forEach((part: any) => {
           if (part.text) {
             console.log('Text part:', part.text);
 
@@ -1069,6 +1162,10 @@ export class App implements OnInit, OnDestroy {
           this.textResponse.set(serverMessages.join('\n\n'));
         }
       }
+    } else {
+      // Fallback: If no parts found, show the raw response in the text area so the user sees SOMETHING
+      console.warn('No standard parts found in response. Showing raw response.');
+      this.textResponse.set('Received response but could not find message parts:\n' + JSON.stringify(response, null, 2));
     }
 
     return serverMessages;
