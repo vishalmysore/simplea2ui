@@ -288,7 +288,20 @@ OR full response:
         @if (showAbout()) {
           <div class="about-section">
             <h3>About SimpleA2UI</h3>
-            <p>SimpleA2UI is a simple a2ui client which works with a2a and a2ui protocol, developed by Vishal Mysore</p>
+            <p>SimpleA2UI is a simple a2ui client which works with a2a and a2ui protocol, developed by Vishal Mysore</p> 
+            <p>
+            This application is a frontend renderer for the A2UI protocol; it doesn't 'think' on its own. It requires a connected backend agentic server to process your prompts and send back the structured UI components.
+            To use the demo correctly:
+            </p> 
+            <p>
+            <b>Check Available Actions</b>: Click the 'Show Agent Card' button in the sidebar. This lists the specific skills and example prompts that the currently connected backend is configured to handle.
+            </p>
+            <p>
+            <b>Backend Requirement</b>: If you want to visualize arbitrary data (like 'categories of food'), you must connect the client to a backend agent that has been implemented with that specific capability.
+           </p>  
+            <p>
+            <b>Test Locally</b>: If you are a developer, you can use the 'Test A2UI Renderer' or 'Test OpenJSONUI Renderer' panels to paste your own JSON and see how the UI renders instantly without a backend."            
+            </p> 
           </div>
         }
         
