@@ -668,6 +668,18 @@ export class App implements OnInit, OnDestroy {
 
         try {
           console.log('Rendering A2UI message...');
+          // Debug: log the List component before processing to inspect structure
+          try {
+            const detailsComp = (msg.surfaceUpdate && msg.surfaceUpdate.components)
+              ? msg.surfaceUpdate.components.find((c: any) => c.id === 'details_list')
+              : null;
+            if (detailsComp) {
+              console.log('DEBUG details_list component before processing:', JSON.stringify(detailsComp, null, 2));
+            }
+          } catch (dbgErr) {
+            console.warn('Failed to log details_list debug info', dbgErr);
+          }
+
           this.processor.processMessages([msg]);
           console.log('✓ Render successful');
 

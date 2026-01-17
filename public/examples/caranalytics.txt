@@ -1,0 +1,532 @@
+{  
+  "timestamp": "2026-01-17T18:00:14.855Z",  
+  "data": {  
+    "jsonrpc": "2.0",  
+    "id": "msg-1768672790745-fyifltxzd",  
+    "result": {  
+      "id": "msg-1768672790745-fyifltxzd",  
+      "sessionId": "sess-1768672790745-9jpi0y7zo",  
+      "status": {  
+        "state": "completed",  
+        "message": {  
+          "role": "agent",  
+          "parts": [  
+            {  
+              "metadata": {},  
+              "text": " Here's your car inventory analytics dashboard"  
+            },  
+            {  
+              "metadata": {  
+                "mimeType": "application/json+a2ui"  
+              },  
+              "data": {  
+                "surfaceUpdate": {  
+                  "components": [  
+                    {  
+                      "component": {  
+                        "Column": {  
+                          "children": {  
+                            "explicitList": [  
+                              "title",  
+                              "filters_row",  
+                              "kpi_row",  
+                              "charts_row",  
+                              "details_section"  
+                            ]  
+                          }  
+                        }  
+                      },  
+                      "id": "root"  
+                    },  
+                    {  
+                      "component": {  
+                        "Text": {  
+                          "usageHint": "h1",  
+                          "text": {  
+                            "literalString": "📊 Car Inventory Analytics"  
+                          }  
+                        }  
+                      },  
+                      "id": "title"  
+                    },  
+                    {  
+                      "component": {  
+                        "Row": {  
+                          "children": {  
+                            "explicitList": [  
+                              "category_filter",  
+                              "price_filter",  
+                              "refresh_btn"  
+                            ]  
+                          }  
+                        }  
+                      },  
+                      "id": "filters_row"  
+                    },  
+                    {  
+                      "component": {  
+                        "ChoicePicker": {  
+                          "label": {  
+                            "literalString": "Category"  
+                          },  
+                          "options": [  
+                            {  
+                              "value": "all",  
+                              "label": {  
+                                "literalString": "All Categories"  
+                              }  
+                            },  
+                            {  
+                              "value": "sedan",  
+                              "label": {  
+                                "literalString": "Sedan"  
+                              }  
+                            },  
+                            {  
+                              "value": "suv",  
+                              "label": {  
+                                "literalString": "SUV"  
+                              }  
+                            },  
+                            {  
+                              "value": "truck",  
+                              "label": {  
+                                "literalString": "Truck"  
+                              }  
+                            }  
+                          ]  
+                        }  
+                      },  
+                      "id": "category_filter"  
+                    },  
+                    {  
+                      "component": {  
+                        "ChoicePicker": {  
+                          "label": {  
+                            "literalString": "Price Range"  
+                          },  
+                          "options": [  
+                            {  
+                              "value": "all",  
+                              "label": {  
+                                "literalString": "All Prices"  
+                              }  
+                            },  
+                            {  
+                              "value": "0-25000",  
+                              "label": {  
+                                "literalString": "Under $25,000"  
+                              }  
+                            },  
+                            {  
+                              "value": "25000-50000",  
+                              "label": {  
+                                "literalString": "$25,000 - $50,000"  
+                              }  
+                            },  
+                            {  
+                              "value": "50000+",  
+                              "label": {  
+                                "literalString": "Over $50,000"  
+                              }  
+                            }  
+                          ]  
+                        }  
+                      },  
+                      "id": "price_filter"  
+                    },  
+                    {  
+                      "component": {  
+                        "Button": {  
+                          "child": "refresh_btn_text",  
+                          "action": {  
+                            "name": "refreshAnalytics",  
+                            "context": {  
+                              "category": {  
+                                "path": "/filters/category"  
+                              },  
+                              "priceRange": {  
+                                "path": "/filters/priceRange"  
+                              }  
+                            }  
+                          }  
+                        }  
+                      },  
+                      "id": "refresh_btn"  
+                    },  
+                    {  
+                      "component": {  
+                        "Text": {  
+                          "text": {  
+                            "literalString": "🔄 Refresh"  
+                          }  
+                        }  
+                      },  
+                      "id": "refresh_btn_text"  
+                    },  
+                    {  
+                      "component": {  
+                        "Row": {  
+                          "children": {  
+                            "explicitList": [  
+                              "total_cars_card",  
+                              "avg_price_card",  
+                              "categories_card"  
+                            ]  
+                          }  
+                        }  
+                      },  
+                      "id": "kpi_row"  
+                    },  
+                    {  
+                      "component": {  
+                        "Card": {  
+                          "child": "total_cars_content"  
+                        }  
+                      },  
+                      "id": "total_cars_card"  
+                    },  
+                    {  
+                      "component": {  
+                        "Column": {  
+                          "children": {  
+                            "explicitList": [  
+                              "total_cars_label",  
+                              "total_cars_value"  
+                            ]  
+                          }  
+                        }  
+                      },  
+                      "id": "total_cars_content"  
+                    },  
+                    {  
+                      "component": {  
+                        "Text": {  
+                          "usageHint": "h3",  
+                          "text": {  
+                            "literalString": "🚗 Total Cars"  
+                          }  
+                        }  
+                      },  
+                      "id": "total_cars_label"  
+                    },  
+                    {  
+                      "component": {  
+                        "Text": {  
+                          "usageHint": "body",  
+                          "text": {  
+                            "path": "/analytics/totalCars"  
+                          }  
+                        }  
+                      },  
+                      "id": "total_cars_value"  
+                    },  
+                    {  
+                      "component": {  
+                        "Card": {  
+                          "child": "avg_price_content"  
+                        }  
+                      },  
+                      "id": "avg_price_card"  
+                    },  
+                    {  
+                      "component": {  
+                        "Column": {  
+                          "children": {  
+                            "explicitList": [  
+                              "avg_price_label",  
+                              "avg_price_value"  
+                            ]  
+                          }  
+                        }  
+                      },  
+                      "id": "avg_price_content"  
+                    },  
+                    {  
+                      "component": {  
+                        "Text": {  
+                          "usageHint": "h3",  
+                          "text": {  
+                            "literalString": "💰 Average Price"  
+                          }  
+                        }  
+                      },  
+                      "id": "avg_price_label"  
+                    },  
+                    {  
+                      "component": {  
+                        "Text": {  
+                          "usageHint": "body",  
+                          "text": {  
+                            "path": "/analytics/averagePrice"  
+                          }  
+                        }  
+                      },  
+                      "id": "avg_price_value"  
+                    },  
+                    {  
+                      "component": {  
+                        "Card": {  
+                          "child": "categories_content"  
+                        }  
+                      },  
+                      "id": "categories_card"  
+                    },  
+                    {  
+                      "component": {  
+                        "Column": {  
+                          "children": {  
+                            "explicitList": [  
+                              "categories_label",  
+                              "categories_value"  
+                            ]  
+                          }  
+                        }  
+                      },  
+                      "id": "categories_content"  
+                    },  
+                    {  
+                      "component": {  
+                        "Text": {  
+                          "usageHint": "h3",  
+                          "text": {  
+                            "literalString": "📋 Categories"  
+                          }  
+                        }  
+                      },  
+                      "id": "categories_label"  
+                    },  
+                    {  
+                      "component": {  
+                        "Text": {  
+                          "usageHint": "body",  
+                          "text": {  
+                            "path": "/analytics/categoryCount"  
+                          }  
+                        }  
+                      },  
+                      "id": "categories_value"  
+                    },  
+                    {  
+                      "component": {  
+                        "Row": {  
+                          "children": {  
+                            "explicitList": [  
+                              "category_chart",  
+                              "price_chart"  
+                            ]  
+                          }  
+                        }  
+                      },  
+                      "id": "charts_row"  
+                    },  
+                    {  
+                      "component": {  
+                        "Chart": {  
+                          "type": "pie",  
+                          "title": {  
+                            "literalString": "Cars by Category"  
+                          },  
+                          "chartData": {  
+                            "path": "/charts/categoryData"  
+                          }  
+                        }  
+                      },  
+                      "id": "category_chart"  
+                    },  
+                    {  
+                      "component": {  
+                        "Chart": {  
+                          "type": "bar",  
+                          "title": {  
+                            "literalString": "Price Distribution"  
+                          },  
+                          "chartData": {  
+                            "path": "/charts/priceData"  
+                          }  
+                        }  
+                      },  
+                      "id": "price_chart"  
+                    },  
+                    {  
+                      "component": {  
+                        "Card": {  
+                          "child": "details_content"  
+                        }  
+                      },  
+                      "id": "details_section"  
+                    },  
+                    {  
+                      "component": {  
+                        "Column": {  
+                          "children": {  
+                            "explicitList": [  
+                              "details_title",  
+                              "details_list"  
+                            ]  
+                          }  
+                        }  
+                      },  
+                      "id": "details_content"  
+                    },  
+                    {  
+                      "component": {  
+                        "Text": {  
+                          "usageHint": "h2",  
+                          "text": {  
+                            "literalString": "📝 Recent Inventory Changes"  
+                          }  
+                        }  
+                      },  
+                      "id": "details_title"  
+                    },  
+                    {
+                      "component": {
+                        "List": {
+                          "children": {
+                            "template": {
+                              "dataBinding": "/analytics/recentChanges",
+                              "componentId": "change_item_template"
+                            }
+                          }
+                        }
+                      },
+                      "id": "details_list"
+                    },
+                    {  
+                      "component": {  
+                        "Row": {  
+                          "children": {  
+                            "explicitList": [  
+                              "change_icon",  
+                              "change_text"  
+                            ]  
+                          }  
+                        }  
+                      },  
+                      "id": "change_item_template"  
+                    },  
+                    {  
+                      "component": {  
+                        "Text": {  
+                          "text": {  
+                            "path": "icon"  
+                          }  
+                        }  
+                      },  
+                      "id": "change_icon"  
+                    },  
+                    {  
+                      "component": {  
+                        "Text": {  
+                          "text": {  
+                            "path": "description"  
+                          }  
+                        }  
+                      },  
+                      "id": "change_text"  
+                    }  
+                  ],  
+                  "surfaceId": "car_analytics"  
+                },  
+                "dataModelUpdate": {  
+                  "contents": [  
+                    {  
+                      "key": "filters",  
+                      "valueMap": [  
+                        {  
+                          "key": "category",  
+                          "valueString": "all"  
+                        },  
+                        {  
+                          "key": "priceRange",  
+                          "valueString": "all"  
+                        }  
+                      ]  
+                    },  
+                    {  
+                      "key": "analytics",  
+                      "valueMap": [  
+                        {  
+                          "key": "totalCars",  
+                          "valueString": "156"  
+                        },  
+                        {  
+                          "key": "averagePrice",  
+                          "valueString": "$32,500"  
+                        },  
+                        {  
+                          "key": "categoryCount",  
+                          "valueString": "8"  
+                        }  
+                      ]  
+                    },  
+                    {  
+                      "key": "charts",  
+                      "valueMap": [  
+                        {  
+                          "key": "categoryData",  
+                          "valueString": "[{\"label\":\"Sedan\",\"value\":45},{\"label\":\"SUV\",\"value\":62},{\"label\":\"Truck\",\"value\":28},{\"label\":\"Coupe\",\"value\":21}]"  
+                        },  
+                        {  
+                          "key": "priceData",  
+                          "valueString": "[{\"label\":\"0-25k\",\"value\":48},{\"label\":\"25-50k\",\"value\":78},{\"label\":\"50k+\",\"value\":30}]"  
+                        }  
+                      ]  
+                    },  
+                    {  
+                      "key": "recentChanges",  
+                      "valueList": [  
+                        {  
+                          "icon": "📈",  
+                          "description": "Added 12 new SUVs to inventory"  
+                        },  
+                        {  
+                          "icon": "💰",  
+                          "description": "Price drop on 5 sedan models"  
+                        },  
+                        {  
+                          "icon": "🚗",  
+                          "description": "3 trucks sold this week"  
+                        }  
+                      ]  
+                    }  
+                  ],  
+                  "surfaceId": "car_analytics"  
+                },  
+                "beginRendering": {  
+                  "root": "root",  
+                  "surfaceId": "car_analytics"  
+                }  
+              }  
+            }  
+          ],  
+          "metadata": null  
+        },  
+        "timestamp": "2026-01-17T17:59:53.072938100Z"  
+      },  
+      "history": [  
+        {  
+          "role": "user",  
+          "parts": [  
+            {  
+              "metadata": null,  
+              "text": "show car analytics"  
+            }  
+          ],  
+          "metadata": null  
+        }  
+      ],  
+      "artifacts": null,  
+      "metadata": null,  
+      "pushNotificationConfig": null,  
+      "pushNotificationUrl": null,  
+      "subscribed": false,  
+      "subscriptionDateNow": null,  
+      "cancelled": false,  
+      "textResult": ""  
+    },  
+    "error": null,  
+    "textResult": ""  
+  }  
+}
