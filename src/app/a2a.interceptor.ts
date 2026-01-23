@@ -20,7 +20,7 @@ export const a2aInterceptor: HttpInterceptorFn = (req, next) => {
   // Transform parts to match the format in user's curl example (type instead of kind)
   const transformedParts = parts.map((p: any) => ({
     type: p.kind || p.type || 'text',
-    text: p.text,
+    ...(p.kind === 'data' ? { data: p.data } : { text: p.text }),
     metadata: p.metadata || null
   }));
 

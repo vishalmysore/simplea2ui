@@ -449,13 +449,15 @@ export class App implements OnInit, OnDestroy {
         this.loading.set(true);
 
         // Send the client event message to the server
+        const eventData = event.message || event;
+
         const parts: Part[] = [
           {
             kind: 'data',
             metadata: {
               mimeType: 'application/json+a2ui'
             },
-            data: event.message
+            data: eventData
           } as any
         ];
 
@@ -466,6 +468,7 @@ export class App implements OnInit, OnDestroy {
         });
 
         console.log('Sending action to server:', JSON.stringify(parts, null, 2));
+        console.log('Event data being sent:', JSON.stringify(eventData, null, 2));
 
         const response: any = await this.a2aService.sendMessage(parts);
 

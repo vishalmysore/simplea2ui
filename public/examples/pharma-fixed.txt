@@ -1,0 +1,66 @@
+[
+  {
+    "surfaceUpdate": {
+      "components": [
+        { "component": { "Column": { "children": { "explicitList": [ "title", "filters_row", "kpi_row", "charts_section", "map_section", "timeline_section", "updates_section" ] } } }, "id": "root" },
+        { "component": { "Text": { "usageHint": "h1", "text": { "literalString": "🧬 Pharmaceutical Analytics Dashboard" } } }, "id": "title" },
+        { "component": { "Row": { "children": { "explicitList": [ "disease_filter", "time_filter", "region_filter", "refresh_btn" ] } } }, "id": "filters_row" },
+        { "component": { "ChoicePicker": { "label": { "literalString": "Disease Area" }, "options": [ { "value": "all", "label": { "literalString": "🌍 All Diseases" } }, { "value": "respiratory", "label": { "literalString": "🫁 Respiratory" } }, { "value": "cardiovascular", "label": { "literalString": "❤️ Cardiovascular" } } ] } }, "id": "disease_filter" },
+        { "component": { "ChoicePicker": { "label": { "literalString": "Time Range" }, "options": [ { "value": "7d", "label": { "literalString": "📅 Last 7 Days" } }, { "value": "30d", "label": { "literalString": "📆 Last 30 Days" } }, { "value": "90d", "label": { "literalString": "📋 Last 90 Days" } } ] } }, "id": "time_filter" },
+        { "component": { "ChoicePicker": { "label": { "literalString": "Region" }, "options": [ { "value": "global", "label": { "literalString": "🌎 Global" } }, { "value": "americas", "label": { "literalString": "🌎 Americas" } }, { "value": "europe", "label": { "literalString": "🌍 Europe" } } ] } }, "id": "region_filter" },
+        { "component": { "Button": { "child": "refresh_text", "action": { "name": "refresh_dashboard" } } }, "id": "refresh_btn" },
+        { "component": { "Text": { "text": { "literalString": "🔄 Refresh" } } }, "id": "refresh_text" },
+        { "component": { "Row": { "children": { "explicitList": [ "trials_card", "success_card", "patients_card" ] } } }, "id": "kpi_row" },
+        { "component": { "Card": { "child": "trials_content" } }, "id": "trials_card" },
+        { "component": { "Column": { "children": { "explicitList": [ "trials_icon", "trials_number", "trials_label" ] } } }, "id": "trials_content" },
+        { "component": { "Text": { "usageHint": "h2", "text": { "literalString": "🧪" } } }, "id": "trials_icon" },
+        { "component": { "Text": { "usageHint": "h3", "text": { "path": "/pharma/activeTrials" } } }, "id": "trials_number" },
+        { "component": { "Text": { "text": { "literalString": "Active Trials" } } }, "id": "trials_label" },
+        { "component": { "Card": { "child": "success_content" } }, "id": "success_card" },
+        { "component": { "Column": { "children": { "explicitList": [ "success_icon", "success_rate", "success_label" ] } } }, "id": "success_content" },
+        { "component": { "Text": { "usageHint": "h2", "text": { "literalString": "📈" } } }, "id": "success_icon" },
+        { "component": { "Text": { "usageHint": "h3", "text": { "path": "/pharma/successRate" } } }, "id": "success_rate" },
+        { "component": { "Text": { "text": { "literalString": "Success Rate %" } } }, "id": "success_label" },
+        { "component": { "Card": { "child": "patients_content" } }, "id": "patients_card" },
+        { "component": { "Column": { "children": { "explicitList": [ "patients_icon", "patients_number", "patients_label" ] } } }, "id": "patients_content" },
+        { "component": { "Text": { "usageHint": "h2", "text": { "literalString": "👥" } } }, "id": "patients_icon" },
+        { "component": { "Text": { "usageHint": "h3", "text": { "path": "/pharma/patientsTreated" } } }, "id": "patients_number" },
+        { "component": { "Text": { "text": { "literalString": "Patients Treated" } } }, "id": "patients_label" },
+        { "component": { "Column": { "children": { "explicitList": [ "charts_title", "disease_chart", "discovery_chart" ] } } }, "id": "charts_section" },
+        { "component": { "Text": { "usageHint": "h2", "text": { "literalString": "📊 Disease Spread & Drug Discovery" } } }, "id": "charts_title" },
+        { "component": { "Chart": { "type": "line", "title": { "literalString": "🦠 Disease Spread Trends" }, "chartData": { "path": "/charts/diseaseData" } } }, "id": "disease_chart" },
+        { "component": { "Chart": { "type": "bar", "title": { "literalString": "💊 Drug Discovery Pipeline" }, "chartData": { "path": "/charts/discoveryData" } } }, "id": "discovery_chart" },
+        { "component": { "Column": { "children": { "explicitList": [ "map_title", "outbreak_map" ] } } }, "id": "map_section" },
+        { "component": { "Text": { "usageHint": "h2", "text": { "literalString": "🗺️ Global Outbreak Map" } } }, "id": "map_title" },
+        { "component": { "GoogleMap": { "zoom": 2, "center": { "literalString": "20,0" }, "pins": { "path": "/map/outbreakLocations" }, "title": { "literalString": "COVID-19 Outbreak Locations" } } }, "id": "outbreak_map" },
+        { "component": { "Column": { "children": { "explicitList": [ "timeline_title", "timeline_list" ] } } }, "id": "timeline_section" },
+        { "component": { "Text": { "usageHint": "h2", "text": { "literalString": "⏰ Recent Timeline" } } }, "id": "timeline_title" },
+        { "component": { "List": { "children": { "dataBinding": { "path": "/timeline/events" }, "componentId": "timeline_item_template" } } }, "id": "timeline_list" },
+        { "component": { "Card": { "child": "timeline_content" } }, "id": "timeline_item_template" },
+        { "component": { "Column": { "children": { "explicitList": [ "timeline_date", "timeline_event" ] } } }, "id": "timeline_content" },
+        { "component": { "Text": { "usageHint": "caption", "text": { "path": "date" } } }, "id": "timeline_date" },
+        { "component": { "Text": { "text": { "path": "event" } } }, "id": "timeline_event" },
+        { "component": { "Column": { "children": { "explicitList": [ "updates_title", "updates_list" ] } } }, "id": "updates_section" },
+        { "component": { "Text": { "usageHint": "h2", "text": { "literalString": "🔬 Recent Updates" } } }, "id": "updates_title" },
+        { "component": { "List": { "children": { "dataBinding": { "path": "/updates/recentChanges" }, "componentId": "update_item_template" } } }, "id": "updates_list" },
+        { "component": { "Row": { "children": { "explicitList": [ "update_icon", "update_text" ] } } }, "id": "update_item_template" },
+        { "component": { "Text": { "usageHint": "h3", "text": { "path": "icon" } } }, "id": "update_icon" },
+        { "component": { "Text": { "usageHint": "body", "text": { "path": "description" } } }, "id": "update_text" }
+      ],
+      "surfaceId": "pharma_analytics"
+    }
+  },
+  {
+    "dataModelUpdate": {
+      "contents": [
+        { "key": "filters", "valueMap": [ { "key": "disease", "valueString": "all" }, { "key": "timeframe", "valueString": "30d" }, { "key": "region", "valueString": "global" } ] },
+        { "key": "pharma", "valueMap": [ { "key": "activeTrials", "valueString": "2847" }, { "key": "successRate", "valueString": "73.4" }, { "key": "patientsTreated", "valueString": "1200000" } ] },
+        { "key": "charts", "valueMap": [ { "key": "diseaseData", "valueString": "[{\"label\":\"COVID-19\",\"data\":[100,150,200,180,220]},{\"label\":\"Influenza\",\"data\":[80,90,85,95,88]}]" }, { "key": "discoveryData", "valueString": "[{\"label\":\"Phase I\",\"value\":145},{\"label\":\"Phase II\",\"value\":89},{\"label\":\"Phase III\",\"value\":34},{\"label\":\"Approved\",\"value\":12}]" } ] },
+        { "key": "map", "valueMap": [ { "key": "outbreakLocations", "valueString": "[{\"lat\":40.7128,\"lng\":-74.0060,\"title\":\"New York\",\"cases\":5000},{\"lat\":51.5074,\"lng\":-0.1278,\"title\":\"London\",\"cases\":3200},{\"lat\":35.6762,\"lng\":139.6503,\"title\":\"Tokyo\",\"cases\":2800}]" } ] },
+        { "key": "timeline", "valueList": [ { "date": "2025-01-15", "event": "New vaccine trial shows 90% efficacy" }, { "date": "2025-01-12", "event": "FDA approves novel treatment for rare disease" }, { "date": "2025-01-10", "event": "Breakthrough in Alzheimer's research announced" } ] },
+        { "key": "updates", "valueList": [ { "icon": "🧬", "description": "Breakthrough in mRNA vaccine technology" }, { "icon": "💊", "description": "New antiviral drug shows promising results" }, { "icon": "🔬", "description": "AI accelerates drug discovery process by 40%" } ] }
+      ],
+      "surfaceId": "pharma_analytics"
+    }
+  }
+]
