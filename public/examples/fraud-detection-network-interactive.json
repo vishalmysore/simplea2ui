@@ -1,0 +1,281 @@
+[
+    {
+        "surfaceUpdate": {
+            "surfaceId": "fraud-detection-interactive",
+            "components": [
+                {
+                    "id": "root",
+                    "component": {
+                        "Column": {
+                            "children": {
+                                "explicitList": [
+                                    "fraud-graph-interactive"
+                                ]
+                            }
+                        }
+                    }
+                },
+                {
+                    "id": "fraud-graph-interactive",
+                    "component": {
+                        "KnowledgeGraph": {
+                            "title": "Fraud Detection Alert - Suspicious Account Network (Interactive)",
+                            "layout": "cose",
+                            "emits": ["graph.node.selected", "graph.edge.selected"],
+                            "data": {
+                                "path": "/fraudData"
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+    },
+    {
+        "dataModelUpdate": {
+            "surfaceId": "fraud-detection-interactive",
+            "contents": [
+                {
+                    "key": "fraudData",
+                    "valueArray": [
+                        {
+                            "key": "0",
+                            "valueMap": [
+                                {
+                                    "key": "id",
+                                    "valueString": "acc1"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "Account A\n(HIGH RISK)"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "1",
+                            "valueMap": [
+                                {
+                                    "key": "id",
+                                    "valueString": "acc2"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "Account B\n(HIGH RISK)"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "2",
+                            "valueMap": [
+                                {
+                                    "key": "id",
+                                    "valueString": "acc3"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "Account C\n(Suspicious)"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "3",
+                            "valueMap": [
+                                {
+                                    "key": "id",
+                                    "valueString": "acc4"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "Account D\n(Suspicious)"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "4",
+                            "valueMap": [
+                                {
+                                    "key": "id",
+                                    "valueString": "acc5"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "Account E\n(HIGH RISK)"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "5",
+                            "valueMap": [
+                                {
+                                    "key": "id",
+                                    "valueString": "device1"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "Device XYZ\n(Shared)"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "6",
+                            "valueMap": [
+                                {
+                                    "key": "id",
+                                    "valueString": "merchant"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "Electronics Store\n(High Volume)"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "7",
+                            "valueMap": [
+                                {
+                                    "key": "source",
+                                    "valueString": "acc1"
+                                },
+                                {
+                                    "key": "target",
+                                    "valueString": "device1"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "uses"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "8",
+                            "valueMap": [
+                                {
+                                    "key": "source",
+                                    "valueString": "acc2"
+                                },
+                                {
+                                    "key": "target",
+                                    "valueString": "device1"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "uses"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "9",
+                            "valueMap": [
+                                {
+                                    "key": "source",
+                                    "valueString": "acc3"
+                                },
+                                {
+                                    "key": "target",
+                                    "valueString": "device1"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "uses"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "10",
+                            "valueMap": [
+                                {
+                                    "key": "source",
+                                    "valueString": "acc4"
+                                },
+                                {
+                                    "key": "target",
+                                    "valueString": "device1"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "uses"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "11",
+                            "valueMap": [
+                                {
+                                    "key": "source",
+                                    "valueString": "acc5"
+                                },
+                                {
+                                    "key": "target",
+                                    "valueString": "device1"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "uses"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "12",
+                            "valueMap": [
+                                {
+                                    "key": "source",
+                                    "valueString": "acc1"
+                                },
+                                {
+                                    "key": "target",
+                                    "valueString": "merchant"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "$2,500"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "13",
+                            "valueMap": [
+                                {
+                                    "key": "source",
+                                    "valueString": "acc2"
+                                },
+                                {
+                                    "key": "target",
+                                    "valueString": "merchant"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "$2,300"
+                                }
+                            ]
+                        },
+                        {
+                            "key": "14",
+                            "valueMap": [
+                                {
+                                    "key": "source",
+                                    "valueString": "acc5"
+                                },
+                                {
+                                    "key": "target",
+                                    "valueString": "merchant"
+                                },
+                                {
+                                    "key": "label",
+                                    "valueString": "$2,800"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "beginRendering": {
+            "root": "root",
+            "surfaceId": "fraud-detection-interactive",
+            "viewportWidthPx": 800,
+            "viewportHeightPx": 600
+        }
+    }
+]

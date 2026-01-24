@@ -4,12 +4,13 @@ import { A2aService } from './a2a.service';
 import type { Part } from '@a2a-js/sdk';
 import { Subscription } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { ServerConfigService } from './server-config.service';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [Surface, CommonModule],
+  imports: [Surface, CommonModule, FormsModule],
   styleUrls: ['./app.css', './app-extra.css'],
   template: `  
     <div class="container">
@@ -172,7 +173,7 @@ import { ServerConfigService } from './server-config.service';
                 id="serverSelect"
                 (change)="onServerSelect($any($event.target).value)">
                 <option value="">-- Select a server --</option>
-                @for (server of serverConfig.availableServers(); track server) {
+                @for (server of serverConfig.availableServers(); track $index) {
                   <option [value]="server">{{ server }}</option>
                 }
               </select>
@@ -182,8 +183,7 @@ import { ServerConfigService } from './server-config.service';
               <input 
                 id="serverUrlInput"
                 type="text" 
-                [value]="tempUrl()" 
-                (input)="tempUrl.set($any($event.target).value)" 
+                [(ngModel)]="tempUrlValue" 
                 placeholder="https://your-server-url.com" />
             </div>
             <button (click)="connectToServer()">Connect</button>
@@ -427,6 +427,15 @@ export class App implements OnInit, OnDestroy {
     'open-json-welcome.json'
   ]);
   protected selectedOpenJsonExample = signal<string>('');
+
+  // Getter/setter for ngModel binding with tempUrl signal
+  get tempUrlValue(): string {
+    return this.tempUrl();
+  }
+
+  set tempUrlValue(value: string) {
+    this.tempUrl.set(value);
+  }
 
   private eventSubscription?: Subscription;
 
@@ -1082,8 +1091,14 @@ export class App implements OnInit, OnDestroy {
   }
 
   toggleConnectForm() {
-    this.showConnectForm.set(!this.showConnectForm());
-    if (!this.showConnectForm()) {
+    const wasOpen = this.showConnectForm();
+    this.showConnectForm.set(!wasOpen);
+    
+    if (!wasOpen) {
+      // Opening the form - initialize tempUrl with current server URL
+      this.tempUrl.set(this.serverUrl());
+    } else {
+      // Closing the form - reset tempUrl to current server URL (in case user made changes)
       this.tempUrl.set(this.serverUrl());
     }
   }

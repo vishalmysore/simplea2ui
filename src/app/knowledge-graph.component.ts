@@ -9,6 +9,7 @@ interface KnowledgeGraphProperties {
     data: any;
     layout?: string;
     title?: string;
+    emits?: string[];
 }
 
 interface KnowledgeGraphNode extends Types.CustomNode {
@@ -184,6 +185,34 @@ export class KnowledgeGraphComponent extends DynamicComponent<KnowledgeGraphNode
             .map(([key, value]) => ({ key, value: typeof value === 'object' ? JSON.stringify(value) : value }));
     }
 
+    protected emitSemanticEvent(eventType: string, data: any) {
+        const comp = this.component();
+        if (!comp || !comp.properties.emits || !comp.properties.emits.includes(eventType)) {
+            return; // Component doesn't declare this event type
+        }
+
+        // Create synthetic userAction event following A2UI pattern
+        const userAction = {
+            name: eventType,
+            sourceComponentId: comp.id,
+            surfaceId: this.surfaceId(),
+            timestamp: new Date().toISOString(),
+            context: data
+        };
+
+        // Emit through processor events as DispatchedEvent
+        if (this.processor && (this.processor as any).events) {
+            (this.processor as any).events.next({
+                message: userAction,
+                completion: {
+                    next: () => {},
+                    complete: () => {},
+                    error: () => {}
+                }
+            });
+        }
+    }
+
     private createGraph() {
         if (!this.graphContainer?.nativeElement) return;
 
@@ -253,6 +282,22 @@ export class KnowledgeGraphComponent extends DynamicComponent<KnowledgeGraphNode
         this.cy.on('tap', 'node', (evt) => {
             const node = evt.target;
             this.selectedNode.set(node.data());
+            
+            // Emit semantic event if component supports it
+            this.emitSemanticEvent('graph.node.selected', {
+                nodeId: node.id(),
+                nodeData: node.data()
+            });
+        });
+
+        this.cy.on('tap', 'edge', (evt) => {
+            const edge = evt.target;
+            
+            // Emit semantic event if component supports it
+            this.emitSemanticEvent('graph.edge.selected', {
+                edgeId: edge.id(),
+                edgeData: edge.data()
+            });
         });
 
         this.cy.on('tap', (evt) => {

@@ -14,10 +14,9 @@ export class ServerConfigService {
   sendCredentials = signal(false);
   lastHeaders = signal<Record<string, string>>({});
   availableServers = signal<string[]>([
-    'http://localhost:7860',
+    'http://localhost:8080',
     'https://vishalmysore-fraudagent.hf.space',
     'https://vishalmysore-a2ui.hf.space',
-    'https://vishalmysore-a2amcpdatabase.hf.space/',
     'https://vishalmysore-a2amcpdatabase.hf.space/'
   ]);
 }

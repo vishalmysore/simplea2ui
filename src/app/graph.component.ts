@@ -13,6 +13,11 @@ interface GraphProperties {
   title?: string;
   xLabel?: string;
   yLabel?: string;
+  emits?: Array<
+    | 'graph.point.selected'
+    | 'graph.range.selected'
+    | 'graph.dataset.filtered'
+  >;
 }
 
 interface GraphNode extends Types.CustomNode {
@@ -70,6 +75,36 @@ export class GraphComponent extends DynamicComponent<GraphNode> implements OnIni
   ngOnDestroy() {
     if (this.chart) {
       this.chart.destroy();
+    }
+  }
+
+  private emitSemanticEvent(type: string, payload: any) {
+    const surfaceId = this.surfaceId();
+    const comp = this.component();
+
+    console.log('GraphComponent – emitting event', { type, payload });
+
+    // For now, we'll create a synthetic userAction event
+    // This follows the A2UI pattern of semantic interactions
+    const userAction = {
+      name: type,
+      sourceComponentId: comp?.id,
+      surfaceId: surfaceId,
+      timestamp: new Date().toISOString(),
+      context: payload
+    };
+
+    // Emit through the processor's events stream
+    // Since MessageProcessor doesn't have emitEvent, we'll use the events subject
+    if (this.processor && (this.processor as any).events) {
+      (this.processor as any).events.next({
+        message: userAction,
+        completion: {
+          next: () => {},
+          complete: () => {},
+          error: () => {}
+        }
+      });
     }
   }
 
@@ -233,6 +268,25 @@ export class GraphComponent extends DynamicComponent<GraphNode> implements OnIni
             },
             beginAtZero: true
           }
+        },
+        onClick: (event, elements) => {
+          // Only emit if component declares it can emit point selection events
+          if (!props.emits?.includes('graph.point.selected')) return;
+          if (!elements.length) return;
+
+          const element = elements[0];
+          const index = element.index;
+
+          const label = labels[index];
+          const value = values[index];
+
+          this.emitSemanticEvent('graph.point.selected', {
+            label,
+            value,
+            index,
+            graphId: comp.id,
+            title
+          });
         }
       }
     };
