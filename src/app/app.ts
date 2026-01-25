@@ -415,6 +415,7 @@ export class App implements OnInit, OnDestroy {
     'ux-flow-onboarding.json',
     'infrastructure-failure.json',
     'fraud-detection-network.json',
+    'fraud-detection-network-interactive.json',
     'medical-diagnosis.json',
     'portfolio-risk-analysis.json',
     'org-chart-interactive.json',
